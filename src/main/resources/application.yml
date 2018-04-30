@@ -7,8 +7,7 @@ server:
 spring:
   jackson:
     serialization:
-      INDENT_OUTPUT: true
-  
+      INDENT_OUTPUT: true 
   
   jpa:
     database: MYSQL
@@ -49,8 +48,6 @@ jwt:
       path: /api/auth
       refresh: /api/refresh
       isTokenValid: /api/token/
-
-
   
 #logging:
 #  level:

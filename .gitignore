@@ -36,6 +36,4 @@ overridedb.*
 .factorypath
 dump.rdb
 transaction-logs
-src/main/resources/static/npm-debug.log
-.vscode/
-node_modules/
+
