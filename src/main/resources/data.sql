@@ -30,6 +30,12 @@ INSERT INTO permiso (id_permiso, nombre) VALUES (4, 'ROLE_consultar rol');
 INSERT INTO permiso (id_permiso, nombre) VALUES (5, 'ROLE_crear rol');
 INSERT INTO permiso (id_permiso, nombre) VALUES (6, 'ROLE_editar rol');
 INSERT INTO permiso (id_permiso, nombre) VALUES (7, 'ROLE_eliminar rol');
+INSERT INTO permiso (id_permiso, nombre) VALUES (8, 'ROLE_listas');
+INSERT INTO permiso (id_permiso, nombre) VALUES (9, 'ROLE_opciones');
+INSERT INTO permiso (id_permiso, nombre) VALUES (10, 'ROLE_consultar opcion');
+INSERT INTO permiso (id_permiso, nombre) VALUES (11, 'ROLE_crear opcion');
+INSERT INTO permiso (id_permiso, nombre) VALUES (12, 'ROLE_editar opcion');
+INSERT INTO permiso (id_permiso, nombre) VALUES (13, 'ROLE_eliminar opcion');
 
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 1);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 2);
@@ -38,3 +44,13 @@ INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 4);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 5);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 6);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 7);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 8);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 9);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 10);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 11);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 12);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 13);
+
+INSERT INTO opcion (id_opcion, nombre) VALUES (1, 'X');
+INSERT INTO opcion (id_opcion, nombre) VALUES (2, 'SI');
+INSERT INTO opcion (id_opcion, nombre) VALUES (3, 'NO');
