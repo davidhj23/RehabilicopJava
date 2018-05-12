@@ -74,12 +74,4 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(null);
         }*/
     }
-    
-    /*@RequestMapping(value = "${jwt.route.authentication.isValidToken}", method = RequestMethod.GET)
-    public ResponseEntity<?> validateToken(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);       
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return ResponseEntity.ok(jwtTokenUtil.validateToken(token, userDetails));        
-    }*/
 }
