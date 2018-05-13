@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.models.JwtUser;
-import com.davidhenriquez.rehabilicop.core.models.RegistroViewModel;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 
@@ -77,22 +76,6 @@ public class UsuarioController {
     				.body(new ValidationResult("error", 
     					"ha ocurrido un error por favor vuelva a intentarlo"));
     	}
-    }    
-    
-    @RequestMapping(value = "/clientes", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('crear cliente')")
-    public ResponseEntity<?> save(@RequestBody RegistroViewModel registroViewModel) throws Exception {
-    	try{
-    		Usuario usuario = registroViewModel.ToUsuario();
-    		return ResponseEntity.ok(usuarioService.registerCliente(usuario));    
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
     }
     
     @RequestMapping(value = "/clientes/{id}", method = RequestMethod.PUT)
@@ -125,76 +108,6 @@ public class UsuarioController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
     	} 
     }
-    
-    @RequestMapping(value = "/promotores", method = RequestMethod.GET)    
-    @PreAuthorize("hasRole('consultar promotor')")
-    public ResponseEntity<?> findAllPromotores() {
-    	try{
-    		List<Usuario> usuarios = usuarioService.findAllPromotores();
-    		return ResponseEntity.ok(usuarios);    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }
-    
-    @RequestMapping(value = "/promotores/{id}", method = RequestMethod.GET)    
-    @PreAuthorize("hasRole('consultar promotor')")
-    public ResponseEntity<?> findOnePromotor(@PathVariable("id") String id){    
-    	try{
-    		return ResponseEntity.ok(usuarioService.findOnePromotor(id));    		
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }
-    
-    @RequestMapping(value = "/promotores", method = RequestMethod.POST)    
-    public ResponseEntity<?> savePromotor(@RequestBody Usuario usuario) throws Exception {
-    	try{
-    		return ResponseEntity.ok(usuarioService.registerPromotor(usuario));
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }
-    
-    @RequestMapping(value = "/promotores/{id}", method = RequestMethod.PUT)
-    @PreAuthorize("hasRole('editar promotor')")
-    public ResponseEntity<?> updatePromotor(@PathVariable("id") Long id, @RequestBody Usuario usuario) throws Exception{
-    	try{
-    		return ResponseEntity.ok(usuarioService.updatePromotor(usuario));    
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}  	
-    }
-    
-    @RequestMapping(value = "/promotores/{id}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasRole('eliminar promotor')")
-    public ResponseEntity deletePromotor(@PathVariable("id") String id){
-    	try{
-    		usuarioService.deletePromotor(id);
-    		return new ResponseEntity(HttpStatus.OK);  
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	} 
-    }   
     
     @RequestMapping(value = "/permisos", method = RequestMethod.GET)
     public ResponseEntity<?> validarPermisos() {

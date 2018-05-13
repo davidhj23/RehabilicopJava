@@ -1,9 +1,7 @@
-# config context path to "/" by setting an empty string
 server:
   contextPath: 
-  port: 4000  
+  port: 4000
 
-# JACKSON
 spring:
   jackson:
     serialization:
@@ -22,22 +20,10 @@ spring:
           auto: create-drop
           
   datasource:
-    url: jdbc:mysql://localhost:3306/base?autoReconnect=true&useSSL=false    
+    url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false    
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-    
-  mail:
-    host: smtp-mail.outlook.com
-    port: 587
-    username: ejemplo@outlook.com
-    password: 0123456789
-    protocol: smtp
-    tls: true
-    properties.mail.smtp:
-        auth: true
-        starttls.enable: true
-        ssl.trust: smtp-mail.outlook.com
 
 jwt:
   header: Authorization
@@ -47,9 +33,4 @@ jwt:
     authentication:
       path: /api/auth
       refresh: /api/refresh
-      isTokenValid: /api/token/
-  
-#logging:
-#  level:
-#    org.springframework:
-#      security: DEBUG
+      isTokenValid: /api/token/  

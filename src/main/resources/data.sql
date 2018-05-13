@@ -41,6 +41,11 @@ INSERT INTO permiso (id_permiso, nombre) VALUES (15, 'ROLE_consultar sede');
 INSERT INTO permiso (id_permiso, nombre) VALUES (16, 'ROLE_crear sede');
 INSERT INTO permiso (id_permiso, nombre) VALUES (17, 'ROLE_editar sede');
 INSERT INTO permiso (id_permiso, nombre) VALUES (18, 'ROLE_eliminar sede');
+INSERT INTO permiso (id_permiso, nombre) VALUES (19, 'ROLE_tipos documentos');
+INSERT INTO permiso (id_permiso, nombre) VALUES (20, 'ROLE_consultar tipo documento');
+INSERT INTO permiso (id_permiso, nombre) VALUES (21, 'ROLE_crear tipo documento');
+INSERT INTO permiso (id_permiso, nombre) VALUES (22, 'ROLE_editar tipo documento');
+INSERT INTO permiso (id_permiso, nombre) VALUES (23, 'ROLE_eliminar tipo documento');
 
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 1);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 2);
@@ -60,6 +65,11 @@ INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 15);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 16);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 17);
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 18);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 19);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 20);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 21);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 22);
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 23);
 
 INSERT INTO opcion (id_opcion, nombre) VALUES (1, 'X');
 INSERT INTO opcion (id_opcion, nombre) VALUES (2, 'SI');
