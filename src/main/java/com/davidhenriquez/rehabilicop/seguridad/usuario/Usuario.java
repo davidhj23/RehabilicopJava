@@ -2,7 +2,9 @@ package com.davidhenriquez.rehabilicop.seguridad.usuario;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -33,6 +37,11 @@ import lombok.Data;
 public class Usuario {
 	
 	@Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID idUsuario;	
+	
 	private String identificacion;
 	
 	private String username;
@@ -62,7 +71,7 @@ public class Usuario {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
         name = "UsuarioRol",
-        joinColumns = {@JoinColumn(name = "identificacion", referencedColumnName = "identificacion")},
+        joinColumns = {@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")},
         inverseJoinColumns = {@JoinColumn(name = "idRol", referencedColumnName = "idRol")})
 	private Collection<Rol> roles;
 }

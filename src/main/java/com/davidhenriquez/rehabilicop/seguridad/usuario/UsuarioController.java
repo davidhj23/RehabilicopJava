@@ -25,6 +25,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,62 +52,6 @@ public class UsuarioController {
         String username = jwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
         return user;
-    }
-    
-    @RequestMapping(value = "/clientes", method = RequestMethod.GET)    
-    @PreAuthorize("hasRole('consultar cliente')")
-    public ResponseEntity<?> findAll() {
-    	try{
-    		List<Usuario> usuarios = usuarioService.findAllClientes();
-    		return ResponseEntity.ok(usuarios);    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }
-    
-    @RequestMapping(value = "/clientes/{id}", method = RequestMethod.GET)    
-    @PreAuthorize("hasRole('consultar cliente')")
-    public ResponseEntity<?> findOne(@PathVariable("id") String id){    
-    	try{
-    		return ResponseEntity.ok(usuarioService.findOneCliente(id));    		
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }
-    
-    @RequestMapping(value = "/clientes/{id}", method = RequestMethod.PUT)
-    @PreAuthorize("hasRole('editar cliente')")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Usuario usuario) throws Exception{
-    	try{
-    		return ResponseEntity.ok(usuarioService.updateCliente(usuario));    
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}  	
-    }
-    
-    @RequestMapping(value = "/clientes/{id}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasRole('eliminar cliente')")
-    public ResponseEntity delete(@PathVariable("id") String id){
-    	try{
-    		usuarioService.deleteCliente(id);
-    		return new ResponseEntity(HttpStatus.OK);  
-    	}catch(ValidationException ex){    		
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(ex.getErrors());    	
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	} 
     }
     
     @RequestMapping(value = "/permisos", method = RequestMethod.GET)

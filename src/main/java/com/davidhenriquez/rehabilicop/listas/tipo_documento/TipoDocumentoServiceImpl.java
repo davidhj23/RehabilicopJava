@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.tipo_documento;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 		return tipoDocumentoRepository.findAll();
 	}
 	
-	public TipoDocumento findById(Long IdTipoDocumento){
+	public TipoDocumento findById(UUID IdTipoDocumento){
 		return tipoDocumentoRepository.findOne(IdTipoDocumento);
 	}
 
@@ -31,7 +32,7 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 	}
 
 	@Transactional
-	public void delete(Long idTipoDocumento) throws ValidationException {
+	public void delete(UUID idTipoDocumento) throws ValidationException {
 		tipoDocumentoRepository.delete(idTipoDocumento);		
 	}
 }

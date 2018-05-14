@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.tipo_documento;
+package com.davidhenriquez.rehabilicop.listas.cie10;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,20 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.sede.Sede;
+import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
+import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumentoService;
+import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
+import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/tipos-documentos")
-public class TipoDocumentoController {
+@RequestMapping("/api/cie10s")
+public class Cie10Controller {
 
 	@Autowired
-	private TipoDocumentoService tipoDocumentoService;
+	private Cie10Service cie10Service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getTiposDocumentos() {
+    public ResponseEntity<?> getCie10() {
     	try{
-    		List<TipoDocumento> tiposDocumento = tipoDocumentoService.findAll();
-    		return ResponseEntity.ok(tiposDocumento);
+    		List<Cie10> cie10s = cie10Service.findAll();
+    		return ResponseEntity.ok(cie10s);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -39,10 +42,10 @@ public class TipoDocumentoController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getTipoDocumento(UUID idTipoDocumento){
+	public ResponseEntity<?> getCie10(UUID id){
 		try {
-			TipoDocumento tipoDocumento = tipoDocumentoService.findById(idTipoDocumento);
-			return ResponseEntity.ok(tipoDocumento);
+			Cie10 cie10 = cie10Service.findById(id);
+			return ResponseEntity.ok(cie10);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -51,10 +54,10 @@ public class TipoDocumentoController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear tipo documento')")
-	public ResponseEntity<?> create(@RequestBody TipoDocumento tipoDocumento) throws Exception {
+	@PreAuthorize("hasRole('crear cie10')")
+	public ResponseEntity<?> create(@RequestBody Cie10 cie10) throws Exception {
 		try {
-			return ResponseEntity.ok(tipoDocumentoService.create(tipoDocumento));
+			return ResponseEntity.ok(cie10Service.create(cie10));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -64,10 +67,10 @@ public class TipoDocumentoController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar tipo documento')")
-	public ResponseEntity<?> update(@RequestBody TipoDocumento tipoDocumento) throws Exception {
+	@PreAuthorize("hasRole('editar cie10')")
+	public ResponseEntity<?> update(@RequestBody Cie10 cie10) throws Exception {
 		try {
-			return ResponseEntity.ok(tipoDocumentoService.update(tipoDocumento));
+			return ResponseEntity.ok(cie10Service.update(cie10));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -77,11 +80,11 @@ public class TipoDocumentoController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar tipo documento')")
+	@PreAuthorize("hasRole('eliminar cie10')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			tipoDocumentoService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new TipoDocumento());
+			cie10Service.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Cie10());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

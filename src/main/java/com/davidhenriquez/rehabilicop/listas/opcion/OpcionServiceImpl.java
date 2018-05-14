@@ -2,6 +2,7 @@ package com.davidhenriquez.rehabilicop.listas.opcion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class OpcionServiceImpl implements OpcionService {
 		return opcionRepository.findAll();
 	}
 	
-	public Opcion findById(Long idOpcion){
+	public Opcion findById(UUID idOpcion){
 		return opcionRepository.findOne(idOpcion);
 	}
 	
@@ -34,7 +35,7 @@ public class OpcionServiceImpl implements OpcionService {
 	}
 
 	@Transactional
-	public void delete(Long idOpcion) throws ValidationException {
+	public void delete(UUID idOpcion) throws ValidationException {
 		opcionRepository.delete(idOpcion);		
 	}
 }

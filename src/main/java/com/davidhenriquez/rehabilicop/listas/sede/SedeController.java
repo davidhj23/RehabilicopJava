@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.sede;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +42,7 @@ public class SedeController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getSede(Long idSede){
+	public ResponseEntity<?> getSede(UUID idSede){
 		try {
 			Sede sede = sedeService.findById(idSede);
 			return ResponseEntity.ok(sede);
@@ -80,7 +81,7 @@ public class SedeController {
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
 	@PreAuthorize("hasRole('eliminar sede')")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
 			sedeService.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body(new Sede());

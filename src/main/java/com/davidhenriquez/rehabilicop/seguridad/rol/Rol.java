@@ -1,7 +1,9 @@
 package com.davidhenriquez.rehabilicop.seguridad.rol;
 
 import java.util.Collection;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.davidhenriquez.rehabilicop.seguridad.permiso.Permiso;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
@@ -28,9 +31,11 @@ import lombok.Data;
 @Data
 public class Rol {
   
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idRol;
+	@Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID idRol;	
     
     private String nombre; 
         

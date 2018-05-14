@@ -3,6 +3,7 @@ package com.davidhenriquez.rehabilicop.seguridad.usuario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,81 +36,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     {
     	return new ArrayList<ValidationResult>();
     }
-    
-	public List<Usuario> findAllClientes(){
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		usuarios = usuarios.stream().filter(x-> x.isEnabled()).collect(Collectors.toList());
-		return usuarios;
-	}
 	
-	public Usuario findOneCliente(String identificacion){
-		return usuarioRepository.findOne(identificacion);
+	public Usuario findOneCliente(UUID idUsuario){
+		return usuarioRepository.findOne(idUsuario);
 	}
-	
-	public Usuario saveCliente(Usuario usuario) throws ValidationException {		
-		usuario.setEnabled(true);
-		ArrayList<ValidationResult> validaciones = this.Validar(usuario);
-
-        if (validaciones.size() > 0)
-            throw new ValidationException(validaciones);
-
-        ArrayList<ValidationResult> validacionesDuplicado = this.ValidarDuplicado(usuario);
-        if (validacionesDuplicado.size() > 0)
-            throw new ValidationException(validacionesDuplicado);
-        
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getIdentificacion()));
-		
-		TipoDocumento tipoDocumento = new TipoDocumento();
-		tipoDocumento.setIdTipoDocumento(1L);
-		
-		usuario.setTipoDocumento(tipoDocumento);
-        
-        return usuarioRepository.save(usuario);
-	}
-	
-	public Usuario updateCliente(Usuario usuario) throws ValidationException {
-		ArrayList<ValidationResult> validaciones = this.Validar(usuario);
-		if (validaciones.size() > 0)
-            throw new ValidationException(validaciones);
-		
-		ArrayList<ValidationResult> validacionesDuplicado = this.ValidarDuplicado(usuario);
-        if (validacionesDuplicado.size() > 0)
-            throw new ValidationException(validacionesDuplicado);
-
-        Usuario usuarioConsultado = findOneCliente(usuario.getIdentificacion());
-        usuario.setPassword(usuarioConsultado.getPassword());
-        
-        return usuarioRepository.save(usuario);
-    }
-
-	public void deleteCliente(String id) throws ValidationException {	
-		Usuario usuario = findOneCliente(id);
-		
-		ArrayList<ValidationResult> validaciones = ValidarIntegridad(usuario);
-        if (validaciones.size() > 0)
-            throw new ValidationException(validaciones);
-        
-        usuario.setEnabled(false);
-		usuarioRepository.save(usuario);
-	}
-	
-	public Usuario registerCliente(Usuario usuario) throws ValidationException {		
-		usuario.setEnabled(true);
-		
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-		
-		TipoDocumento tipoDocumento = new TipoDocumento();
-		tipoDocumento.setIdTipoDocumento(1L);
-		
-		Rol rol = new Rol();
-		rol.setIdRol(2L);
-		List<Rol> roles = new ArrayList<Rol>();
-		roles.add(rol);
-		
-		usuario.setTipoDocumento(tipoDocumento);
-		
-        return usuarioRepository.save(usuario);
-	}	
 }

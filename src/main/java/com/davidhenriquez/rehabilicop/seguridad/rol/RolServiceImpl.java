@@ -2,6 +2,7 @@ package com.davidhenriquez.rehabilicop.seguridad.rol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class RolServiceImpl implements RolService {
 	
 	public List<Rol> findAll(){
 		return rolRepository.findAll().stream()
-                .filter(x -> x.getIdRol() != 1)                    
+                .filter(x -> x.getNombre() != "admin global")                    
                 .collect(Collectors.toList());
 	}
 	
-	public Rol findById(Long idRol){
+	public Rol findById(UUID idRol){
 		return rolRepository.findOne(idRol);
 	}
 	
@@ -36,7 +37,7 @@ public class RolServiceImpl implements RolService {
 	}
 
 	@Transactional
-	public void delete(Long idRol) throws ValidationException {
+	public void delete(UUID idRol) throws ValidationException {
 		rolRepository.delete(idRol);		
 	}
 }

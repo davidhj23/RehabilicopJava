@@ -1,12 +1,16 @@
 package com.davidhenriquez.rehabilicop.seguridad.permiso;
 
 import java.util.Collection;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -19,9 +23,11 @@ import lombok.Data;
 @Data
 public class Permiso {
   
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idPermiso;
+	@Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID idPermiso;
  
     private String nombre;
  

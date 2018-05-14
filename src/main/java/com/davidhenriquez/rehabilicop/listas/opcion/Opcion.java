@@ -1,7 +1,9 @@
 package com.davidhenriquez.rehabilicop.listas.opcion;
 
 import java.util.Collection;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -26,9 +29,11 @@ import lombok.Data;
 @Data
 public class Opcion {
   
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idOpcion;
+	@Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID idOpcion;
     
     private String nombre; 
 }

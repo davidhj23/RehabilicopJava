@@ -2,6 +2,7 @@ package com.davidhenriquez.rehabilicop.listas.sede;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SedeServiceImpl implements SedeService {
 		return sedeRepository.findAll();
 	}
 	
-	public Sede findById(Long idSede){
+	public Sede findById(UUID idSede){
 		return sedeRepository.findOne(idSede);
 	}
 	
@@ -37,7 +38,7 @@ public class SedeServiceImpl implements SedeService {
 	}
 
 	@Transactional
-	public void delete(Long idSede) throws ValidationException {
+	public void delete(UUID idSede) throws ValidationException {
 		sedeRepository.delete(idSede);		
 	}
 }

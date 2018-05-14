@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.opcion;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +42,7 @@ public class OpcionController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getOpcion(Long idOpcion){
+	public ResponseEntity<?> getOpcion(UUID idOpcion){
 		try {
 			Opcion opcion = opcionService.findById(idOpcion);
 			return ResponseEntity.ok(opcion);
@@ -80,7 +81,7 @@ public class OpcionController {
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
 	@PreAuthorize("hasRole('eliminar opcion')")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
 			opcionService.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body(new Opcion());
