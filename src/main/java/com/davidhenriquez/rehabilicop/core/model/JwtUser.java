@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.core.models;
+package com.davidhenriquez.rehabilicop.core.model;
 
 import java.util.ArrayList;
 import java.util.Collection;

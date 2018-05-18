@@ -27,10 +27,20 @@ public class Cie10ServiceImpl implements Cie10Service {
 	}
 	
 	public Cie10 create(Cie10 cie10) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validarDuplicado(cie10);
+		
+		if (validaciones != null && validaciones.size() > 0)
+			throw new ValidationException(validaciones);
+		
 		return cie10Repository.save(cie10);		
 	}
 	
-	public Cie10 update(Cie10 cie10) throws ValidationException {		
+	public Cie10 update(Cie10 cie10) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validarDuplicado(cie10);
+		
+		if (validaciones != null && validaciones.size() > 0)
+			throw new ValidationException(validaciones);
+		
 		return cie10Repository.save(cie10);		
 	}
 
@@ -38,4 +48,20 @@ public class Cie10ServiceImpl implements Cie10Service {
 	public void delete(UUID idCie10) throws ValidationException {
 		cie10Repository.delete(idCie10);		
 	}
+	
+    private ArrayList<ValidationResult> validarDuplicado(Cie10 cie10)
+    {
+    	Cie10 duplicate = findAll().stream()
+	        .filter(a -> a.getCodigo() == cie10.getCodigo() &&
+	                     a.getIdCie10() != cie10.getIdCie10())
+	        .findFirst()
+            .get();
+    	
+    	ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
+    	if(duplicate == null){
+    		vaidationResults.add(new ValidationResult("codigo", "Ya existe un Cie 10 con este código"));
+    	}
+    	
+    	return vaidationResults;
+    }
 }

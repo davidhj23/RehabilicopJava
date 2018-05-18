@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.davidhenriquez.rehabilicop.core.models.JwtUserFactory;
+import com.davidhenriquez.rehabilicop.core.model.JwtUserFactory;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

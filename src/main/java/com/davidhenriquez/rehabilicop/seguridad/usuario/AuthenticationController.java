@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtAuthenticationRequest;
 import com.davidhenriquez.rehabilicop.core.config.JwtAuthenticationResponse;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
-import com.davidhenriquez.rehabilicop.core.models.JwtUser;
+import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -8,7 +8,7 @@ import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.davidhenriquez.rehabilicop.core.models.JwtUser;
+import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 
 import java.io.Serializable;
 import java.util.Date;
