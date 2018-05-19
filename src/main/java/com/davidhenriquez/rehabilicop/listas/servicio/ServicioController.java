@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.cie10;
+package com.davidhenriquez.rehabilicop.listas.servicio;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,17 +23,17 @@ import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/cie10s")
-public class Cie10Controller {
+@RequestMapping("/api/servicios")
+public class ServicioController {
 
 	@Autowired
-	private Cie10Service cie10Service;
+	private ServicioService servicioService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getCie10s() {
+    public ResponseEntity<?> getServicios() {
     	try{
-    		List<Cie10> cie10s = cie10Service.findAll();
-    		return ResponseEntity.ok(cie10s);
+    		List<Servicio> servicios = servicioService.findAll();
+    		return ResponseEntity.ok(servicios);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -42,10 +42,10 @@ public class Cie10Controller {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getCie10(UUID id){
+	public ResponseEntity<?> getServicio(UUID idServicio){
 		try {
-			Cie10 cie10 = cie10Service.findById(id);
-			return ResponseEntity.ok(cie10);
+			Servicio servicio = servicioService.findById(idServicio);
+			return ResponseEntity.ok(servicio);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -54,10 +54,10 @@ public class Cie10Controller {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear cie10')")
-	public ResponseEntity<?> create(@RequestBody Cie10 cie10) throws Exception {
+	@PreAuthorize("hasRole('crear servicio')")
+	public ResponseEntity<?> create(@RequestBody Servicio servicio) throws Exception {
 		try {
-			return ResponseEntity.ok(cie10Service.create(cie10));
+			return ResponseEntity.ok(servicioService.create(servicio));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -67,10 +67,10 @@ public class Cie10Controller {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar cie10')")
-	public ResponseEntity<?> update(@RequestBody Cie10 cie10) throws Exception {
+	@PreAuthorize("hasRole('editar servicio')")
+	public ResponseEntity<?> update(@RequestBody Servicio servicio) throws Exception {
 		try {
-			return ResponseEntity.ok(cie10Service.update(cie10));
+			return ResponseEntity.ok(servicioService.update(servicio));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -80,11 +80,11 @@ public class Cie10Controller {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar cie10')")
+	@PreAuthorize("hasRole('eliminar servicio')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			cie10Service.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Cie10());
+			servicioService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Servicio());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

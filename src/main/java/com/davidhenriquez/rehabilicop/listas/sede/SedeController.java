@@ -30,7 +30,7 @@ public class SedeController {
 	private SedeService sedeService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getSede() {
+    public ResponseEntity<?> getSedes() {
     	try{
     		List<Sede> sedes = sedeService.findAll();
     		return ResponseEntity.ok(sedes);

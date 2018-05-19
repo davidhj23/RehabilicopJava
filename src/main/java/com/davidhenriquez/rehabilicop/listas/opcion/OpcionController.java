@@ -30,7 +30,7 @@ public class OpcionController {
 	private OpcionService opcionService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getOpcion() {
+    public ResponseEntity<?> getOpciones() {
     	try{
     		List<Opcion> opciones = opcionService.findAll();
     		return ResponseEntity.ok(opciones);
