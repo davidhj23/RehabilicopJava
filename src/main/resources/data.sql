@@ -116,11 +116,11 @@ INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B86F3335C4A11E8871A4016
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B86F7B25C4A11E8871A40167EB4F57C'), 'Role_crear alucinacion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B86FCAB5C4A11E8871A40167EB4F57C'), 'Role_editar alucinacion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8701865C4A11E8871A40167EB4F57C'), 'Role_eliminar alucinacion');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8706425C4A11E8871A40167EB4F57C'), 'Role_fuerza');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B870B365C4A11E8871A40167EB4F57C'), 'Role_consultar fuerza');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8719DC5C4A11E8871A40167EB4F57C'), 'Role_crear fuerza');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8720485C4A11E8871A40167EB4F57C'), 'Role_editar fuerza');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B87226C5C4A11E8871A40167EB4F57C'), 'Role_eliminar fuerza');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8706425C4A11E8871A40167EB4F57C'), 'Role_fuerza muscular');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B870B365C4A11E8871A40167EB4F57C'), 'Role_consultar fuerza muscular');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8719DC5C4A11E8871A40167EB4F57C'), 'Role_crear fuerza muscular');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8720485C4A11E8871A40167EB4F57C'), 'Role_editar fuerza muscular');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B87226C5C4A11E8871A40167EB4F57C'), 'Role_eliminar fuerza muscular');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B87243A5C4A11E8871A40167EB4F57C'), 'Role_movilidad');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8725A25C4A11E8871A40167EB4F57C'), 'Role_consultar movilidad');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('1B8726DB5C4A11E8871A40167EB4F57C'), 'Role_crear movilidad');
@@ -437,9 +437,9 @@ INSERT INTO alucinacion (id_alucinacion, nombre) VALUES (UNHEX('FCAADF2C57CF11E8
 INSERT INTO alucinacion (id_alucinacion, nombre) VALUES (UNHEX('FCAADF2C57CF11E8A87C40167EB4F57C'), 'OTRAS');
 INSERT INTO alucinacion (id_alucinacion, nombre) VALUES (UNHEX('FCAADCCC57CF11E8A87C40167EB4F57C'), 'OLFATIVAS');
 
-INSERT INTO fuerza (id_fuerza , nombre) VALUES (UNHEX('FCAAD31A57CF11E8A87C40167EB4F57C'), 'APROPIADO');
-INSERT INTO fuerza (id_fuerza , nombre) VALUES (UNHEX('FCAAD6D157CF11E8A87C40167EB4F57C'), 'DISMINUIDO');
-INSERT INTO fuerza (id_fuerza , nombre) VALUES (UNHEX('FCAADA5957CF11E8A87C40167EB4F57C'), 'AUMENTADO');
+INSERT INTO fuerza_muscular (id_fuerza_muscular , nombre) VALUES (UNHEX('FCAAD31A57CF11E8A87C40167EB4F57C'), 'APROPIADO');
+INSERT INTO fuerza_muscular (id_fuerza_muscular , nombre) VALUES (UNHEX('FCAAD6D157CF11E8A87C40167EB4F57C'), 'DISMINUIDO');
+INSERT INTO fuerza_muscular (id_fuerza_muscular , nombre) VALUES (UNHEX('FCAADA5957CF11E8A87C40167EB4F57C'), 'AUMENTADO');
 
 INSERT INTO movilidad (id_movilidad , nombre) VALUES (UNHEX('C334E7E35B9511E8A1EE40167EB4F57C'), 'INDEPENDIENTE');
 INSERT INTO movilidad (id_movilidad , nombre) VALUES (UNHEX('C334F89A5B9511E8A1EE40167EB4F57C'), 'DISMINUIDO');
