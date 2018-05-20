@@ -2,6 +2,7 @@ package com.davidhenriquez.rehabilicop.listas.cie10;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -50,15 +51,14 @@ public class Cie10ServiceImpl implements Cie10Service {
 	}
 	
     private ArrayList<ValidationResult> validarDuplicado(Cie10 cie10)
-    {
-    	Cie10 duplicate = findAll().stream()
-	        .filter(a -> a.getCodigo() == cie10.getCodigo() &&
-	                     a.getIdCie10() != cie10.getIdCie10())
-	        .findFirst()
-            .get();
+    {	
+    	Optional<Cie10> duplicate = findAll().stream()
+	        .filter(a -> !a.getIdCie10().equals(cie10.getIdCie10()) &&
+	        			 a.getCodigo().equals(cie10.getCodigo()))
+	        .findAny();            
     	
     	ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
-    	if(duplicate == null){
+    	if(duplicate.isPresent()){
     		vaidationResults.add(new ValidationResult("codigo", "Ya existe un Cie 10 con este código"));
     	}
     	
