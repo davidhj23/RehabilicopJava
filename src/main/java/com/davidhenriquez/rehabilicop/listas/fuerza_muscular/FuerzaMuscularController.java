@@ -20,7 +20,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 
 @RestController
-@RequestMapping("/api/fuerzas-musculares")
+@RequestMapping("/api/fuerza-muscular")
 public class FuerzaMuscularController {
 
 	@Autowired
