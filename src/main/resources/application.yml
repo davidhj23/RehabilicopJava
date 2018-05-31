@@ -20,7 +20,7 @@ spring:
           auto: create-drop
           
   datasource:
-    url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false    
+    url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false&AllowPublicKeyRetrieval=true    
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
