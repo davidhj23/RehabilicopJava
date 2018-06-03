@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.escolaridad;
+package com.davidhenriquez.rehabilicop.listas.memoria2;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.Escolaridad;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.EscolaridadService;
+import com.davidhenriquez.rehabilicop.listas.memoria2.Memoria2;
+import com.davidhenriquez.rehabilicop.listas.memoria2.Memoria2Service;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumentoService;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/escolaridades")
-public class EscolaridadController {
+@RequestMapping("/api/memoria2s")
+public class Memoria2Controller {
 	
 	@Autowired
-	private EscolaridadService escolaridadService;
+	private Memoria2Service memoria2Service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getEscolaridades() {
+    public ResponseEntity<?> getMemoria2s() {
     	try{
-    		List<Escolaridad> escolaridades = escolaridadService.findAll();
-    		return ResponseEntity.ok(escolaridades);
+    		List<Memoria2> memoria2s = memoria2Service.findAll();
+    		return ResponseEntity.ok(memoria2s);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -45,10 +45,10 @@ public class EscolaridadController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getEscolaridad(UUID id){
+	public ResponseEntity<?> getMemoria2(UUID id){
 		try {
-			Escolaridad escolaridad = escolaridadService.findById(id);
-			return ResponseEntity.ok(escolaridad);
+			Memoria2 memoria2 = memoria2Service.findById(id);
+			return ResponseEntity.ok(memoria2);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -57,10 +57,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear escolaridad')")
-	public ResponseEntity<?> create(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('crear memoria2')")
+	public ResponseEntity<?> create(@RequestBody Memoria2 memoria2) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.create(escolaridad));
+			return ResponseEntity.ok(memoria2Service.create(memoria2));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -70,10 +70,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar escolaridad')")
-	public ResponseEntity<?> update(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('editar memoria2')")
+	public ResponseEntity<?> update(@RequestBody Memoria2 memoria2) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.update(escolaridad));
+			return ResponseEntity.ok(memoria2Service.update(memoria2));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -83,11 +83,11 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar escolaridad')")
+	@PreAuthorize("hasRole('eliminar memoria2')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			escolaridadService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Escolaridad());
+			memoria2Service.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Memoria2());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

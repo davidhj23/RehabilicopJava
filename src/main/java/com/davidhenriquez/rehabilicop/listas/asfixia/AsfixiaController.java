@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.escolaridad;
+package com.davidhenriquez.rehabilicop.listas.asfixia;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.Escolaridad;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.EscolaridadService;
+import com.davidhenriquez.rehabilicop.listas.asfixia.Asfixia;
+import com.davidhenriquez.rehabilicop.listas.asfixia.AsfixiaService;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumentoService;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/escolaridades")
-public class EscolaridadController {
+@RequestMapping("/api/asfixias")
+public class AsfixiaController {
 	
 	@Autowired
-	private EscolaridadService escolaridadService;
+	private AsfixiaService asfixiaService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getEscolaridades() {
+    public ResponseEntity<?> getAsfixias() {
     	try{
-    		List<Escolaridad> escolaridades = escolaridadService.findAll();
-    		return ResponseEntity.ok(escolaridades);
+    		List<Asfixia> asfixias = asfixiaService.findAll();
+    		return ResponseEntity.ok(asfixias);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -45,10 +45,10 @@ public class EscolaridadController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getEscolaridad(UUID id){
+	public ResponseEntity<?> getAsfixia(UUID id){
 		try {
-			Escolaridad escolaridad = escolaridadService.findById(id);
-			return ResponseEntity.ok(escolaridad);
+			Asfixia asfixia = asfixiaService.findById(id);
+			return ResponseEntity.ok(asfixia);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -57,10 +57,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear escolaridad')")
-	public ResponseEntity<?> create(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('crear asfixia')")
+	public ResponseEntity<?> create(@RequestBody Asfixia asfixia) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.create(escolaridad));
+			return ResponseEntity.ok(asfixiaService.create(asfixia));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -70,10 +70,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar escolaridad')")
-	public ResponseEntity<?> update(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('editar asfixia')")
+	public ResponseEntity<?> update(@RequestBody Asfixia asfixia) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.update(escolaridad));
+			return ResponseEntity.ok(asfixiaService.update(asfixia));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -83,11 +83,11 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar escolaridad')")
+	@PreAuthorize("hasRole('eliminar asfixia')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			escolaridadService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Escolaridad());
+			asfixiaService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Asfixia());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

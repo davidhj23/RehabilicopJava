@@ -11,11 +11,11 @@ public interface TonoVozService {
 
 	List<TonoVoz> findAll();
 
-	TonoVoz findById(UUID idSede);
+	TonoVoz findById(UUID idTonoVoz);
 
-	TonoVoz create(TonoVoz sede) throws ValidationException;
+	TonoVoz create(TonoVoz tonoVoz) throws ValidationException;
 	
-	TonoVoz update(TonoVoz sede) throws ValidationException;
+	TonoVoz update(TonoVoz tonoVoz) throws ValidationException;
 
-	void delete(UUID idSede) throws ValidationException;
+	void delete(UUID idTonoVoz) throws ValidationException;
 }

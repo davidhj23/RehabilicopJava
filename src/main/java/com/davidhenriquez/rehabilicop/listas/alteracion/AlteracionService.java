@@ -13,9 +13,9 @@ public interface AlteracionService {
 
 	Alteracion findById(UUID idAlteracion);
 
-	Alteracion create(Alteracion sede) throws ValidationException;
+	Alteracion create(Alteracion alimentacion) throws ValidationException;
 	
-	Alteracion update(Alteracion sede) throws ValidationException;
+	Alteracion update(Alteracion alimentacion) throws ValidationException;
 
 	void delete(UUID idAlteracion) throws ValidationException;
 }

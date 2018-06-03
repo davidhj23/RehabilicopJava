@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.escolaridad;
+package com.davidhenriquez.rehabilicop.listas.comprensible;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.Escolaridad;
-import com.davidhenriquez.rehabilicop.listas.escolaridad.EscolaridadService;
+import com.davidhenriquez.rehabilicop.listas.comprensible.Comprensible;
+import com.davidhenriquez.rehabilicop.listas.comprensible.ComprensibleService;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumentoService;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/escolaridades")
-public class EscolaridadController {
+@RequestMapping("/api/comprensibles")
+public class ComprensibleController {
 	
 	@Autowired
-	private EscolaridadService escolaridadService;
+	private ComprensibleService comprensibleService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getEscolaridades() {
+    public ResponseEntity<?> getComprensibles() {
     	try{
-    		List<Escolaridad> escolaridades = escolaridadService.findAll();
-    		return ResponseEntity.ok(escolaridades);
+    		List<Comprensible> comprensibles = comprensibleService.findAll();
+    		return ResponseEntity.ok(comprensibles);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -45,10 +45,10 @@ public class EscolaridadController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getEscolaridad(UUID id){
+	public ResponseEntity<?> getComprensible(UUID id){
 		try {
-			Escolaridad escolaridad = escolaridadService.findById(id);
-			return ResponseEntity.ok(escolaridad);
+			Comprensible comprensible = comprensibleService.findById(id);
+			return ResponseEntity.ok(comprensible);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -57,10 +57,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear escolaridad')")
-	public ResponseEntity<?> create(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('crear comprensible')")
+	public ResponseEntity<?> create(@RequestBody Comprensible comprensible) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.create(escolaridad));
+			return ResponseEntity.ok(comprensibleService.create(comprensible));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -70,10 +70,10 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar escolaridad')")
-	public ResponseEntity<?> update(@RequestBody Escolaridad escolaridad) throws Exception {
+	@PreAuthorize("hasRole('editar comprensible')")
+	public ResponseEntity<?> update(@RequestBody Comprensible comprensible) throws Exception {
 		try {
-			return ResponseEntity.ok(escolaridadService.update(escolaridad));
+			return ResponseEntity.ok(comprensibleService.update(comprensible));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -83,11 +83,11 @@ public class EscolaridadController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar escolaridad')")
+	@PreAuthorize("hasRole('eliminar comprensible')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			escolaridadService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Escolaridad());
+			comprensibleService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Comprensible());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

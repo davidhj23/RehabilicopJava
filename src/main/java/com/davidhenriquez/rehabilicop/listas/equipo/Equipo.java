@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.listas.escolaridad;
+package com.davidhenriquez.rehabilicop.listas.equipo;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -27,13 +27,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Escolaridad{
+public class Equipo{
 	
 	@Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idEscolaridad;
+    private UUID idEquipo;
 	
     private String nombre; 
 }

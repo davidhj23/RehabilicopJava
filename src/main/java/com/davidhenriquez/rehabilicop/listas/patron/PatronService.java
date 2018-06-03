@@ -13,9 +13,9 @@ public interface PatronService {
 
 	Patron findById(UUID idPatron);
 
-	Patron create(Patron sede) throws ValidationException;
+	Patron create(Patron patron) throws ValidationException;
 	
-	Patron update(Patron sede) throws ValidationException;
+	Patron update(Patron patron) throws ValidationException;
 
 	void delete(UUID idPatron) throws ValidationException;
 }

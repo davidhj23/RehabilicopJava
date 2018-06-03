@@ -29,8 +29,8 @@ public class TipoDocumentoController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> getTiposDocumentos() {
     	try{
-    		List<TipoDocumento> tiposDocumento = tipoDocumentoService.findAll();
-    		return ResponseEntity.ok(tiposDocumento);
+    		List<TipoDocumento> tiposDocumentos = tipoDocumentoService.findAll();
+    		return ResponseEntity.ok(tiposDocumentos);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 

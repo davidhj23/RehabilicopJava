@@ -19,26 +19,26 @@ import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 public class TonoVozServiceImpl implements TonoVozService {
 
 	@Autowired
-	private TonoVozRepository sedeRepository;
+	private TonoVozRepository tonoVozRepository;
 	
 	public List<TonoVoz> findAll(){
-		return sedeRepository.findAll();
+		return tonoVozRepository.findAll();
 	}
 	
-	public TonoVoz findById(UUID idSede){
-		return sedeRepository.findOne(idSede);
+	public TonoVoz findById(UUID idTonoVoz){
+		return tonoVozRepository.findOne(idTonoVoz);
 	}
 	
-	public TonoVoz create(TonoVoz sede) throws ValidationException {
-		return sedeRepository.save(sede);		
+	public TonoVoz create(TonoVoz tonoVoz) throws ValidationException {
+		return tonoVozRepository.save(tonoVoz);		
 	}
 	
-	public TonoVoz update(TonoVoz sede) throws ValidationException {		
-		return sedeRepository.save(sede);		
+	public TonoVoz update(TonoVoz tonoVoz) throws ValidationException {		
+		return tonoVozRepository.save(tonoVoz);		
 	}
 
 	@Transactional
-	public void delete(UUID idSede) throws ValidationException {
-		sedeRepository.delete(idSede);		
+	public void delete(UUID idTonoVoz) throws ValidationException {
+		tonoVozRepository.delete(idTonoVoz);		
 	}
 }
