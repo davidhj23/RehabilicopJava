@@ -171,11 +171,11 @@ INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D027650911E8B93A9840
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D31B650911E8B93A9840BB26612F'), 'ROLE_crear atencion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D4E9650911E8B93A9840BB26612F'), 'ROLE_editar atencion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D69F650911E8B93A9840BB26612F'), 'ROLE_eliminar atencion');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC051650A11E8B93A9840BB26612F'), 'ROLE_estado cociencia');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC5EE650A11E8B93A9840BB26612F'), 'ROLE_consultar estado cociencia');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC7DD650A11E8B93A9840BB26612F'), 'ROLE_crear estado cociencia');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC993650A11E8B93A9840BB26612F'), 'ROLE_editar estado cociencia');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CCB12650A11E8B93A9840BB26612F'), 'ROLE_eliminar estado cociencia');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC051650A11E8B93A9840BB26612F'), 'ROLE_estado conciencia');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC5EE650A11E8B93A9840BB26612F'), 'ROLE_consultar estado conciencia');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC7DD650A11E8B93A9840BB26612F'), 'ROLE_crear estado conciencia');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CC993650A11E8B93A9840BB26612F'), 'ROLE_editar estado conciencia');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('251CCB12650A11E8B93A9840BB26612F'), 'ROLE_eliminar estado conciencia');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('4BAC34D6650A11E8B93A9840BB26612F'), 'ROLE_sexo');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('4BAC38BC650A11E8B93A9840BB26612F'), 'ROLE_consultar sexo');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('4BAC3AD5650A11E8B93A9840BB26612F'), 'ROLE_crear sexo');
