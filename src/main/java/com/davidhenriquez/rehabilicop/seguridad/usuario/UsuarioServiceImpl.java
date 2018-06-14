@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.util.Util;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
@@ -39,5 +40,22 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	public Usuario findOneCliente(UUID idUsuario){
 		return usuarioRepository.findOne(idUsuario);
+	}
+
+	@Override
+	public void changePassword(String username, ChangePasswordModel changePasswordModel) throws ValidationException {	
+		Usuario usuario = usuarioRepository.findByUsername(username);		
+		
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();		
+		String currentEncryptedPassword = bCryptPasswordEncoder.encode(changePasswordModel.getCurrentPassword());
+		
+		if(!usuario.getPassword().equals(currentEncryptedPassword)) {
+			ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();	    	
+	    	vaidationResults.add(new ValidationResult("password", "La contraseña actual no es correcta"));
+	    	throw new ValidationException(vaidationResults);
+		}		
+		
+		usuario.setPassword(bCryptPasswordEncoder.encode(changePasswordModel.getNewPassword()));
+		usuarioRepository.save(usuario);		
 	}
 }

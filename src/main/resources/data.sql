@@ -161,11 +161,11 @@ INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('F5CA9682650211E8B93A9840
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('F5CA9867650211E8B93A9840BB26612F'), 'ROLE_crear aseguradora');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('F5CA9A01650211E8B93A9840BB26612F'), 'ROLE_editar aseguradora');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('F5CA9B85650211E8B93A9840BB26612F'), 'ROLE_eliminar aseguradora');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C0647D7650511E8B93A9840BB26612F'), 'ROLE_entidad');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C064D1B650511E8B93A9840BB26612F'), 'ROLE_consultar entidad');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C064EC8650511E8B93A9840BB26612F'), 'ROLE_crear entidad');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C065030650511E8B93A9840BB26612F'), 'ROLE_editar entidad');
-INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C065197650511E8B93A9840BB26612F'), 'ROLE_eliminar entidad');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C0647D7650511E8B93A9840BB26612F'), 'ROLE_tipo entidad');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C064D1B650511E8B93A9840BB26612F'), 'ROLE_consultar tipo entidad');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C064EC8650511E8B93A9840BB26612F'), 'ROLE_crear tipo entidad');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C065030650511E8B93A9840BB26612F'), 'ROLE_editar tipo entidad');
+INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('8C065197650511E8B93A9840BB26612F'), 'ROLE_eliminar tipo entidad');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984C99C650911E8B93A9840BB26612F'), 'ROLE_atencion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D027650911E8B93A9840BB26612F'), 'ROLE_consultar atencion');
 INSERT INTO permiso (id_permiso, nombre) VALUES (UNHEX('C984D31B650911E8B93A9840BB26612F'), 'ROLE_crear atencion');

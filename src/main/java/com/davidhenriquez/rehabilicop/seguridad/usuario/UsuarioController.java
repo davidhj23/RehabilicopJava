@@ -22,6 +22,7 @@ import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.via_ingreso.ViaIngreso;
 
 import java.util.Collection;
 import java.util.List;
@@ -65,6 +66,23 @@ public class UsuarioController {
                     .collect(Collectors.toList());
     		
     		return ResponseEntity.ok(permisos);      	
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
+    @RequestMapping(value = "/password", method = RequestMethod.POST)    
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordModel chanagePasswordModel,
+    		HttpServletRequest request) {
+    	try{
+	        String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);	        
+	        usuarioService.changePassword(username, chanagePasswordModel);
+	        return ResponseEntity.ok("");     
+    	} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());		
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 

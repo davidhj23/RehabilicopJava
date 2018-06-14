@@ -8,4 +8,6 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 public interface UsuarioService {
 	
 	Usuario findOneCliente(UUID idUsuario);
+	
+	void changePassword(String username, ChangePasswordModel changePasswordModel) throws ValidationException;
 }
