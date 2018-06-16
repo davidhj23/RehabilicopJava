@@ -23,7 +23,7 @@ import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolService;
 
 @RestController
-@RequestMapping("/api/vias-ingreso")
+@RequestMapping("/api/vias-ingresos")
 public class ViaIngresoController {
 
 	@Autowired

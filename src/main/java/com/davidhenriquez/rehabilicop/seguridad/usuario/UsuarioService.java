@@ -4,10 +4,19 @@ import java.util.List;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
+import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 
 public interface UsuarioService {
 	
-	Usuario findOneCliente(UUID idUsuario);
+	List<Usuario> findAll();
+
+	Usuario findById(UUID idUsuario);
+
+	Usuario create(Usuario usuario) throws ValidationException;
+	
+	Usuario update(Usuario usuario) throws ValidationException;
+
+	void delete(UUID idUsuario) throws ValidationException;
 	
 	void changePassword(String username, ChangePasswordModel changePasswordModel) throws ValidationException;
 }

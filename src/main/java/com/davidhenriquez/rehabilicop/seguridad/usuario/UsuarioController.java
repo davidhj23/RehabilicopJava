@@ -3,15 +3,12 @@ package com.davidhenriquez.rehabilicop.seguridad.usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +19,6 @@ import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.via_ingreso.ViaIngreso;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,7 +41,71 @@ public class UsuarioController {
     private UserDetailsService userDetailsService;
     
     @Autowired
-    private UsuarioService usuarioService;    
+    private UsuarioService usuarioService; 
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<?> getUsuarios() {
+    	try{
+    		List<Usuario> usuarios = usuarioService.findAll();
+    		return ResponseEntity.ok(usuarios);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUsuario(UUID idUsuario){
+		try {
+			Usuario usuario = usuarioService.findById(idUsuario);
+			return ResponseEntity.ok(usuario);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('crear usuario')")
+	public ResponseEntity<?> create(@RequestBody Usuario usuario) throws Exception {
+		try {
+			return ResponseEntity.ok(usuarioService.create(usuario));
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('editar usuario')")
+	public ResponseEntity<?> update(@RequestBody Usuario usuario) throws Exception {
+		try {
+			return ResponseEntity.ok(usuarioService.update(usuario));
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+	@PreAuthorize("hasRole('eliminar usuario')")
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
+		try {
+			usuarioService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Usuario());
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
     
     @RequestMapping(value = "/me", method = RequestMethod.GET)    
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
