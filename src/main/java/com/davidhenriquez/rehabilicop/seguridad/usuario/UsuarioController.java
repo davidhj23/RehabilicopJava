@@ -149,4 +149,20 @@ public class UsuarioController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
     	}
     }
+    
+    @RequestMapping(value = "/{idUsuario}/password", method = RequestMethod.POST)    
+    @PreAuthorize("hasRole('restablecer clave')")
+    public ResponseEntity<?> restablecerPassword(@PathVariable UUID idUsuario, 
+    		@RequestBody RestablecerPasswordModel restablecerPasswordModel) {
+    	try{	        
+	        usuarioService.restablecerPassword(idUsuario, restablecerPasswordModel);
+	        return ResponseEntity.ok("");     
+    	} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());		
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
 }

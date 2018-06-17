@@ -73,4 +73,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 		usuario.setPassword(bCryptPasswordEncoder.encode(changePasswordModel.getNewPassword()));
 		usuarioRepository.save(usuario);		
 	}
+
+	@Override
+	public void restablecerPassword(UUID idUsuario, RestablecerPasswordModel restablecerPasswordModel)
+			throws ValidationException {
+		Usuario usuario = usuarioRepository.findOne(idUsuario);				
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		usuario.setPassword(bCryptPasswordEncoder.encode(restablecerPasswordModel.getNewPassword()));
+		usuarioRepository.save(usuario);		
+	}
 }

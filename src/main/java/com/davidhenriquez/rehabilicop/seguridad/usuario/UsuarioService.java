@@ -19,4 +19,6 @@ public interface UsuarioService {
 	void delete(UUID idUsuario) throws ValidationException;
 	
 	void changePassword(String username, ChangePasswordModel changePasswordModel) throws ValidationException;
+	
+	void restablecerPassword(UUID idUsuario, RestablecerPasswordModel restablecerPasswordModel) throws ValidationException;
 }
