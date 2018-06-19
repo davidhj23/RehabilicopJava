@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.seguridad.rol;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,7 +21,8 @@ public class RolServiceImpl implements RolService {
 	
 	public List<Rol> findAll(){
 		return rolRepository.findAll().stream()
-                .filter(x -> x.getNombre() != "admin global")                    
+                .filter(x -> !x.getNombre().equals("admin global"))
+                .sorted(Comparator.comparing(Rol::getNombre))
                 .collect(Collectors.toList());
 	}
 	

@@ -29,6 +29,7 @@ import lombok.Data;
 
 @Entity
 @Data
+
 public class Rol {
   
 	@Id
