@@ -46,6 +46,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	public Usuario create(Usuario usuario) throws ValidationException {
+		usuario.setUsername(usuario.getEmail());
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getIdentificacion()));
 		return usuarioRepository.save(usuario);		
 	}
 	

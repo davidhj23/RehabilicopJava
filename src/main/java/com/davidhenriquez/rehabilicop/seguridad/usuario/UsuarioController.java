@@ -56,9 +56,9 @@ public class UsuarioController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getUsuario(UUID idUsuario){
+	public ResponseEntity<?> getUsuario(@PathVariable UUID id){
 		try {
-			Usuario usuario = usuarioService.findById(idUsuario);
+			Usuario usuario = usuarioService.findById(id);
 			return ResponseEntity.ok(usuario);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
