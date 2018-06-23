@@ -73,7 +73,7 @@ public class UsuarioController {
 		try {
 			return ResponseEntity.ok(usuarioService.create(usuario));
 		} catch (ValidationException ex) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
@@ -158,7 +158,7 @@ public class UsuarioController {
 	        usuarioService.restablecerPassword(idUsuario, restablecerPasswordModel);
 	        return ResponseEntity.ok("");     
     	} catch (ValidationException ex) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());    		
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
