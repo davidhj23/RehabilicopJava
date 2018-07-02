@@ -21,4 +21,15 @@ public interface UsuarioService {
 	void changePassword(String username, ChangePasswordModel changePasswordModel) throws ValidationException;
 	
 	void restablecerPassword(UUID idUsuario, RestablecerPasswordModel restablecerPasswordModel) throws ValidationException;
+	
+	
+	List<Usuario> findAllPacientes();
+
+	Usuario findPacienteById(UUID idPaciente);
+
+	Usuario createPaciente(Usuario paciente) throws ValidationException;
+	
+	Usuario updatePaciente(Usuario paciente) throws ValidationException;
+
+	void deletePaciente(UUID idPaciente) throws ValidationException;
 }

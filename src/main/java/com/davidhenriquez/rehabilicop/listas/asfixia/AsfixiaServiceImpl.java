@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.asfixia;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 
 @Service
 public class AsfixiaServiceImpl implements AsfixiaService {
@@ -19,7 +21,9 @@ public class AsfixiaServiceImpl implements AsfixiaService {
 	private AsfixiaRepository asfixiaRepository;
 	
 	public List<Asfixia> findAll(){
-		return asfixiaRepository.findAll();
+		return asfixiaRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Asfixia::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Asfixia findById(UUID idAsfixia){

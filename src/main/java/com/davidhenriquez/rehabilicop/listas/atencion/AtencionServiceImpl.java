@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.atencion;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 
 @Service
 public class AtencionServiceImpl implements AtencionService {
@@ -19,7 +21,9 @@ public class AtencionServiceImpl implements AtencionService {
 	private AtencionRepository atencionRepository;
 	
 	public List<Atencion> findAll(){
-		return atencionRepository.findAll();
+		return atencionRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Atencion::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Atencion findById(UUID idAtencion){

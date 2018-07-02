@@ -1,26 +1,37 @@
 package com.davidhenriquez.rehabilicop.seguridad.usuario;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
+import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
+import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
+import com.mysql.cj.util.StringUtils;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private RolRepository rolRepository;
 	
 	private ArrayList<ValidationResult> Validar(Usuario usuario)
     {
@@ -59,7 +70,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     public List<Usuario> findAll(){
 		return usuarioRepository.findAll().stream()
-                .filter(x -> !x.getUsername().equals("admin"))                    
+                .filter(x -> !x.getUsername().equals("admin"))
+                .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}
 	
@@ -73,7 +85,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		usuario.setUsername(usuario.getEmail());
+		usuario.setEnabled(true);
+		usuario.setUsername(usuario.getIdentificacion());		
+		
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getIdentificacion()));
 		return usuarioRepository.save(usuario);		
@@ -85,7 +99,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		usuario.setUsername(usuario.getEmail());
+		usuario.setUsername(usuario.getIdentificacion());
 		Usuario usuarioGuardado = findById(usuario.getIdUsuario()); 
 		usuario.setPassword(usuarioGuardado.getPassword());
 		return usuarioRepository.save(usuario);			
@@ -120,4 +134,72 @@ public class UsuarioServiceImpl implements UsuarioService{
 		usuario.setPassword(bCryptPasswordEncoder.encode(restablecerPasswordModel.getNewPassword()));
 		usuarioRepository.save(usuario);		
 	}
+
+	@Override
+	public List<Usuario> findAllPacientes() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> StringUtils.isNullOrEmpty(x.getUsername()))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public Usuario findPacienteById(UUID idPaciente) {		
+		return findById(idPaciente);
+	}
+
+	@Override
+	public Usuario createPaciente(Usuario paciente) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validarDuplicado(paciente);
+		
+		if (validaciones != null && validaciones.size() > 0)
+			throw new ValidationException(validaciones);		
+		 
+		Optional<Rol> rol = rolRepository.findAll().stream().filter(x -> x.getNombre().equals("Paciente")).findFirst();		
+		ArrayList<Rol> roles = new ArrayList<Rol>();
+		roles.add(rol.get());
+		
+		paciente.setRoles(roles);
+		return usuarioRepository.save(paciente);		
+	}
+
+	@Override
+	public Usuario updatePaciente(Usuario paciente) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validarDuplicado(paciente);
+		
+		if (validaciones != null && validaciones.size() > 0)
+			throw new ValidationException(validaciones);
+		
+		return usuarioRepository.save(paciente);		
+	}
+
+	@Override
+	public void deletePaciente(UUID idPaciente) throws ValidationException {
+		delete(idPaciente);
+	}
+	
+	private ArrayList<ValidationResult> validarDuplicadoPaciente(Usuario paciente)
+    {	
+		ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
+		
+		Optional<Usuario> duplicateCedula = findAll().stream()
+		        .filter(a -> !a.getIdUsuario().equals(paciente.getIdUsuario()) &&
+		        			  a.getIdentificacion().equals(paciente.getIdentificacion()))
+		        .findAny();
+    	
+    	if(duplicateCedula.isPresent()){
+    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cédula"));
+    	}
+		
+    	Optional<Usuario> duplicate = findAll().stream()
+	        .filter(a -> !a.getIdUsuario().equals(paciente.getIdUsuario()) &&
+	        			  a.getEmail().equals(paciente.getEmail()))
+	        .findAny();
+    	
+    	if(duplicate.isPresent()){
+    		vaidationResults.add(new ValidationResult("email", "Ya existe un paciente con este email"));
+    	}
+    	
+    	return vaidationResults;
+    }
 }

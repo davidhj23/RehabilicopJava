@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.conciencia;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 
 @Service
 public class ConcienciaServiceImpl implements ConcienciaService {
@@ -19,7 +21,9 @@ public class ConcienciaServiceImpl implements ConcienciaService {
 	private ConcienciaRepository concienciaRepository;
 	
 	public List<Conciencia> findAll(){
-		return concienciaRepository.findAll();
+		return concienciaRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Conciencia::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Conciencia findById(UUID idConciencia){

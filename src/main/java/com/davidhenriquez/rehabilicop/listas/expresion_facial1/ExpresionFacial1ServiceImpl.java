@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.expresion_facial1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
 import com.davidhenriquez.rehabilicop.listas.opcion.OpcionRepository;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -22,7 +24,9 @@ public class ExpresionFacial1ServiceImpl implements ExpresionFacial1Service {
 	private ExpresionFacial1Repository expresionFacial1Repository;
 	
 	public List<ExpresionFacial1> findAll(){
-		return expresionFacial1Repository.findAll();
+		return expresionFacial1Repository.findAll().stream()                
+		           .sorted(Comparator.comparing(ExpresionFacial1::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public ExpresionFacial1 findById(UUID idExpresionFacial1){

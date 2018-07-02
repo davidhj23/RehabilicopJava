@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.cie10;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 
 @Service
 public class Cie10ServiceImpl implements Cie10Service {
@@ -20,7 +22,9 @@ public class Cie10ServiceImpl implements Cie10Service {
 	private Cie10Repository cie10Repository;
 	
 	public List<Cie10> findAll(){
-		return cie10Repository.findAll();
+		return cie10Repository.findAll().stream()                
+		           .sorted(Comparator.comparing(Cie10::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Cie10 findById(UUID idCie10){

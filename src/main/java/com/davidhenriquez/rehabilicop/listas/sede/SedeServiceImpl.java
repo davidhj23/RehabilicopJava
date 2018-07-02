@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.sede;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
 import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
 import com.davidhenriquez.rehabilicop.listas.opcion.OpcionRepository;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -22,7 +24,9 @@ public class SedeServiceImpl implements SedeService {
 	private SedeRepository sedeRepository;
 	
 	public List<Sede> findAll(){
-		return sedeRepository.findAll();
+		return sedeRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Sede::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Sede findById(UUID idSede){

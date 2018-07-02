@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.aseguradora;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 
 @Service
 public class AseguradoraServiceImpl implements AseguradoraService {
@@ -19,7 +21,9 @@ public class AseguradoraServiceImpl implements AseguradoraService {
 	private AseguradoraRepository aseguradoraRepository;
 	
 	public List<Aseguradora> findAll(){
-		return aseguradoraRepository.findAll();
+		return aseguradoraRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Aseguradora::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Aseguradora findById(UUID idAseguradora){

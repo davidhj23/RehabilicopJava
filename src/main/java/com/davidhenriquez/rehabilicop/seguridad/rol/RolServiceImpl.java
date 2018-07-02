@@ -21,7 +21,8 @@ public class RolServiceImpl implements RolService {
 	
 	public List<Rol> findAll(){
 		return rolRepository.findAll().stream()
-                .filter(x -> !x.getNombre().equals("admin global"))
+                .filter(x -> !x.getNombre().equals("admin global") && 
+                			 !x.getNombre().equals("Paciente"))
                 .sorted(Comparator.comparing(Rol::getNombre))
                 .collect(Collectors.toList());
 	}

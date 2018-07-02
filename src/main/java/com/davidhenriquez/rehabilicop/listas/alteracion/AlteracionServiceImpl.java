@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.alteracion;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
 import com.davidhenriquez.rehabilicop.listas.opcion.OpcionRepository;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -22,7 +24,9 @@ public class AlteracionServiceImpl implements AlteracionService {
 	private AlteracionRepository alteracionRepository;
 	
 	public List<Alteracion> findAll(){
-		return alteracionRepository.findAll();
+		return alteracionRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Alteracion::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Alteracion findById(UUID idAlteracion){

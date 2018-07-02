@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.listas.cama;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 
 @Service
 public class CamaServiceImpl implements CamaService {
@@ -19,7 +21,9 @@ public class CamaServiceImpl implements CamaService {
 	private CamaRepository camaRepository;
 	
 	public List<Cama> findAll(){
-		return camaRepository.findAll();
+		return camaRepository.findAll().stream()                
+		           .sorted(Comparator.comparing(Cama::getNombre))
+		           .collect(Collectors.toList());
 	}
 	
 	public Cama findById(UUID idCama){
