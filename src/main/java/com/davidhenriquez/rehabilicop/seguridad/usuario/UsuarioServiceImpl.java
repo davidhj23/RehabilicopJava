@@ -22,7 +22,6 @@ import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
-import com.mysql.cj.util.StringUtils;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -42,7 +41,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     {	
 		ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
 		
-		Optional<Usuario> duplicateCedula = findAll().stream()
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		
+		Optional<Usuario> duplicateCedula = usuarios.stream()
 		        .filter(a -> !a.getIdUsuario().equals(usuario.getIdUsuario()) &&
 		        			  a.getIdentificacion().equals(usuario.getIdentificacion()))
 		        .findAny();
@@ -51,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     		vaidationResults.add(new ValidationResult("cedula", "Ya existe un Usuario con esta cédula"));
     	}
 		
-    	Optional<Usuario> duplicate = findAll().stream()
+    	Optional<Usuario> duplicate = usuarios.stream()
 	        .filter(a -> !a.getIdUsuario().equals(usuario.getIdUsuario()) &&
 	        			  a.getEmail().equals(usuario.getEmail()))
 	        .findAny();
@@ -70,7 +71,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     public List<Usuario> findAll(){
 		return usuarioRepository.findAll().stream()
-                .filter(x -> !x.getUsername().equals("admin"))
+                .filter(x -> x.getUsername() != null && 
+                		     !x.getUsername().equals("admin"))
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}
@@ -138,7 +140,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public List<Usuario> findAllPacientes() {
 		return usuarioRepository.findAll().stream()
-                .filter(x -> StringUtils.isNullOrEmpty(x.getUsername()))
+                .filter(x -> x.getUsername() == null || 
+                		     x.getUsername().equals(""))
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}
@@ -170,6 +173,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
+		Optional<Rol> rol = rolRepository.findAll().stream().filter(x -> x.getNombre().equals("Paciente")).findFirst();		
+		ArrayList<Rol> roles = new ArrayList<Rol>();
+		roles.add(rol.get());
+		
+		paciente.setRoles(roles);
 		return usuarioRepository.save(paciente);		
 	}
 
@@ -182,7 +190,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     {	
 		ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
 		
-		Optional<Usuario> duplicateCedula = findAll().stream()
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		
+		Optional<Usuario> duplicateCedula = usuarios.stream()
 		        .filter(a -> !a.getIdUsuario().equals(paciente.getIdUsuario()) &&
 		        			  a.getIdentificacion().equals(paciente.getIdentificacion()))
 		        .findAny();
@@ -191,7 +201,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cédula"));
     	}
 		
-    	Optional<Usuario> duplicate = findAll().stream()
+    	Optional<Usuario> duplicate = usuarios.stream()
 	        .filter(a -> !a.getIdUsuario().equals(paciente.getIdUsuario()) &&
 	        			  a.getEmail().equals(paciente.getEmail()))
 	        .findAny();

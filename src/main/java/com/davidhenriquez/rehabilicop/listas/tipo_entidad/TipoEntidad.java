@@ -34,4 +34,8 @@ public class TipoEntidad {
 	
 	@NotNull
 	private String nombre;
+	
+	@OneToMany(mappedBy="tipoEntidad")
+	@JsonBackReference(value="usuarios")	
+	private Collection<Usuario> usuarios;
 }

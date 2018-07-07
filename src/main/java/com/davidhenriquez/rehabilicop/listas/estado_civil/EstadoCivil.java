@@ -34,4 +34,8 @@ public class EstadoCivil {
 	
 	@NotNull
 	private String nombre;
+	
+	@OneToMany(mappedBy="estadoCivil")
+	@JsonBackReference(value="usuarios")	
+	private Collection<Usuario> usuarios;
 }

@@ -22,7 +22,10 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
+import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
+import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -57,6 +60,9 @@ public class Usuario {
 	private String direccion;	
 	private String telefono;
 	private String celular;
+	
+	private String ocupacion;
+	private Date fechaDeNacimiento;
 
 	@Temporal(TemporalType.TIMESTAMP)	
 	private Date ultimoAcceso;
@@ -67,6 +73,18 @@ public class Usuario {
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)
 	private TipoDocumento tipoDocumento;
+	
+	@ManyToOne	
+	@JoinColumn(name="idEstadoCivil", nullable=true)
+	private EstadoCivil estadoCivil;
+	
+	@ManyToOne	
+	@JoinColumn(name="idAseguradora", nullable=true)
+	private Aseguradora aseguradora;
+	
+	@ManyToOne	
+	@JoinColumn(name="idTipoEntidad", nullable=true)
+	private TipoEntidad tipoEntidad;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
