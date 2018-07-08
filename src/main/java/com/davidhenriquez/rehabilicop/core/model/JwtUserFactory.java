@@ -19,9 +19,8 @@ public final class JwtUserFactory {
     		usuario.getApellidos(),
     		usuario.getDireccion(),
     		usuario.getTelefono(),
-    		usuario.getCelular(),
+    		usuario.getCelular(),    		
     		
-    		usuario.getUltimoAcceso(),
     		usuario.getRoles()        		
         );
     }

@@ -28,8 +28,6 @@ public class JwtUser implements UserDetails {
 	private final String direccion;	
 	private final String telefono;
 	private final String celular;
-
-	private final Date ultimoAcceso;
 	
 	private final Collection<Rol> roles;	
 
@@ -44,9 +42,7 @@ public class JwtUser implements UserDetails {
 		String apellidos,
 		String direccion,	
 		String telefono,
-		String celular,
-
-		Date ultimoAcceso,
+		String celular,		
 		
 		Collection<Rol> roles
     ) {        
@@ -61,9 +57,7 @@ public class JwtUser implements UserDetails {
         this.direccion = direccion;
         this.telefono = telefono;
         this.celular = celular;
-        
-        this.ultimoAcceso = ultimoAcceso;
-        
+                
         this.roles = roles;
     }
 
@@ -114,11 +108,6 @@ public class JwtUser implements UserDetails {
     @JsonIgnore
     public String getCelular() {
         return celular;
-    }
-    
-    @JsonIgnore
-    public Date getUltimoAcceso() {
-        return ultimoAcceso;
     }
     
     @JsonIgnore

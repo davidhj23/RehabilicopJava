@@ -23,9 +23,12 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
+import com.davidhenriquez.rehabilicop.listas.atencion.Atencion;
 import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
+import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
+import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -63,12 +66,9 @@ public class Usuario {
 	
 	private String ocupacion;
 	private Date fechaDeNacimiento;
-
-	@Temporal(TemporalType.TIMESTAMP)	
-	private Date ultimoAcceso;
-	
-	@Transient
-	private String imagenUrl;
+	private Date fechaIngreso;
+	private UUID idMedico;
+	private UUID idEnfermero;	
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)
@@ -85,6 +85,18 @@ public class Usuario {
 	@ManyToOne	
 	@JoinColumn(name="idTipoEntidad", nullable=true)
 	private TipoEntidad tipoEntidad;
+	
+	@ManyToOne	
+	@JoinColumn(name="idSede", nullable=true)
+	private Sede sede;
+	
+	@ManyToOne	
+	@JoinColumn(name="idAtencion", nullable=true)
+	private Atencion atencion;
+	
+	@ManyToOne	
+	@JoinColumn(name="idCama", nullable=true)
+	private Cama cama;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
