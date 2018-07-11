@@ -92,4 +92,16 @@ public class Cie10Controller {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	@RequestMapping(path="/search/{search}", method=RequestMethod.GET)
+	public ResponseEntity<?> getCie10(@PathVariable String search){
+		try{
+    		List<Cie10> cie10s = cie10Service.search(search);
+    		return ResponseEntity.ok(cie10s);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}	     
+	}
 }

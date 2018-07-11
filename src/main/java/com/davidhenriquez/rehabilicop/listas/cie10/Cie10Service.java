@@ -18,4 +18,6 @@ public interface Cie10Service {
 	Cie10 update(Cie10 cie10) throws ValidationException;
 
 	void delete(UUID idCie10) throws ValidationException;
+	
+	List<Cie10> search(String search);
 }

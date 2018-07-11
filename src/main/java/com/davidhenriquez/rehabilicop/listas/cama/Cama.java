@@ -39,7 +39,7 @@ public class Cama{
 	
     private String nombre; 
     
-    @OneToMany(mappedBy="cama")
+    @OneToMany(mappedBy="diagnosticoSecundario")
 	@JsonBackReference(value="usuarios")	
 	private Collection<Usuario> usuarios;
 }

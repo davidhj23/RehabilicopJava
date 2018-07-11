@@ -68,4 +68,13 @@ public class Cie10ServiceImpl implements Cie10Service {
     	
     	return vaidationResults;
     }
+
+	@Override
+	public List<Cie10> search(String search) {
+		return cie10Repository.findAll().stream()
+				.filter(x -> x.getCodigo().contains(search) ||
+							 x.getNombre().contains(search))
+				.sorted(Comparator.comparing(Cie10::getNombre))
+				.collect(Collectors.toList()); 
+	}
 }

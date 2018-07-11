@@ -25,10 +25,12 @@ import org.hibernate.annotations.GenericGenerator;
 import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 import com.davidhenriquez.rehabilicop.listas.atencion.Atencion;
 import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
+import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
+import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -66,9 +68,16 @@ public class Usuario {
 	
 	private String ocupacion;
 	private Date fechaDeNacimiento;
-	private Date fechaIngreso;
+	private Date fechaDeIngreso;
 	private UUID idMedico;
 	private UUID idEnfermero;	
+		
+	private Date fechaDeRemision;
+	private String numeroRemision;
+	private String acompanante;
+    private String direccionAcompanante;	
+    private String telefonoAcompanante;
+    private String ciudadAcompanante;
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)
@@ -97,6 +106,18 @@ public class Usuario {
 	@ManyToOne	
 	@JoinColumn(name="idCama", nullable=true)
 	private Cama cama;
+	
+	@ManyToOne	
+	@JoinColumn(name="idParentesco", nullable=true)
+	private Parentesco parentesco;
+	
+	@ManyToOne	
+	@JoinColumn(name="idDiagnosticoPrincipal", nullable=true)
+	private Cie10 diagnosticoPrincipal;
+	
+	@ManyToOne	
+	@JoinColumn(name="idDiagnosticoSecundario", nullable=true)
+	private Cie10 diagnosticoSecundario;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(

@@ -32,4 +32,9 @@ public interface UsuarioService {
 	Usuario updatePaciente(Usuario paciente) throws ValidationException;
 
 	void deletePaciente(UUID idPaciente) throws ValidationException;
+
+	
+	List<Usuario> findAllMedicos();
+	
+	List<Usuario> findAllEnfermeros();
 }

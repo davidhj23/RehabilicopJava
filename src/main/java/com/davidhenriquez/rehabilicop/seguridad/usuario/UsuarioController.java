@@ -165,4 +165,28 @@ public class UsuarioController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
     	}
     }
+    
+    @RequestMapping(value = "/medicos", method = RequestMethod.GET)
+    public ResponseEntity<?> getMedicos() {
+    	try{
+    		List<Usuario> medicos = usuarioService.findAllMedicos();
+    		return ResponseEntity.ok(medicos);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
+    @RequestMapping(value = "/enfermeros", method = RequestMethod.GET)
+    public ResponseEntity<?> getEnfermeros() {
+    	try{
+    		List<Usuario> enfermeros = usuarioService.findAllEnfermeros();
+    		return ResponseEntity.ok(enfermeros);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
 }
