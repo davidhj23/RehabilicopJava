@@ -78,6 +78,8 @@ public class Usuario {
     private String direccionAcompanante;	
     private String telefonoAcompanante;
     private String ciudadAcompanante;
+    
+    private UUID idAdminisionista;
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)

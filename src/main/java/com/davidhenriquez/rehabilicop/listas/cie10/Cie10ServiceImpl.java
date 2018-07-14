@@ -72,8 +72,8 @@ public class Cie10ServiceImpl implements Cie10Service {
 	@Override
 	public List<Cie10> search(String search) {
 		return cie10Repository.findAll().stream()
-				.filter(x -> x.getCodigo().contains(search) ||
-							 x.getNombre().contains(search))
+				.filter(x -> x.getCodigo().contains(search.toUpperCase()) ||
+							 x.getNombre().contains(search.toUpperCase()))
 				.sorted(Comparator.comparing(Cie10::getNombre))
 				.collect(Collectors.toList()); 
 	}

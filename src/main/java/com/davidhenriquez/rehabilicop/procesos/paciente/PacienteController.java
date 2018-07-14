@@ -71,8 +71,13 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('crear paciente')")
-	public ResponseEntity<?> create(@RequestBody Usuario paciente) throws Exception {
+	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Usuario paciente) throws Exception {
 		try {
+			String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);
+	        Usuario usuario = usuarioService.findUserByUsername(username);	        
+			
+			paciente.setIdAdminisionista(usuario.getIdUsuario());
 			return ResponseEntity.ok(usuarioService.createPaciente(paciente));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());			

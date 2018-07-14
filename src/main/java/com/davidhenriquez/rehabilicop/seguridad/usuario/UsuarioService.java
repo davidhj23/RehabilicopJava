@@ -37,4 +37,6 @@ public interface UsuarioService {
 	List<Usuario> findAllMedicos();
 	
 	List<Usuario> findAllEnfermeros();
+
+	Usuario findUserByUsername(String username);
 }

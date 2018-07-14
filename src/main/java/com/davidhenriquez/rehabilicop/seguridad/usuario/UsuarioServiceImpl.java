@@ -228,4 +228,9 @@ public class UsuarioServiceImpl implements UsuarioService{
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}
+
+	@Override
+	public Usuario findUserByUsername(String username) {
+		return usuarioRepository.findByUsername(username);
+	}
 }
