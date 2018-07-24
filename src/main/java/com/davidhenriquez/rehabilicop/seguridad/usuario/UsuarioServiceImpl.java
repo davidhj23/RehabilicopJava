@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
@@ -198,7 +197,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		        .findAny();
     	
     	if(duplicateCedula.isPresent()){
-    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cédula"));
+    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cÃ©dula"));
     	}
 		
     	Optional<Usuario> duplicate = usuarios.stream()

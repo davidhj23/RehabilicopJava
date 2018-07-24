@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.procesos.paciente;
+package com.davidhenriquez.rehabilicop.procesos.admision;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,17 +30,26 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/pacientes")
-public class PacienteController {    
-    
+@RequestMapping("/api/admisiones")
+public class AdmisionController {
+        
+	@Value("${jwt.header}")
+    private String tokenHeader;
+
     @Autowired
-    private UsuarioService usuarioService; 
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private UsuarioService usuarioService;
+        
+    @Autowired
+    private AdmisionService admisionService; 
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getPacientes() {
+    public ResponseEntity<?> getAdmisiones() {
     	try{
-    		List<Usuario> pacientes = usuarioService.findAllPacientes();
-    		return ResponseEntity.ok(pacientes);
+    		List<Admision> admisiones = admisionService.findAll();
+    		return ResponseEntity.ok(admisiones);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -49,10 +58,10 @@ public class PacienteController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getPaciente(@PathVariable UUID id){
+	public ResponseEntity<?> getAdmision(@PathVariable UUID id){
 		try {
-			Usuario paciente = usuarioService.findPacienteById(id);
-			return ResponseEntity.ok(paciente);
+			Admision admision = admisionService.findById(id);
+			return ResponseEntity.ok(admision);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -61,10 +70,15 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear paciente')")
-	public ResponseEntity<?> create(@RequestBody Usuario paciente) throws Exception {
+	@PreAuthorize("hasRole('crear admisiones')")
+	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Admision admision) throws Exception {
 		try {
-			return ResponseEntity.ok(usuarioService.createPaciente(paciente));
+			String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);
+	        Usuario usuario = usuarioService.findUserByUsername(username);	        
+			
+	        admision.setIdAdminisionista(usuario.getIdUsuario());
+			return ResponseEntity.ok(admisionService.create(admision));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());			
 		} catch (Exception ex) {
@@ -74,10 +88,10 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar paciente')")
-	public ResponseEntity<?> update(@RequestBody Usuario paciente) throws Exception {
+	@PreAuthorize("hasRole('editar admision')")
+	public ResponseEntity<?> update(@RequestBody Admision admision) throws Exception {
 		try {
-			return ResponseEntity.ok(usuarioService.updatePaciente(paciente));
+			return ResponseEntity.ok(admisionService.update(admision));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -87,11 +101,11 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar paciente')")
+	@PreAuthorize("hasRole('eliminar admision')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			usuarioService.deletePaciente(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Usuario());
+			admisionService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Admision());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

@@ -63,7 +63,7 @@ public class Cie10ServiceImpl implements Cie10Service {
     	
     	ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
     	if(duplicate.isPresent()){
-    		vaidationResults.add(new ValidationResult("codigo", "Ya existe un Cie 10 con este código"));
+    		vaidationResults.add(new ValidationResult("codigo", "Ya existe un Cie 10 con este cÃ³digo"));
     	}
     	
     	return vaidationResults;

@@ -1,10 +1,9 @@
-package com.davidhenriquez.rehabilicop.seguridad.usuario;
+package com.davidhenriquez.rehabilicop.procesos.admision;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,10 +29,10 @@ import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
-import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
+import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,57 +43,47 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Usuario {
+public class Admision {
 	
 	@Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idUsuario;	
+    private UUID idAdmision;	
 	
-	private String identificacion;
-	
-	private String username;
-	
-	@JsonIgnore
-	private String password;
-	
-	private String email;
-	private boolean enabled;
-	
-	private String nombres;
-	private String apellidos;
-	private String direccion;	
-	private String telefono;
-	private String celular;
-	
-	private String ocupacion;
-	private Date fechaDeNacimiento;	
+	private Date fechaDeIngreso;
+	private UUID idMedico;
+	private UUID idEnfermero;	
+		
+	private Date fechaDeRemision;
+	private String numeroRemision;
+	private String acompanante;
+    private String direccionAcompanante;	
+    private String telefonoAcompanante;
+    private String ciudadAcompanante;
+    
+    private UUID idDiagnosticoPrincipal;
+    private UUID idDiagnosticoSecundario;
+    
+    private UUID idAdminisionista;
 	
 	@ManyToOne	
-	@JoinColumn(name="idTipoDocumento", nullable=false)
-	private TipoDocumento tipoDocumento;	
+	@JoinColumn(name="idSede", nullable=true)
+	private Sede sede;
 	
 	@ManyToOne	
-	@JoinColumn(name="idEstadoCivil", nullable=true)
-	private EstadoCivil estadoCivil;	
+	@JoinColumn(name="idAtencion", nullable=true)
+	private Atencion atencion;
 	
 	@ManyToOne	
-	@JoinColumn(name="idAseguradora", nullable=true)
-	private Aseguradora aseguradora;
+	@JoinColumn(name="idCama", nullable=true)
+	private Cama cama;
 	
 	@ManyToOne	
-	@JoinColumn(name="idTipoEntidad", nullable=true)
-	private TipoEntidad tipoEntidad;
-	
-	@OneToMany(mappedBy="paciente")
-	@JsonBackReference(value="admisiones")	
-	private Collection<Admision> admisiones;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-        name = "UsuarioRol",
-        joinColumns = {@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")},
-        inverseJoinColumns = {@JoinColumn(name = "idRol", referencedColumnName = "idRol")})
-	private Collection<Rol> roles;
+	@JoinColumn(name="idParentesco", nullable=true)
+	private Parentesco parentesco;
+		
+	@ManyToOne	
+	@JoinColumn(name="idUsuario", nullable=false)
+	private Usuario paciente;
 }

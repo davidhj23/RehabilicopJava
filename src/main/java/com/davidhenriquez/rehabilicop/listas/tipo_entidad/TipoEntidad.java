@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
