@@ -27,12 +27,14 @@ import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 import com.davidhenriquez.rehabilicop.listas.atencion.Atencion;
 import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
 import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
+import com.davidhenriquez.rehabilicop.listas.regimen.Regimen;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
+import com.davidhenriquez.rehabilicop.listas.escolaridad.Escolaridad;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -69,7 +71,10 @@ public class Usuario {
 	private String celular;
 	
 	private String ocupacion;
-	private Date fechaDeNacimiento;	
+	private Date fechaDeNacimiento;
+	
+	private String ciudad;
+	private String sexo;
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)
@@ -86,6 +91,14 @@ public class Usuario {
 	@ManyToOne	
 	@JoinColumn(name="idTipoEntidad", nullable=true)
 	private TipoEntidad tipoEntidad;
+	
+	@ManyToOne	
+	@JoinColumn(name="idRegimen", nullable=true)
+	private Regimen regimen;
+	
+	@ManyToOne	
+	@JoinColumn(name="idEscolaridad", nullable=true)
+	private Escolaridad escolaridad;
 	
 	@OneToMany(mappedBy="paciente")
 	@JsonBackReference(value="admisiones")	
