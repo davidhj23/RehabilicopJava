@@ -12,12 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -39,6 +41,10 @@ public class Cama{
     private UUID idCama;
 	
     private String nombre; 
+    
+    @ManyToOne	
+	@JoinColumn(name="idSede", nullable=true)
+	private Sede sede;
     
     @OneToMany(mappedBy="cama")
 	@JsonBackReference(value="admisiones")	
