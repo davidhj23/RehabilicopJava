@@ -232,4 +232,19 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario findUserByUsername(String username) {
 		return usuarioRepository.findByUsername(username);
 	}
+	
+	@Override
+	public Usuario findPacienteByIdentificacion(String identificacion) {
+		 Optional<Usuario> pacienteOptional = usuarioRepository.findAll().stream()
+                .filter(x -> (x.getUsername() == null || 
+                		      x.getUsername().equals("")) &&
+                			  x.getIdentificacion().equals(identificacion))                
+                .findFirst();
+		 
+		 if(pacienteOptional.isPresent()){
+	    		return pacienteOptional.get();
+		 }
+		 
+		 return null;
+	}
 }

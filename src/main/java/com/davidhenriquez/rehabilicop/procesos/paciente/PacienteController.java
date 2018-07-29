@@ -99,4 +99,16 @@ public class PacienteController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	@RequestMapping(value = "identificacion/{identificacion}", method = RequestMethod.GET)
+	public ResponseEntity<?> getPaciente(@PathVariable String identificacion){
+		try {
+			Usuario paciente = usuarioService.findPacienteByIdentificacion(identificacion);
+			return ResponseEntity.ok(paciente);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }
