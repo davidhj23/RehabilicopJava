@@ -29,6 +29,7 @@ import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
 import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
 import com.davidhenriquez.rehabilicop.listas.regimen.Regimen;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
+import com.davidhenriquez.rehabilicop.listas.sexo.Sexo;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
@@ -73,8 +74,7 @@ public class Usuario {
 	private String ocupacion;
 	private Date fechaDeNacimiento;
 	
-	private String ciudad;
-	private String sexo;
+	private String ciudad;	
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)
@@ -99,6 +99,10 @@ public class Usuario {
 	@ManyToOne	
 	@JoinColumn(name="idEscolaridad", nullable=true)
 	private Escolaridad escolaridad;
+	
+	@ManyToOne	
+	@JoinColumn(name="idSexo", nullable=true)
+	private Sexo sexo;
 	
 	@OneToMany(mappedBy="paciente")
 	@JsonBackReference(value="admisiones")	
