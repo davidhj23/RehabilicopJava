@@ -21,6 +21,7 @@ import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
+import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioRepository;
 
 @Service
 public class AdmisionServiceImpl implements AdmisionService{
@@ -28,18 +29,44 @@ public class AdmisionServiceImpl implements AdmisionService{
 	@Autowired
 	private AdmisionRepository admisionRepository;
 	
-	private ArrayList<ValidationResult> Validar(Admision admision)
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
+	private ArrayList<ValidationResult> validar(Admision admision)
     {
-        return new ArrayList<ValidationResult>();
+		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
+		
+		Usuario paciente = usuarioRepository.findOne(admision.getPaciente().getIdUsuario());		
+		if(paciente == null)
+			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));
+			
+        return validationResults;
     }
 
 	private ArrayList<ValidationResult> validarDuplicado(Admision admision)
     {	
-		ArrayList<ValidationResult> vaidationResults = new ArrayList<ValidationResult>();
+		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
 		
-		List<Admision> admisiones = admisionRepository.findAll();
+		Optional<Admision> numeroRemisionDuplicado = admisionRepository.findAll().stream()
+		        .filter(a -> !a.getIdAdmision().equals(admision.getIdAdmision()) &&
+		        			  a.getNumeroRemision().equals(admision.getNumeroRemision()))
+		        .findAny();
     	
-    	return vaidationResults;
+    	if(numeroRemisionDuplicado.isPresent()){
+    		validationResults.add(new ValidationResult("remision", "Ya existe una admisión con este número"));
+    	}
+    	
+    	Optional<Admision> pacienteDuplicado = admisionRepository.findAll().stream()
+    			.filter(a -> !a.getIdAdmision().equals(admision.getIdAdmision()) &&
+    							a.getPaciente().getIdUsuario().equals(admision.getPaciente().getIdUsuario()) &&    							
+    							a.getEstado().equals("ACTIVA"))
+    			.findAny();
+    	
+    	if(pacienteDuplicado.isPresent()){
+    		validationResults.add(new ValidationResult("paciente", "Hay una historia activa para este paciente"));
+    	}
+			
+        return validationResults;
     }
 
     private ArrayList<ValidationResult> ValidarIntegridad(Usuario usuario)
@@ -56,11 +83,17 @@ public class AdmisionServiceImpl implements AdmisionService{
 	}
 	
 	public Admision create(Admision admision) throws ValidationException {
-		ArrayList<ValidationResult> validaciones = this.validarDuplicado(admision);
+		ArrayList<ValidationResult> validaciones = this.validar(admision);
 		
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
+		ArrayList<ValidationResult> validacionesDuplicado = this.validarDuplicado(admision);
+		
+		if (validacionesDuplicado != null && validacionesDuplicado.size() > 0)
+			throw new ValidationException(validacionesDuplicado);
+		
+		admision.setEstado("ACTIVA");
 		return admisionRepository.save(admision);		
 	}
 	

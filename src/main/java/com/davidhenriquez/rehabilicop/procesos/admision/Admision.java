@@ -66,6 +66,9 @@ public class Admision {
     private UUID idDiagnosticoSecundario;
     
     private UUID idAdminisionista;
+    
+    private String estado;
+    private Date fechaDeCierre;
 	
 	@ManyToOne	
 	@JoinColumn(name="idSede", nullable=true)

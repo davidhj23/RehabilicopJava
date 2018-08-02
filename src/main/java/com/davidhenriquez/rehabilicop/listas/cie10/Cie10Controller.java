@@ -42,7 +42,7 @@ public class Cie10Controller {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getCie10(UUID id){
+	public ResponseEntity<?> getCie10(@PathVariable UUID id){
 		try {
 			Cie10 cie10 = cie10Service.findById(id);
 			return ResponseEntity.ok(cie10);

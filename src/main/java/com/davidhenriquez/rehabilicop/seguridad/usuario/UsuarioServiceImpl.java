@@ -53,7 +53,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
     	Optional<Usuario> duplicate = usuarios.stream()
 	        .filter(a -> !a.getIdUsuario().equals(usuario.getIdUsuario()) &&
-	        			  a.getEmail().equals(usuario.getEmail()))
+	        			  (a.getEmail() != null && a.getEmail().equals("") &&
+	        			   a.getEmail().equals(usuario.getEmail())))
 	        .findAny();
     	
     	if(duplicate.isPresent()){

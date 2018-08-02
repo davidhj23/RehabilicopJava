@@ -18,4 +18,6 @@ public interface CamaService {
 	Cama update(Cama cama) throws ValidationException;
 
 	void delete(UUID idCama) throws ValidationException;
+	
+	List<Cama> findAllCamasBySedeId(UUID idSede);
 }

@@ -11,13 +11,13 @@ spring:
     database: MYSQL
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:   
         dialect: org.hibernate.dialect.MySQL5Dialect
         hbm2ddl:
-          auto: none
+          auto: update
           
   datasource:
     url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false    

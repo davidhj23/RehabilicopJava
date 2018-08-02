@@ -70,7 +70,7 @@ public class AdmisionController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear admisiones')")
+	@PreAuthorize("hasRole('crear admision')")
 	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Admision admision) throws Exception {
 		try {
 			String token = request.getHeader(tokenHeader);

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.cama.Cama;
+import com.davidhenriquez.rehabilicop.listas.cama.CamaService;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumentoService;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -28,6 +30,9 @@ public class SedeController {
 
 	@Autowired
 	private SedeService sedeService;
+	
+	@Autowired
+	private CamaService camaService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> getSedes() {
@@ -90,6 +95,18 @@ public class SedeController {
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/camas", method = RequestMethod.GET)
+	public ResponseEntity<?> getCamas(@PathVariable UUID id){
+		try {
+			List<Cama> camas = camaService.findAllCamasBySedeId(id);
+			return ResponseEntity.ok(camas);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
 }
