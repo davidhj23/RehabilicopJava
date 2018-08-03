@@ -65,7 +65,7 @@ public class Admision {
     private UUID idDiagnosticoPrincipal;
     private UUID idDiagnosticoSecundario;
     
-    private UUID idAdminisionista;
+    private UUID idAdmisionista;
     
     private String estado;
     private Date fechaDeCierre;

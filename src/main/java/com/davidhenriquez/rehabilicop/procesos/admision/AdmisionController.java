@@ -77,7 +77,7 @@ public class AdmisionController {
 	        String username = jwtTokenUtil.getUsernameFromToken(token);
 	        Usuario usuario = usuarioService.findUserByUsername(username);	        
 			
-	        admision.setIdAdminisionista(usuario.getIdUsuario());
+	        admision.setIdAdmisionista(usuario.getIdUsuario());
 			return ResponseEntity.ok(admisionService.create(admision));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());			
