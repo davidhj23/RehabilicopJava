@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.procesos.admision;
+package com.davidhenriquez.rehabilicop.procesos.historia;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,47 +24,47 @@ import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioRepository;
 
 @Service
-public class AdmisionServiceImpl implements AdmisionService{
+public class HistoriaServiceImpl implements HistoriaService{
 
 	@Autowired
-	private AdmisionRepository admisionRepository;
+	private HistoriaRepository historiaRepository;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	private ArrayList<ValidationResult> validar(Admision admision)
+	private ArrayList<ValidationResult> validar(Historia historia)
     {
 		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
 		
-		Usuario paciente = usuarioRepository.findOne(admision.getPaciente().getIdUsuario());		
+		/*Usuario paciente = usuarioRepository.findOne(historia.getPaciente().getIdUsuario());		
 		if(paciente == null)
-			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));
+			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));*/
 			
         return validationResults;
     }
 
-	private ArrayList<ValidationResult> validarDuplicado(Admision admision)
+	private ArrayList<ValidationResult> validarDuplicado(Historia historia)
     {	
 		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
 		
-		Optional<Admision> numeroRemisionDuplicado = admisionRepository.findAll().stream()
-		        .filter(a -> !a.getIdAdmision().equals(admision.getIdAdmision()) &&
-		        			  a.getNumeroRemision().equals(admision.getNumeroRemision()))
+		/*Optional<Historia> numeroRemisionDuplicado = historiaRepository.findAll().stream()
+		        .filter(a -> !a.getIdHistoria().equals(historia.getIdHistoria()) &&
+		        			  a.getNumeroRemision().equals(historia.getNumeroRemision()))
 		        .findAny();
     	
     	if(numeroRemisionDuplicado.isPresent()){
     		validationResults.add(new ValidationResult("remision", "Ya existe una admisión con este número"));
     	}
     	
-    	Optional<Admision> pacienteDuplicado = admisionRepository.findAll().stream()
-    			.filter(a -> !a.getIdAdmision().equals(admision.getIdAdmision()) &&
-    							a.getPaciente().getIdUsuario().equals(admision.getPaciente().getIdUsuario()) &&    							
+    	Optional<Historia> pacienteDuplicado = historiaRepository.findAll().stream()
+    			.filter(a -> !a.getIdHistoria().equals(historia.getIdHistoria()) &&
+    							a.getPaciente().getIdUsuario().equals(historia.getPaciente().getIdUsuario()) &&    							
     							a.getEstado().equals("ACTIVA"))
     			.findAny();
     	
     	if(pacienteDuplicado.isPresent()){
     		validationResults.add(new ValidationResult("paciente", "Hay una historia activa para este paciente"));
-    	}
+    	}*/
 			
         return validationResults;
     }
@@ -74,54 +74,39 @@ public class AdmisionServiceImpl implements AdmisionService{
     	return new ArrayList<ValidationResult>();
     }
     
-    public List<Admision> findAll(){
-		return admisionRepository.findAll();
+    public List<Historia> findAll(){
+		return historiaRepository.findAll();
 	}
 	
-	public Admision findById(UUID idAdmision){
-		return admisionRepository.findOne(idAdmision);
+	public Historia findById(UUID idHistoria){
+		return historiaRepository.findOne(idHistoria);
 	}
 	
-	public Admision create(Admision admision) throws ValidationException {
-		ArrayList<ValidationResult> validaciones = this.validar(admision);
+	public Historia create(Historia historia) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validar(historia);
 		
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		ArrayList<ValidationResult> validacionesDuplicado = this.validarDuplicado(admision);
+		ArrayList<ValidationResult> validacionesDuplicado = this.validarDuplicado(historia);
 		
 		if (validacionesDuplicado != null && validacionesDuplicado.size() > 0)
-			throw new ValidationException(validacionesDuplicado);
+			throw new ValidationException(validacionesDuplicado);		
 		
-		admision.setEstado("ACTIVA");
-		return admisionRepository.save(admision);		
+		return historiaRepository.save(historia);		
 	}
 	
-	public Admision update(Admision admision) throws ValidationException {
-		ArrayList<ValidationResult> validaciones = this.validarDuplicado(admision);
+	public Historia update(Historia historia) throws ValidationException {
+		ArrayList<ValidationResult> validaciones = this.validarDuplicado(historia);
 		
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		return admisionRepository.save(admision);			
+		return historiaRepository.save(historia);			
 	}
 
 	@Transactional
-	public void delete(UUID idAdmision) throws ValidationException {
-		admisionRepository.delete(idAdmision);		
-	}
-
-	@Override
-	public Admision findAdmisionActivaByIdentificacionPaciente(String identificacion) {
-		 Optional<Admision> admisionOptional = admisionRepository.findAll().stream()
-				.filter(a -> a.getEstado().equals("ACTIVA") &&
-							 a.getPaciente().getIdentificacion().equals(identificacion))
-				.findFirst();
-		 
-		 if(admisionOptional.isPresent()){
-    		return admisionOptional.get();
-    	 }
-		 
-		 return null;
+	public void delete(UUID idHistoria) throws ValidationException {
+		historiaRepository.delete(idHistoria);		
 	}
 }

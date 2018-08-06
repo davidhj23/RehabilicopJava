@@ -16,4 +16,6 @@ public interface AdmisionService {
 	Admision update(Admision admision) throws ValidationException;
 
 	void delete(UUID idAdmision) throws ValidationException;
+	
+	Admision findAdmisionActivaByIdentificacionPaciente(String identificacion);
 }

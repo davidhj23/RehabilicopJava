@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.procesos.admision;
+package com.davidhenriquez.rehabilicop.procesos.historia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,6 @@ import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
@@ -31,8 +30,8 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/admisiones")
-public class AdmisionController {
+@RequestMapping("/api/historias")
+public class HistoriaController {
         
 	@Value("${jwt.header}")
     private String tokenHeader;
@@ -44,13 +43,13 @@ public class AdmisionController {
     private UsuarioService usuarioService;
         
     @Autowired
-    private AdmisionService admisionService; 
+    private HistoriaService historiaService; 
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAdmisiones() {
+    public ResponseEntity<?> getHistorias() {
     	try{
-    		List<Admision> admisiones = admisionService.findAll();
-    		return ResponseEntity.ok(admisiones);
+    		List<Historia> historias = historiaService.findAll();
+    		return ResponseEntity.ok(historias);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -59,10 +58,10 @@ public class AdmisionController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getAdmision(@PathVariable UUID id){
+	public ResponseEntity<?> getHistoria(@PathVariable UUID id){
 		try {
-			Admision admision = admisionService.findById(id);
-			return ResponseEntity.ok(admision);
+			Historia historia = historiaService.findById(id);
+			return ResponseEntity.ok(historia);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
@@ -71,15 +70,10 @@ public class AdmisionController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear admision')")
-	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Admision admision) throws Exception {
+	@PreAuthorize("hasRole('crear historia')")
+	public ResponseEntity<?> create(@RequestBody Historia historia) throws Exception {
 		try {
-			String token = request.getHeader(tokenHeader);
-	        String username = jwtTokenUtil.getUsernameFromToken(token);
-	        Usuario usuario = usuarioService.findUserByUsername(username);	        
-			
-	        admision.setIdAdmisionista(usuario.getIdUsuario());
-			return ResponseEntity.ok(admisionService.create(admision));
+			return ResponseEntity.ok(historiaService.create(historia));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());			
 		} catch (Exception ex) {
@@ -89,10 +83,10 @@ public class AdmisionController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar admision')")
-	public ResponseEntity<?> update(@RequestBody Admision admision) throws Exception {
+	@PreAuthorize("hasRole('editar historia')")
+	public ResponseEntity<?> update(@RequestBody Historia historia) throws Exception {
 		try {
-			return ResponseEntity.ok(admisionService.update(admision));
+			return ResponseEntity.ok(historiaService.update(historia));
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
@@ -102,28 +96,16 @@ public class AdmisionController {
 	}
 	
 	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
-	@PreAuthorize("hasRole('eliminar admision')")
+	@PreAuthorize("hasRole('eliminar historia')")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			admisionService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Admision());
+			historiaService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Historia());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
-		}
-	}
-	
-	@RequestMapping(value = "/paciente/{identificacion}", method = RequestMethod.GET)
-	public ResponseEntity<?> getAdmisionActivaByIdentificacionPaciente(@PathVariable String identificacion){
-		try {
-			Admision admision = admisionService.findAdmisionActivaByIdentificacionPaciente(identificacion);
-			return ResponseEntity.ok(admision);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
 }
