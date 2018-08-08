@@ -51,6 +51,42 @@ public class Historia {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     private UUID idHistoria;	
+	
+	private String motivoConsulta;
+	private String enfermedadActual;
+	
+	private String patologicoPsiquiatrico1;
+	private String patologicoPsiquiatrico2;
+	private String patologicoPsiquiatrico3;
+	private UUID estadoPatologicoPsiquiatrico1;
+	private UUID estadoPatologicoPsiquiatrico2;
+	private UUID estadoPatologicoPsiquiatrico3;
+	private String tiempoEvolucionPatologicoPsiquiatrico1;
+	private String tiempoEvolucionPatologicoPsiquiatrico2;
+	private String tiempoEvolucionPatologicoPsiquiatrico3;
+	
+	private String patologicoNoPsiquiatrico1;
+	private String patologicoNoPsiquiatrico2;
+	private String patologicoNoPsiquiatrico3;
+	private UUID estadoPatologicoNoPsiquiatrico1;
+	private UUID estadoPatologicoNoPsiquiatrico2;
+	private UUID estadoPatologicoNoPsiquiatrico3;
+	private String tiempoEvolucionPatologicoNoPsiquiatrico1;
+	private String tiempoEvolucionPatologicoNoPsiquiatrico2;
+	private String tiempoEvolucionPatologicoNoPsiquiatrico3;
+	
+	private String numeroPsiquiatrica;
+	private String institucionPsiquiatrica;
+	private Date fechaUltimaHospitalizacionPsiquiatrica;
+	private UUID esLaPrimeraHospitalizacionPsiquiatrica;
+
+	private String numeroNoPsiquiatrica;
+	private String institucionNoPsiquiatrica;
+	private Date fechaUltimaHospitalizacionNoPsiquiatrica;	
+	
+	private String analisisYmanejo;
+	
+	private Date fechaDeInicio;
 		
 	@ManyToOne	
 	@JoinColumn(name="idAdmision", nullable=false)
