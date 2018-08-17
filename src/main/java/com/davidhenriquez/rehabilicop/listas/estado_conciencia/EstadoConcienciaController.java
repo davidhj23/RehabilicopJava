@@ -20,7 +20,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 
 @RestController
-@RequestMapping("/api/estados-conciencia")
+@RequestMapping("/api/estados-conciencias")
 public class EstadoConcienciaController {
 
 	@Autowired
