@@ -58,9 +58,9 @@ public class Antecedente {
 	private String institucion;
 	private Date fechaUltimaHospitalizacion;		
 		
-	/*@ManyToOne	
+	@ManyToOne	
 	@JoinColumn(name="idEsLaPrimeraHospitalizacion", nullable=false)
-	private Opcion esLaPrimeraHospitalizacion;*/
+	private Opcion esLaPrimeraHospitalizacion;
 	
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=false)

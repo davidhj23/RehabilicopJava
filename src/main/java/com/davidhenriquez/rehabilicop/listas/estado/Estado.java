@@ -37,9 +37,5 @@ public class Estado{
     @Column(columnDefinition = "BINARY(16)")
     private UUID idEstado;
 	
-    private String nombre; 
-    
-    @OneToMany(mappedBy="estado")
-	@JsonBackReference(value="patologicos")	
-	private Collection<Patologico> patologicos;
+    private String nombre;
 }

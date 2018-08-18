@@ -66,17 +66,17 @@ public class Historia {
 	@JsonBackReference(value="patologicos")	
 	private Collection<Patologico> patologicos;
 	
-	/*@OneToMany(mappedBy="antecedente")
+	@OneToMany(mappedBy="historia")
 	@JsonBackReference(value="antecedentes")	
 	private Collection<Antecedente> antecedentes;
 	
-	@OneToMany(mappedBy="traumatico")
+	@OneToMany(mappedBy="historia")
 	@JsonBackReference(value="traumaticos")	
 	private Collection<Traumatico> traumaticos;
 	
-	@OneToMany(mappedBy="farmacologico")
+	@OneToMany(mappedBy="historia")
 	@JsonBackReference(value="farmacologicos")	
-	private Collection<Farmacologico> farmacologicos;*/
+	private Collection<Farmacologico> farmacologicos;
 		
 	@ManyToOne	
 	@JoinColumn(name="idAdmision", nullable=false)

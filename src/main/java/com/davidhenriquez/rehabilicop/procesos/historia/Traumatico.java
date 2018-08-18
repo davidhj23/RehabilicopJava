@@ -24,15 +24,15 @@ public class Traumatico {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idAntecedente;	
+    private UUID idTraumatico;	
 	
 	private String trauma;
 	private String tiempoEvolucion;	
 	private String secuelas;	
 		
-	/*@ManyToOne	
+	@ManyToOne	
 	@JoinColumn(name="idCompromisoConciencia", nullable=false)
-	private Opcion compromisoConciencia;*/
+	private Opcion compromisoConciencia;
 	
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=false)
