@@ -54,9 +54,7 @@ public class Patologico {
     private UUID idPatologico;	
 	
 	private String descripcion;
-	
-	private String tiempoEvolucion;	
-	
+	private String tiempoEvolucion;
 	private String tipo;	
 		
 	@ManyToOne	
