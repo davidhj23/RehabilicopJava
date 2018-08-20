@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,7 +59,7 @@ public class Historia {
 	private String tipoReaccion;
 	private String sustancias;	
 		
-	private String analisisYmanejo;
+	private String analisisManejo;
 	
 	private Date fechaDeInicio;
 	

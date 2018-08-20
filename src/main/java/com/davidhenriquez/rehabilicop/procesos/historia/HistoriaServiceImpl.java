@@ -32,13 +32,25 @@ public class HistoriaServiceImpl implements HistoriaService{
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private PatologicoRepository patologicoRepository;
+	
+	@Autowired
+	private AntecedenteRepository antecedenteRepository;
+	
+	@Autowired
+	private TraumaticoRepository traumaticoRepository;
+	
+	@Autowired
+	private FarmacologicoRepository farmacologicoRepository;
+	
 	private ArrayList<ValidationResult> validar(Historia historia)
     {
 		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
 		
-		/*Usuario paciente = usuarioRepository.findOne(historia.getPaciente().getIdUsuario());		
+		Usuario paciente = usuarioRepository.findOne(historia.getAdmision().getPaciente().getIdUsuario());		
 		if(paciente == null)
-			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));*/
+			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));
 			
         return validationResults;
     }
@@ -46,25 +58,17 @@ public class HistoriaServiceImpl implements HistoriaService{
 	private ArrayList<ValidationResult> validarDuplicado(Historia historia)
     {	
 		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
-		
-		/*Optional<Historia> numeroRemisionDuplicado = historiaRepository.findAll().stream()
-		        .filter(a -> !a.getIdHistoria().equals(historia.getIdHistoria()) &&
-		        			  a.getNumeroRemision().equals(historia.getNumeroRemision()))
-		        .findAny();
-    	
-    	if(numeroRemisionDuplicado.isPresent()){
-    		validationResults.add(new ValidationResult("remision", "Ya existe una admisión con este número"));
-    	}
     	
     	Optional<Historia> pacienteDuplicado = historiaRepository.findAll().stream()
     			.filter(a -> !a.getIdHistoria().equals(historia.getIdHistoria()) &&
-    							a.getPaciente().getIdUsuario().equals(historia.getPaciente().getIdUsuario()) &&    							
-    							a.getEstado().equals("ACTIVA"))
+    							a.getAdmision().getPaciente().getIdUsuario().equals(
+    									historia.getAdmision().getPaciente().getIdUsuario()) &&    							
+    							a.getAdmision().getEstado().equals("ACTIVA"))
     			.findAny();
     	
     	if(pacienteDuplicado.isPresent()){
     		validationResults.add(new ValidationResult("paciente", "Hay una historia activa para este paciente"));
-    	}*/
+    	}
 			
         return validationResults;
     }
@@ -92,8 +96,30 @@ public class HistoriaServiceImpl implements HistoriaService{
 		
 		if (validacionesDuplicado != null && validacionesDuplicado.size() > 0)
 			throw new ValidationException(validacionesDuplicado);		
+				
+		Historia savedHistoria = historiaRepository.save(historia);
 		
-		return historiaRepository.save(historia);		
+		for (Patologico p : historia.getPatologicos()) {
+			p.setHistoria(savedHistoria);
+			patologicoRepository.save(p);
+		}
+		
+		for (Antecedente a : historia.getAntecedentes()) {
+			a.setHistoria(savedHistoria);
+			antecedenteRepository.save(a);
+		}
+		
+		for (Traumatico t : historia.getTraumaticos()) {
+			t.setHistoria(savedHistoria);
+			traumaticoRepository.save(t);
+		}
+		
+		for (Farmacologico f : historia.getFarmacologicos()) {
+			f.setHistoria(savedHistoria);
+			farmacologicoRepository.save(f);
+		}
+		
+		return savedHistoria;
 	}
 	
 	public Historia update(Historia historia) throws ValidationException {
