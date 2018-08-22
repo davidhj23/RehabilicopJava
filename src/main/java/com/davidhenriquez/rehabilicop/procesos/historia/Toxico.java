@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 import com.davidhenriquez.rehabilicop.listas.atencion.Atencion;
 import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
+import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
 import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
@@ -33,6 +33,7 @@ import com.davidhenriquez.rehabilicop.listas.tipo_entidad.TipoEntidad;
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
+import com.davidhenriquez.rehabilicop.listas.estado.Estado;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -45,51 +46,20 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Historia {
+public class Toxico {
 	
 	@Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idHistoria;	
+    private UUID idToxico;	
 	
-	private String motivoConsulta;
-	private String enfermedadActual;	
+	private String sustancia;
+	private String cantidad;
+	private String frecuencia;
+	private Date edadInicio;	
 	
-	private String tipoReaccion;
-	private String sustancias;	
-		
-	private Date podromosPersonalPremorbida;
-	
-	private String analisisManejo;
-	
-	private Date fechaDeInicio;	
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="patologicos")	
-	private Collection<Patologico> patologicos;
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="antecedentes")	
-	private Collection<Antecedente> antecedentes;
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="traumaticos")	
-	private Collection<Traumatico> traumaticos;
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="farmacologicos")	
-	private Collection<Farmacologico> farmacologicos;
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="toxicos")	
-	private Collection<Toxico> toxicos;
-	
-	@OneToMany(mappedBy="historia")
-	@JsonBackReference(value="ginecoObstetricios")	
-	private Collection<GinecoObstetricio> ginecoObstetricios;
-		
 	@ManyToOne	
-	@JoinColumn(name="idAdmision", nullable=false)
-	private Admision admision;
+	@JoinColumn(name="idHistoria", nullable=false)
+	private Historia historia;
 }

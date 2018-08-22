@@ -44,6 +44,12 @@ public class HistoriaServiceImpl implements HistoriaService{
 	@Autowired
 	private FarmacologicoRepository farmacologicoRepository;
 	
+	@Autowired
+	private ToxicoRepository toxicoRepository;
+	
+	@Autowired
+	private GinecoObstetricioRepository ginecoObstetricioRepository;
+	
 	private ArrayList<ValidationResult> validar(Historia historia)
     {
 		ArrayList<ValidationResult> validationResults = new ArrayList<ValidationResult>();
@@ -117,6 +123,16 @@ public class HistoriaServiceImpl implements HistoriaService{
 		for (Farmacologico f : historia.getFarmacologicos()) {
 			f.setHistoria(savedHistoria);
 			farmacologicoRepository.save(f);
+		}
+		
+		for (Toxico t : historia.getToxicos()) {
+			t.setHistoria(savedHistoria);
+			toxicoRepository.save(t);
+		}
+		
+		for (GinecoObstetricio g : historia.getGinecoObstetricios()) {
+			g.setHistoria(savedHistoria);
+			ginecoObstetricioRepository.save(g);
 		}
 		
 		return savedHistoria;
