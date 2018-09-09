@@ -19,6 +19,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
+import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

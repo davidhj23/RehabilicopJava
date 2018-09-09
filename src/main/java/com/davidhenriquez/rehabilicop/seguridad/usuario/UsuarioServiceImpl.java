@@ -222,6 +222,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
+	public List<Usuario> findAllPsiquiatras() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Psiquiatria") || y.getNombre().equals("Psiquiatria Infantil")))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
+	
+	@Override
 	public List<Usuario> findAllEnfermeros() {
 		return usuarioRepository.findAll().stream()
                 .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Jefe enfermeria")))

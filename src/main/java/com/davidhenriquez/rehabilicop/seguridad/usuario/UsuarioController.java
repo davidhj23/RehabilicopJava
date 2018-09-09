@@ -178,6 +178,18 @@ public class UsuarioController {
     	}
     }
     
+    @RequestMapping(value = "/psiquiatras", method = RequestMethod.GET)
+    public ResponseEntity<?> getPsiquiatras() {
+    	try{
+    		List<Usuario> psiquiatras = usuarioService.findAllPsiquiatras();
+    		return ResponseEntity.ok(psiquiatras);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
     @RequestMapping(value = "/enfermeros", method = RequestMethod.GET)
     public ResponseEntity<?> getEnfermeros() {
     	try{

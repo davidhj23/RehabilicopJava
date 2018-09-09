@@ -31,7 +31,7 @@ public class GinecoObstetricio {
 	private String abortos;
 	private String semanas;
 	private String menarquias;
-	private String fum;
+	private Date fum;
 	
 	@ManyToOne	
 	@JoinColumn(name="idEmbarazoActual", nullable=false)

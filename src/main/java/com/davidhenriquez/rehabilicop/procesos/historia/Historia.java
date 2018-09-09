@@ -26,6 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.davidhenriquez.rehabilicop.listas.aseguradora.Aseguradora;
 import com.davidhenriquez.rehabilicop.listas.atencion.Atencion;
 import com.davidhenriquez.rehabilicop.listas.estado_civil.EstadoCivil;
+import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
 import com.davidhenriquez.rehabilicop.listas.parentesco.Parentesco;
 import com.davidhenriquez.rehabilicop.listas.sede.Sede;
 import com.davidhenriquez.rehabilicop.listas.tipo_documento.TipoDocumento;
@@ -59,7 +60,10 @@ public class Historia {
 	private String tipoReaccion;
 	private String sustancias;	
 		
-	private Date podromosPersonalPremorbida;
+	private String podromosPersonalPremorbida;
+	
+	private String antecendentesFamiliaresPsiquiatricos;
+	private String antecendentesFamiliaresNoPsiquiatricos;
 	
 	private String analisisManejo;
 	
@@ -88,6 +92,40 @@ public class Historia {
 	@OneToMany(mappedBy="historia")
 	@JsonBackReference(value="ginecoObstetricios")	
 	private Collection<GinecoObstetricio> ginecoObstetricios;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos")	
+	private Collection<ExamenFisico> examenFisicos;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos2")	
+	private Collection<ExamenFisico2> examenFisicos2;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos3")	
+	private Collection<ExamenFisico3> examenFisicos3;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos4")	
+	private Collection<ExamenFisico4> examenFisicos4;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos5")	
+	private Collection<ExamenFisico5> examenFisicos5;
+	
+	@OneToMany(mappedBy="historia")
+	@JsonBackReference(value="examenFisicos6")	
+	private Collection<ExamenFisico6> examenFisicos6;
+		
+	private String idImpresionDiagnostica;
+	
+	@ManyToOne	
+	@JoinColumn(name = "idMedico", referencedColumnName = "idUsuario", nullable=false)
+	private Usuario medico;
+    
+    @ManyToOne	
+	@JoinColumn(name = "idAutoriza", referencedColumnName = "idUsuario", nullable=false)
+	private Usuario autoriza;
 		
 	@ManyToOne	
 	@JoinColumn(name="idAdmision", nullable=false)

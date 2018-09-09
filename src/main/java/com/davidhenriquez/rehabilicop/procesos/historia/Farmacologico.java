@@ -30,11 +30,11 @@ public class Farmacologico {
     private String dosis;       
     
     @ManyToOne	
-	@JoinColumn(name="idEficacia", nullable=false)
+	@JoinColumn(name = "idEficacia", referencedColumnName = "idOpcion", nullable=false)
 	private Opcion eficacia;
     
     @ManyToOne	
-	@JoinColumn(name="idEAdverso", nullable=false)
+	@JoinColumn(name = "idAdverso", referencedColumnName = "idOpcion", nullable=false)
 	private Opcion esAdverso;
     
     @ManyToOne	

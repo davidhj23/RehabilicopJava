@@ -48,7 +48,25 @@ public class HistoriaServiceImpl implements HistoriaService{
 	private ToxicoRepository toxicoRepository;
 	
 	@Autowired
+	private ExamenFisicoRepository examenFisicoRepository;
+	
+	@Autowired
+	private ExamenFisico2Repository examenFisico2Repository;
+	
+	@Autowired
 	private GinecoObstetricioRepository ginecoObstetricioRepository;
+	
+	@Autowired
+	private ExamenFisico3Repository examenFisico3Repository;
+	
+	@Autowired
+	private ExamenFisico4Repository examenFisico4Repository;
+	
+	@Autowired
+	private ExamenFisico5Repository examenFisico5Repository;
+	
+	@Autowired
+	private ExamenFisico6Repository examenFisico6Repository;
 	
 	private ArrayList<ValidationResult> validar(Historia historia)
     {
@@ -130,9 +148,53 @@ public class HistoriaServiceImpl implements HistoriaService{
 			toxicoRepository.save(t);
 		}
 		
-		for (GinecoObstetricio g : historia.getGinecoObstetricios()) {
-			g.setHistoria(savedHistoria);
-			ginecoObstetricioRepository.save(g);
+		if(historia.getGinecoObstetricios() != null){
+			for (GinecoObstetricio g : historia.getGinecoObstetricios()) {
+				g.setHistoria(savedHistoria);
+				ginecoObstetricioRepository.save(g);
+			}	
+		}
+		
+		if(historia.getExamenFisicos() != null){
+			for (ExamenFisico ef : historia.getExamenFisicos()) {
+				ef.setHistoria(savedHistoria);
+				examenFisicoRepository.save(ef);
+			}	
+		}
+		
+		if(historia.getExamenFisicos2() != null){
+			for (ExamenFisico2 ef2 : historia.getExamenFisicos2()) {
+				ef2.setHistoria(savedHistoria);
+				examenFisico2Repository.save(ef2);
+			}	
+		}
+		
+		if(historia.getExamenFisicos3() != null){
+			for (ExamenFisico3 ef3 : historia.getExamenFisicos3()) {
+				ef3.setHistoria(savedHistoria);
+				examenFisico3Repository.save(ef3);
+			}	
+		}
+		
+		if(historia.getExamenFisicos4() != null){
+			for (ExamenFisico4 ef4 : historia.getExamenFisicos4()) {
+				ef4.setHistoria(savedHistoria);
+				examenFisico4Repository.save(ef4);
+			}	
+		}
+		
+		if(historia.getExamenFisicos5() != null){
+			for (ExamenFisico5 ef5 : historia.getExamenFisicos5()) {
+				ef5.setHistoria(savedHistoria);
+				examenFisico5Repository.save(ef5);
+			}	
+		}
+		
+		if(historia.getExamenFisicos6() != null){
+			for (ExamenFisico6 ef6 : historia.getExamenFisicos6()) {
+				ef6.setHistoria(savedHistoria);
+				examenFisico6Repository.save(ef6);
+			}	
 		}
 		
 		return savedHistoria;
