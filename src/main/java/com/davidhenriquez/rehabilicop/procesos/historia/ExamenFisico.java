@@ -35,7 +35,7 @@ public class ExamenFisico {
 	
 	private String signoVitalTa;
 	private String signoVitalFc;
-	private String signoVitalTr;
+	private String signoVitalFr;
 	private String signoVitalT;
 	
 	@ManyToOne	

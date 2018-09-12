@@ -28,7 +28,7 @@ public class ExamenFisico5 {
     private UUID idExamenFisico5;
 	
 	@ManyToOne
-	@JoinColumn(name = "idEstadoConciencia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idEstadoConciencia", referencedColumnName = "idEstadoConciencia", nullable=false)
 	private EstadoConciencia estadoConciencia;
 	
 	private Date fecha;
@@ -48,10 +48,7 @@ public class ExamenFisico5 {
 	private Opcion euprosexico;
 	@ManyToOne
 	@JoinColumn(name = "idHipoprosexico", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion hipoprosexico;
-	@ManyToOne
-	@JoinColumn(name = "idHiperprosexico", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion Hiperprosexico;
+	private Opcion hipoprosexico;	
 	
 	@ManyToOne
 	@JoinColumn(name = "idEutimico", referencedColumnName = "idOpcion", nullable=false)
