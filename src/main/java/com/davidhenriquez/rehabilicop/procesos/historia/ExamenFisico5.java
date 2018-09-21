@@ -63,7 +63,7 @@ public class ExamenFisico5 {
 	@JoinColumn(name = "idHiperprosexico", referencedColumnName = "idOpcion", nullable=false)
 	private Opcion hiperprosexico;
 
-	private String Descripcion;
+	private String descripcion;
 	
 	@ManyToOne
 	@JoinColumn(name = "idOrigenNormal", referencedColumnName = "idOpcion", nullable=false)

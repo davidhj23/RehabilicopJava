@@ -46,10 +46,10 @@ public class ExamenFisico4 {
 	private Opcion reflejosMuscoloTendinosooAlterados;
 	@ManyToOne
 	@JoinColumn(name = "idSignosmeningeosPresentes", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion SignosmeningeosPresentes;
+	private Opcion signosmeningeosPresentes;
 	@ManyToOne
 	@JoinColumn(name = "idPerdidaDeLaSensibilidad", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion PerdidaDeLaSensibilidad;
+	private Opcion perdidaDeLaSensibilidad;
 	@ManyToOne
 	@JoinColumn(name = "idInconctinenciaUrinariaOFecal", referencedColumnName = "idOpcion", nullable=false)
 	private Opcion inconctinenciaUrinariaOFecal;
