@@ -57,7 +57,7 @@ public class Toxico {
 	private String sustancia;
 	private String cantidad;
 	private String frecuencia;
-	private Date edadInicio;	
+	private String edadInicio;	
 	
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=false)

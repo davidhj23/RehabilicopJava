@@ -117,7 +117,7 @@ public class Historia {
 	@JsonBackReference(value="examenFisicos6")	
 	private Collection<ExamenFisico6> examenFisicos6;
 		
-	private String idImpresionDiagnostica;
+	private UUID idImpresionDiagnostica;
 	
 	@ManyToOne	
 	@JoinColumn(name = "idMedico", referencedColumnName = "idUsuario", nullable=false)
