@@ -29,7 +29,7 @@ public class ExamenFisico {
     private UUID idExamenFisico;
 	
 	@ManyToOne	
-	@JoinColumn(name="idApariencia", nullable=false)
+	@JoinColumn(name="idApariencia", nullable=true)
 	private Apariencia apariencia;
 	private String descripcionApariencia;
 	
@@ -39,51 +39,51 @@ public class ExamenFisico {
 	private String signoVitalT;
 	
 	@ManyToOne	
-	@JoinColumn(name = "idMidriasis", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idMidriasis", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion midriasis;
 	@ManyToOne	
-	@JoinColumn(name = "idMiosis", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idMiosis", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion miosis;
 	@ManyToOne	
-	@JoinColumn(name = "idAnisocordia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idAnisocordia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion anisocordia;
 	@ManyToOne	
-	@JoinColumn(name = "idpinral", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idpinral", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion pinral;
 	
 	@ManyToOne	
-	@JoinColumn(name = "idOtorragia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idOtorragia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion otorragia;	
 	@ManyToOne	
-	@JoinColumn(name = "idOtoliquia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idOtoliquia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion otoliquia;
 	@ManyToOne	
-	@JoinColumn(name = "idRinoloquia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idRinoloquia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion rinoloquia;
 	@ManyToOne	
-	@JoinColumn(name = "idEpixtasis", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idEpixtasis", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion epixtasis;
 	@ManyToOne	
-	@JoinColumn(name = "idMurmulloVesicular", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idMurmulloVesicular", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion murmulloVesicular;
 	
 	@ManyToOne	
-	@JoinColumn(name = "idEstertoresCrepitantes", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idEstertoresCrepitantes", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion estertoresCrepitantes;
 	@ManyToOne	
-	@JoinColumn(name = "idRoncus", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idRoncus", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion roncus;
 	@ManyToOne	
-	@JoinColumn(name = "idSibilancias", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idSibilancias", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion sibilancias;
 	@ManyToOne	
-	@JoinColumn(name = "idSilencioAuscultorio", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idSilencioAuscultorio", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion silencioAuscultorio;
 	@ManyToOne	
-	@JoinColumn(name = "idMurmulloVesicularPulmones", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idMurmulloVesicularPulmones", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion murmulloVesicularPulmones;
 	
 	@ManyToOne	
-	@JoinColumn(name="idHistoria", nullable=false)
+	@JoinColumn(name="idHistoria", nullable=true)
 	private Historia historia;
 }

@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.alucinacion.Alucinacion;
 import com.davidhenriquez.rehabilicop.listas.asfixia.Asfixia;
+import com.davidhenriquez.rehabilicop.listas.comprensible.Comprensible;
 import com.davidhenriquez.rehabilicop.listas.curso.Curso;
 import com.davidhenriquez.rehabilicop.listas.estado_conciencia.EstadoConciencia;
 import com.davidhenriquez.rehabilicop.listas.inteligencia.Inteligencia;
@@ -34,70 +35,74 @@ public class ExamenFisico6 {
     @Column(columnDefinition = "BINARY(16)")
     private UUID idExamenFisico6;
 	
-	private String comprensible;
-	
 	@ManyToOne
-	@JoinColumn(name = "idDisartrias", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idComprensible", referencedColumnName = "idComprensible", nullable=true)
+	private Comprensible comprensible;
+	@ManyToOne
+	@JoinColumn(name = "idDisartrias", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion disartrias;	
 	@ManyToOne
-	@JoinColumn(name = "idCurso", referencedColumnName = "idCurso", nullable=false)
+	@JoinColumn(name = "idCurso", referencedColumnName = "idCurso", nullable=true)
 	private Curso curso;
 	@ManyToOne
-	@JoinColumn(name = "idAsfixias", referencedColumnName = "idAsfixia", nullable=false)
-	private Asfixia Asfixias;
+	@JoinColumn(name = "idAsfixias", referencedColumnName = "idAsfixia", nullable=true)
+	private Asfixia asfixias;
 	
 	@ManyToOne
-	@JoinColumn(name = "idAlucinaciones", referencedColumnName = "idAlucinacion", nullable=false)
+	@JoinColumn(name = "idAlucinaciones", referencedColumnName = "idAlucinacion", nullable=true)
 	private Alucinacion alucinaciones;
 	
 	private String tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "idFijacion", referencedColumnName = "idMemoria2", nullable=false)
+	@JoinColumn(name = "idFijacion", referencedColumnName = "idMemoria2", nullable=true)
 	private Memoria2 fijacion;
 	@ManyToOne
-	@JoinColumn(name = "idReciente", referencedColumnName = "idMemoria2", nullable=false)
+	@JoinColumn(name = "idReciente", referencedColumnName = "idMemoria2", nullable=true)
 	private Memoria2 reciente;
 	@ManyToOne
-	@JoinColumn(name = "idRemota", referencedColumnName = "idMemoria2", nullable=false)
+	@JoinColumn(name = "idRemota", referencedColumnName = "idMemoria2", nullable=true)
 	private Memoria2 remota;
 	
 	@ManyToOne
-	@JoinColumn(name = "idInteligencia", referencedColumnName = "idInteligencia", nullable=false)
+	@JoinColumn(name = "idInteligencia", referencedColumnName = "idInteligencia", nullable=true)
 	private Inteligencia inteligencia;
 	@ManyToOne
-	@JoinColumn(name = "idIntrospeccion", referencedColumnName = "idIntrospeccion", nullable=false)
-	private Introspeccion introspeccion;		
-	
-	private String prospeccion;
-	private String juicio;
+	@JoinColumn(name = "idIntrospeccion", referencedColumnName = "idIntrospeccion", nullable=true)
+	private Introspeccion introspeccion;
+	@ManyToOne
+	@JoinColumn(name = "idProspeccion", referencedColumnName = "idIntrospeccion", nullable=true)
+	private Introspeccion prospeccion;
+	@ManyToOne
+	@JoinColumn(name = "idJuicio", referencedColumnName = "idIntrospeccion", nullable=true)
+	private Introspeccion juicio;
 	
 	@ManyToOne
-	@JoinColumn(name = "idAlimentacion", referencedColumnName = "idAlimentacion", nullable=false)
+	@JoinColumn(name = "idAlimentacion", referencedColumnName = "idAlimentacion", nullable=true)
 	private Alimentacion alimentacion;		
 	
 	private String tipoAlimenticio;
 	
 	@ManyToOne
-	@JoinColumn(name = "idAdecuado", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idAdecuado", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion adecuado;	
 	@ManyToOne
-	@JoinColumn(name = "idHipersomnio", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idHipersomnio", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion hipersomnio;	
 	@ManyToOne
-	@JoinColumn(name = "idInsomnio", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idInsomnio", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion insomnio;	
 	@ManyToOne
-	@JoinColumn(name = "idCociliacion", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idCociliacion", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion cociliacion;	
 	@ManyToOne
-	@JoinColumn(name = "idReconciliacion", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idReconciliacion", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion reconciliacion;
 	@ManyToOne
-	@JoinColumn(name = "idGlobal", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idGlobal", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion global;	
 	
 	@ManyToOne	
-	@JoinColumn(name="idHistoria", nullable=false)
+	@JoinColumn(name="idHistoria", nullable=true)
 	private Historia historia;
 }

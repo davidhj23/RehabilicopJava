@@ -2,6 +2,7 @@ package com.davidhenriquez.rehabilicop.procesos.historia;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -69,7 +70,7 @@ public class Historia {
 	
 	private Date fechaDeInicio;	
 	
-	@OneToMany(mappedBy="historia")
+	@OneToMany(mappedBy="historia")	
 	@JsonBackReference(value="patologicos")	
 	private Collection<Patologico> patologicos;
 	

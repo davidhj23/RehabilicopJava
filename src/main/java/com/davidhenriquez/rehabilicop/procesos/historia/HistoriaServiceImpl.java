@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.procesos.historia;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -106,7 +107,7 @@ public class HistoriaServiceImpl implements HistoriaService{
 		return historiaRepository.findAll();
 	}
 	
-	public Historia findById(UUID idHistoria){
+	public Historia findById(UUID idHistoria){		
 		return historiaRepository.findOne(idHistoria);
 	}
 	
@@ -206,11 +207,151 @@ public class HistoriaServiceImpl implements HistoriaService{
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		return historiaRepository.save(historia);			
+		Historia savedHistoria = historiaRepository.save(historia);	
+		
+		for (Patologico pe : findPatologicosByIdHistoria(historia.getIdHistoria())) {			
+			patologicoRepository.delete(pe);
+		}
+				
+		for (Patologico pn : historia.getPatologicos()){			
+			pn.setHistoria(historia);
+			patologicoRepository.save(pn);
+		}
+		
+		for (Antecedente ae : findAntecedentesByIdHistoria(historia.getIdHistoria())) {			
+			antecedenteRepository.delete(ae);
+		}		
+				
+		for (Antecedente an : historia.getAntecedentes()){			
+			an.setHistoria(historia);
+			antecedenteRepository.save(an);
+		} 
+		
+		for (Traumatico te : findTraumaticosByIdHistoria(historia.getIdHistoria())) {			
+			traumaticoRepository.delete(te);
+		}		
+				
+		for (Traumatico tn : historia.getTraumaticos()){			
+			tn.setHistoria(historia);
+			traumaticoRepository.save(tn);
+		} 
+		
+		for (Farmacologico x : findFarmacologicosByIdHistoria(historia.getIdHistoria())) {			
+			farmacologicoRepository.delete(x);
+		}		
+				
+		for (Farmacologico x : historia.getFarmacologicos()){			
+			x.setHistoria(historia);
+			farmacologicoRepository.save(x);
+		}
+		
+		for (Toxico x : findToxicosByIdHistoria(historia.getIdHistoria())) {			
+			toxicoRepository.delete(x);
+		}		
+				
+		for (Toxico x : historia.getToxicos()){			
+			x.setHistoria(historia);
+			toxicoRepository.save(x);
+		}
+		
+		for (GinecoObstetricio x : findGinecoObstetriciosByIdHistoria(historia.getIdHistoria())) {			
+			ginecoObstetricioRepository.delete(x);
+		}		
+				
+		for (GinecoObstetricio x : historia.getGinecoObstetricios()){			
+			x.setHistoria(historia);
+			ginecoObstetricioRepository.save(x);
+		}
+		
+		return savedHistoria;			
 	}
 
 	@Transactional
 	public void delete(UUID idHistoria) throws ValidationException {
 		historiaRepository.delete(idHistoria);		
+	}
+
+	@Override
+	public List<Patologico> findPatologicosByIdHistoria(UUID idHistoria) {
+		return patologicoRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Antecedente> findAntecedentesByIdHistoria(UUID idHistoria) {
+		return antecedenteRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<Traumatico> findTraumaticosByIdHistoria(UUID idHistoria) {
+		return traumaticoRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<Farmacologico> findFarmacologicosByIdHistoria(UUID idHistoria) {
+		return farmacologicoRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<Toxico> findToxicosByIdHistoria(UUID idHistoria) {
+		return toxicoRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<GinecoObstetricio> findGinecoObstetriciosByIdHistoria(UUID idHistoria) {
+		return ginecoObstetricioRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<ExamenFisico> findExamenFisicoByIdHistoria(UUID idHistoria) {
+		return examenFisicoRepository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());		
+	}
+
+	@Override
+	public List<ExamenFisico2> findExamenFisico2ByIdHistoria(UUID idHistoria) {
+		return examenFisico2Repository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ExamenFisico3> findExamenFisico3ByIdHistoria(UUID idHistoria) {
+		return examenFisico3Repository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ExamenFisico4> findExamenFisico4ByIdHistoria(UUID idHistoria) {
+		return examenFisico4Repository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ExamenFisico5> findExamenFisico5ByIdHistoria(UUID idHistoria) {
+		return examenFisico5Repository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ExamenFisico6> findExamenFisico6ByIdHistoria(UUID idHistoria) {
+		return examenFisico6Repository.findAll().stream()
+                .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
+                .collect(Collectors.toList());
 	}
 }

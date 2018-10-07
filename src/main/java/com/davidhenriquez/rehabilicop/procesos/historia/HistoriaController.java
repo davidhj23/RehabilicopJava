@@ -108,4 +108,148 @@ public class HistoriaController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	@RequestMapping(value = "/{id}/patologicos", method = RequestMethod.GET)
+	public ResponseEntity<?> getPatologicos(@PathVariable UUID id){
+		try {
+			List<Patologico> patologicos = historiaService.findPatologicosByIdHistoria(id);
+			return ResponseEntity.ok(patologicos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/antecedentes", method = RequestMethod.GET)
+	public ResponseEntity<?> getAntecedentes(@PathVariable UUID id){
+		try {
+			List<Antecedente> antecedentes = historiaService.findAntecedentesByIdHistoria(id);
+			return ResponseEntity.ok(antecedentes);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/traumaticos", method = RequestMethod.GET)
+	public ResponseEntity<?> getTraumaticos(@PathVariable UUID id){
+		try {
+			List<Traumatico> traumaticos = historiaService.findTraumaticosByIdHistoria(id);
+			return ResponseEntity.ok(traumaticos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/farmacologicos", method = RequestMethod.GET)
+	public ResponseEntity<?> getFarmacologicos(@PathVariable UUID id){
+		try {
+			List<Farmacologico> farmacologicos = historiaService.findFarmacologicosByIdHistoria(id);
+			return ResponseEntity.ok(farmacologicos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/toxicos", method = RequestMethod.GET)
+	public ResponseEntity<?> getToxicos(@PathVariable UUID id){
+		try {
+			List<Toxico> toxicos = historiaService.findToxicosByIdHistoria(id);
+			return ResponseEntity.ok(toxicos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/gineco-obstetricios", method = RequestMethod.GET)
+	public ResponseEntity<?> getGinecoObstetricios(@PathVariable UUID id){
+		try {
+			List<GinecoObstetricio> ginecoObstetricios = historiaService.findGinecoObstetriciosByIdHistoria(id);
+			return ResponseEntity.ok(ginecoObstetricios);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico(@PathVariable UUID id){
+		try {
+			List<ExamenFisico> examenFisico = historiaService.findExamenFisicoByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico2", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico2(@PathVariable UUID id){
+		try {
+			List<ExamenFisico2> examenFisico2 = historiaService.findExamenFisico2ByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico2);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico3", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico3(@PathVariable UUID id){
+		try {
+			List<ExamenFisico3> examenFisico3 = historiaService.findExamenFisico3ByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico3);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico4", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico4(@PathVariable UUID id){
+		try {
+			List<ExamenFisico4> examenFisico4 = historiaService.findExamenFisico4ByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico4);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico5", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico5(@PathVariable UUID id){
+		try {
+			List<ExamenFisico5> examenFisico5 = historiaService.findExamenFisico5ByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico5);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/examen-fisico6", method = RequestMethod.GET)
+	public ResponseEntity<?> getExamenFisico6(@PathVariable UUID id){
+		try {
+			List<ExamenFisico6> examenFisico6 = historiaService.findExamenFisico6ByIdHistoria(id);
+			return ResponseEntity.ok(examenFisico6);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

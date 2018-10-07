@@ -34,14 +34,14 @@ public class GinecoObstetricio {
 	private Date fum;
 	
 	@ManyToOne	
-	@JoinColumn(name="idEmbarazoActual", nullable=false)
+	@JoinColumn(name="idEmbarazoActual", nullable=true)
 	private Opcion embarazoActual;
 	
 	@ManyToOne	
-	@JoinColumn(name="idGesta", nullable=false)
+	@JoinColumn(name="idGesta", nullable=true)
 	private Gesta gesta;	
 	
 	@ManyToOne	
-	@JoinColumn(name="idHistoria", nullable=false)
+	@JoinColumn(name="idHistoria", nullable=true)
 	private Historia historia;
 }

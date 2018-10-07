@@ -27,44 +27,44 @@ public class ExamenFisico2 {
     private UUID idExamenFisico2;
 	
 	@ManyToOne	
-	@JoinColumn(name = "idFrotePericardial", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idFrotePericardial", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion frotePericardial;
 	@ManyToOne	
-	@JoinColumn(name = "idRuidosNoAuscultables", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idRuidosNoAuscultables", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion ruidosNoAuscultables;
 	@ManyToOne	
-	@JoinColumn(name = "idArritmico", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idArritmico", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion arritmico;
 	@ManyToOne	
-	@JoinColumn(name = "idSoplo", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idSoplo", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion soplo;
 	@ManyToOne	
-	@JoinColumn(name = "idRsCsRsSinSoplo", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idRsCsRsSinSoplo", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion rsCsRsSinSoplo;
 	
 	@ManyToOne	
-	@JoinColumn(name = "idHepatomegalia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idHepatomegalia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion hepatomegalia;
 	@ManyToOne
-	@JoinColumn(name = "idEsplenomegalia", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idEsplenomegalia", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion esplenomegalia;
 	@ManyToOne
-	@JoinColumn(name = "idMasaPalpable", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idMasaPalpable", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion masaPalpable;
 	@ManyToOne
-	@JoinColumn(name = "idSignosDeIrritacionPeritoneal", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idSignosDeIrritacionPeritoneal", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion signosDeIrritacionPeritoneal;
 	@ManyToOne
-	@JoinColumn(name = "idSinAlteracionesEvidente", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion sinAlteracionesEvidente;
+	@JoinColumn(name = "idSinAlteracionesEvidentes", referencedColumnName = "idOpcion", nullable=true)
+	private Opcion sinAlteracionesEvidentes;
 	@ManyToOne
-	@JoinColumn(name = "idIieoParalitico", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion IieoParalitico;
+	@JoinColumn(name = "idIieoParalitico", referencedColumnName = "idOpcion", nullable=true)
+	private Opcion iieoParalitico;
 	@ManyToOne
-	@JoinColumn(name = "idAscitis", referencedColumnName = "idOpcion", nullable=false)
+	@JoinColumn(name = "idAscitis", referencedColumnName = "idOpcion", nullable=true)
 	private Opcion ascitis;	
 	
 	@ManyToOne	
-	@JoinColumn(name="idHistoria", nullable=false)
+	@JoinColumn(name="idHistoria", nullable=true)
 	private Historia historia;
 }
