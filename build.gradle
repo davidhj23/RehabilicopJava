@@ -16,7 +16,7 @@ apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'app'
-    version =  '1.0.0'
+    version =  '100'
 }
 
 sourceCompatibility = 1.8

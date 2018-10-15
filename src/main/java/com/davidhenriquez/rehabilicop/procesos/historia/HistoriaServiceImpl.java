@@ -19,6 +19,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
@@ -207,8 +208,6 @@ public class HistoriaServiceImpl implements HistoriaService{
 		if (validaciones != null && validaciones.size() > 0)
 			throw new ValidationException(validaciones);
 		
-		Historia savedHistoria = historiaRepository.save(historia);	
-		
 		for (Patologico pe : findPatologicosByIdHistoria(historia.getIdHistoria())) {			
 			patologicoRepository.delete(pe);
 		}
@@ -263,7 +262,75 @@ public class HistoriaServiceImpl implements HistoriaService{
 			ginecoObstetricioRepository.save(x);
 		}
 		
-		return savedHistoria;			
+		for (ExamenFisico x : findExamenFisicoByIdHistoria(historia.getIdHistoria())) {			
+			examenFisicoRepository.delete(x);
+		}		
+				
+		for (ExamenFisico x : historia.getExamenFisicos()){			
+			x.setHistoria(historia);
+			examenFisicoRepository.save(x);
+		}
+		
+		for (ExamenFisico2 x : findExamenFisico2ByIdHistoria(historia.getIdHistoria())) {			
+			examenFisico2Repository.delete(x);
+		}		
+				
+		for (ExamenFisico2 x : historia.getExamenFisicos2()){			
+			x.setHistoria(historia);
+			examenFisico2Repository.save(x);
+		}
+		
+		for (ExamenFisico3 x : findExamenFisico3ByIdHistoria(historia.getIdHistoria())) {			
+			examenFisico3Repository.delete(x);
+		}		
+				
+		for (ExamenFisico3 x : historia.getExamenFisicos3()){			
+			x.setHistoria(historia);
+			examenFisico3Repository.save(x);
+		}
+		
+		for (ExamenFisico4 x : findExamenFisico4ByIdHistoria(historia.getIdHistoria())) {			
+			examenFisico4Repository.delete(x);
+		}		
+				
+		for (ExamenFisico4 x : historia.getExamenFisicos4()){			
+			x.setHistoria(historia);
+			examenFisico4Repository.save(x);
+		}
+		
+		for (ExamenFisico5 x : findExamenFisico5ByIdHistoria(historia.getIdHistoria())) {			
+			examenFisico5Repository.delete(x);
+		}		
+				
+		for (ExamenFisico5 x : historia.getExamenFisicos5()){			
+			x.setHistoria(historia);
+			examenFisico5Repository.save(x);
+		}
+		
+		for (ExamenFisico6 x : findExamenFisico6ByIdHistoria(historia.getIdHistoria())) {			
+			examenFisico6Repository.delete(x);
+		}		
+				
+		for (ExamenFisico6 x : historia.getExamenFisicos6()){			
+			x.setHistoria(historia);
+			examenFisico6Repository.save(x);
+		}
+		
+		historia.setPatologicos(null);
+		historia.setAntecedentes(null);
+		historia.setTraumaticos(null);
+		historia.setFarmacologicos(null);
+		historia.setToxicos(null);
+		historia.setGinecoObstetricios(null);
+		
+		historia.setExamenFisicos(null);
+		historia.setExamenFisicos2(null);
+		historia.setExamenFisicos3(null);
+		historia.setExamenFisicos4(null);
+		historia.setExamenFisicos5(null);
+		historia.setExamenFisicos6(null);
+		
+		return historiaRepository.save(historia);			
 	}
 
 	@Transactional
@@ -353,5 +420,19 @@ public class HistoriaServiceImpl implements HistoriaService{
 		return examenFisico6Repository.findAll().stream()
                 .filter(x -> x.getHistoria().getIdHistoria().equals(idHistoria))                
                 .collect(Collectors.toList());
+	}
+
+	@Override
+	public Historia findHistoriaActivaByIdentificacionPaciente(String identificacion) {
+		Optional<Historia> historiaOptional = historiaRepository.findAll().stream()
+				.filter(a -> a.getAdmision().getEstado().equals("ACTIVA") &&
+							 a.getAdmision().getPaciente().getIdentificacion().equals(identificacion))
+				.findFirst();
+		 
+		 if(historiaOptional.isPresent()){
+    		return historiaOptional.get();
+    	 }
+		 
+		 return null;
 	}
 }

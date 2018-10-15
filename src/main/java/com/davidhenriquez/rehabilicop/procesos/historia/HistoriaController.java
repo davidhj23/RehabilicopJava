@@ -19,6 +19,7 @@ import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
@@ -246,6 +247,18 @@ public class HistoriaController {
 		try {
 			List<ExamenFisico6> examenFisico6 = historiaService.findExamenFisico6ByIdHistoria(id);
 			return ResponseEntity.ok(examenFisico6);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value = "/paciente/{identificacion}", method = RequestMethod.GET)
+	public ResponseEntity<?> getHistoriaActivaByIdentificacionPaciente(@PathVariable String identificacion){
+		try {
+			Historia historia = historiaService.findHistoriaActivaByIdentificacionPaciente(identificacion);
+			return ResponseEntity.ok(historia);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 

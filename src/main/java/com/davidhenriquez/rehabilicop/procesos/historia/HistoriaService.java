@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 
 public interface HistoriaService {
 	
@@ -29,4 +30,6 @@ public interface HistoriaService {
 	List<ExamenFisico4> findExamenFisico4ByIdHistoria(UUID idHistoria);
 	List<ExamenFisico5> findExamenFisico5ByIdHistoria(UUID idHistoria);
 	List<ExamenFisico6> findExamenFisico6ByIdHistoria(UUID idHistoria);
+	
+	Historia findHistoriaActivaByIdentificacionPaciente(String identificacion);
 }
