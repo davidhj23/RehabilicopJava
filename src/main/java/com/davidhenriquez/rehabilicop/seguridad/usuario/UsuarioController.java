@@ -201,4 +201,16 @@ public class UsuarioController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
     	}
     }
+    
+    @RequestMapping(value = "/auditores", method = RequestMethod.GET)
+    public ResponseEntity<?> getAuditores() {
+    	try{
+    		List<Usuario> auditores = usuarioService.findAllAuditores();
+    		return ResponseEntity.ok(auditores);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
 }

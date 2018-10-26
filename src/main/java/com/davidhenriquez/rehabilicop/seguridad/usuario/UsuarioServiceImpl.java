@@ -236,6 +236,14 @@ public class UsuarioServiceImpl implements UsuarioService{
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<Usuario> findAllAuditores() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Auditor")))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
 
 	@Override
 	public Usuario findUserByUsername(String username) {

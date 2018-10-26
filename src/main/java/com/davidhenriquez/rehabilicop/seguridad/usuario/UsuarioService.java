@@ -41,6 +41,8 @@ public interface UsuarioService {
 	List<Usuario> findAllEnfermeros();
 	
 	List<Usuario> findAllPsiquiatras();
+	
+	List<Usuario> findAllAuditores();
 
 	Usuario findUserByUsername(String username);
 }
