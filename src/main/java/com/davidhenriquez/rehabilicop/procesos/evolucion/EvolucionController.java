@@ -49,7 +49,7 @@ public class EvolucionController {
         
     @Autowired
     private UserDetailsService userDetailsService;
-    
+        
     @RequestMapping(value = "/", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('evolucion')")
 	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Evolucion evolucion) throws Exception {
@@ -77,4 +77,18 @@ public class EvolucionController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
     }
+    
+    @RequestMapping(value = "/aseguradora/{id}/anio/{anio}/mes/{mes}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('auditoria')")
+	public ResponseEntity<?> getAllEvoluciones(
+			@PathVariable String id,
+			@PathVariable int anio,
+			@PathVariable int mes) throws Exception {
+		try {			
+			return ResponseEntity.ok(evolucionService.getAllEvoluciones(id, anio, mes));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

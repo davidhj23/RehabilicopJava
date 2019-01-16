@@ -1,7 +1,10 @@
 package com.davidhenriquez.rehabilicop.configuracion.evolucion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,5 +54,25 @@ public class ParametrizacionEvolucionServiceImpl implements ParametrizacionEvolu
 	@Transactional
 	public void delete(UUID id) throws ValidationException {
 		parametrizacionEvolucionRepository.delete(id);
+	}
+
+	@Override
+	public List<ParametrizacionEvolucion> getAllByAnioAndMes(int year, int month) {
+		
+		List<ParametrizacionEvolucion> peList = new ArrayList<ParametrizacionEvolucion>();
+		
+		Calendar calendar = Calendar.getInstance();		
+		for (ParametrizacionEvolucion pe : parametrizacionEvolucionRepository.findAll()){
+			calendar.setTime(pe.getFecha());
+			if(calendar.get(Calendar.YEAR) == year &&
+					calendar.get(Calendar.MONTH) == month){
+						peList.add(pe);
+			}
+		}
+		
+		return peList
+				.stream()
+				.sorted(Comparator.comparing(ParametrizacionEvolucion::getFecha))
+		        .collect(Collectors.toList());
 	}
 }

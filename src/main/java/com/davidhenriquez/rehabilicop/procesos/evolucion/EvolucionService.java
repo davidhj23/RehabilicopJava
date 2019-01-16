@@ -14,4 +14,6 @@ public interface EvolucionService {
 	Evolucion create(Evolucion evolucion) throws ValidationException;
 	
 	List<TipoEvolucion> findTipoEvolucionbyIdRol(Collection<Rol> roles);
+	
+	List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month);
 }

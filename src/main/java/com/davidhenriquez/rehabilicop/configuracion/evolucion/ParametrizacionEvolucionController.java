@@ -97,4 +97,17 @@ public class ParametrizacionEvolucionController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+    
+    @RequestMapping(value = "/anio/{anio}/mes/{mes}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('auditoria')")
+	public ResponseEntity<?> getAllEvoluciones(			
+			@PathVariable int anio,
+			@PathVariable int mes) throws Exception {
+		try {			
+			return ResponseEntity.ok(parametrizacionEvolucionService.getAllByAnioAndMes(anio, mes));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

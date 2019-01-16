@@ -38,6 +38,9 @@ public class EvolucionServiceImpl implements EvolucionService{
 	@Autowired
 	private RolTipoEvolucionRepository rolTipoEvolucionRepository;
 	
+	@Autowired	
+	private EvolucionesRepository evolucionesRepository;
+	
 	public Evolucion create(Evolucion evolucion) throws ValidationException {
 		return evolucionRepository.save(evolucion);		
 	}
@@ -63,5 +66,10 @@ public class EvolucionServiceImpl implements EvolucionService{
     		
     		return tipoEvolucionList;
     	}
+	}
+
+	@Override
+	public List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month) {
+		return evolucionesRepository.getAllEvoluciones(idAseguradora, year, month);
 	}
 }
