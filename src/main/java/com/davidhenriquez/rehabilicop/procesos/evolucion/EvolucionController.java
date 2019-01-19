@@ -79,13 +79,27 @@ public class EvolucionController {
     }
     
     @RequestMapping(value = "/aseguradora/{id}/anio/{anio}/mes/{mes}", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('auditoria')")
+	@PreAuthorize("hasRole('auditar')")
 	public ResponseEntity<?> getAllEvoluciones(
 			@PathVariable String id,
 			@PathVariable int anio,
 			@PathVariable int mes) throws Exception {
-		try {			
+		try {
 			return ResponseEntity.ok(evolucionService.getAllEvoluciones(id, anio, mes));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value = "/empleado", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('auditar')")
+	public ResponseEntity<?> getEvolucionesPorMesYEmpleado(HttpServletRequest request) throws Exception {
+		try {
+			String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);
+	        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+			return ResponseEntity.ok(evolucionService.getEvolucionesEmpleado(user.getIdentificacion()));
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));

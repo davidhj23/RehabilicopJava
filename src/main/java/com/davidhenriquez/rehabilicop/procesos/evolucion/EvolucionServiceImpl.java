@@ -72,4 +72,11 @@ public class EvolucionServiceImpl implements EvolucionService{
 	public List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month) {
 		return evolucionesRepository.getAllEvoluciones(idAseguradora, year, month);
 	}
+
+	@Override
+	public List<Evolucion> getEvolucionesEmpleado(String identificacion) {
+		return evolucionRepository.findAll().stream()
+	        	.filter(x -> x.getUsuario().getIdentificacion().equals(identificacion))	        	
+                .collect(Collectors.toList());
+	}
 }

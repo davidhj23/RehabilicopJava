@@ -12,8 +12,8 @@ public class EvolucionesRepositoryImpl implements EvolucionesRepositoryCustom {
 
     @Override
     public List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month) {
-        StoredProcedureQuery getAllEvoluciones = em.createNamedStoredProcedureQuery("getAllEvoluciones");
-        getAllEvoluciones.setParameter("id_aseguradora", idAseguradora);
+        StoredProcedureQuery getAllEvoluciones = em.createNamedStoredProcedureQuery("getAllEvoluciones");        
+        getAllEvoluciones.setParameter("id_aseguradora", idAseguradora.replace("-", "").toUpperCase());
         getAllEvoluciones.setParameter("year_param", year);
         getAllEvoluciones.setParameter("month_param", month);
         return getAllEvoluciones.getResultList();

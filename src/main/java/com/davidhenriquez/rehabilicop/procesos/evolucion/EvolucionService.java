@@ -16,4 +16,6 @@ public interface EvolucionService {
 	List<TipoEvolucion> findTipoEvolucionbyIdRol(Collection<Rol> roles);
 	
 	List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month);
+	
+	List<Evolucion> getEvolucionesEmpleado(String identification);
 }

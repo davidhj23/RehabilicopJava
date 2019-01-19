@@ -1,5 +1,7 @@
 package com.davidhenriquez.rehabilicop.configuracion.evolucion;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -61,11 +63,10 @@ public class ParametrizacionEvolucionServiceImpl implements ParametrizacionEvolu
 		
 		List<ParametrizacionEvolucion> peList = new ArrayList<ParametrizacionEvolucion>();
 		
-		Calendar calendar = Calendar.getInstance();		
 		for (ParametrizacionEvolucion pe : parametrizacionEvolucionRepository.findAll()){
-			calendar.setTime(pe.getFecha());
-			if(calendar.get(Calendar.YEAR) == year &&
-					calendar.get(Calendar.MONTH) == month){
+			LocalDate localDate = pe.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			if(localDate.getYear() == year &&
+					localDate.getMonthValue() == month){
 						peList.add(pe);
 			}
 		}

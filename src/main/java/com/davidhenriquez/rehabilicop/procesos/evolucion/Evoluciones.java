@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "evoluciones")
 @Data
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(name = "getAllEvoluciones",
@@ -23,24 +23,26 @@ public class Evoluciones implements Serializable {
     
 	@Id
     @Column(name = "idEvolucion")
-    private UUID idEvolucion;
+    private String idEvolucion;
 	
 	@Column(name = "aseguradora")
     private String aseguradora;
     @Column(name = "fechaEvolucion")
     private Date fechaEvolucion;
     @Column(name = "idPaciente")
-    private UUID idPaciente;
+    private String idPaciente;
+    @Column(name = "identificacion")
+    private String identificacion;
     @Column(name = "nombrePaciente")
     private String nombrePaciente;
     @Column(name = "idTipoEvolucion")
-    private UUID idTipoEvolucion;
+    private String idTipoEvolucion;
     @Column(name = "tipoEvolucion")
     private String tipoEvolucion;
     @Column(name = "descripcionEvolucion")
     private String descripcionEvolucion;
     @Column(name = "idResponsable")
-    private UUID idResponsable;
-    @Column(name = "responsable")
-    private String responsable;
+    private String idResponsable;
+    @Column(name = "nombreResponsable")
+    private String nombreResponsable;
 }
