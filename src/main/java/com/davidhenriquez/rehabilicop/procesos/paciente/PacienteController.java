@@ -111,4 +111,16 @@ public class PacienteController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	@RequestMapping(value = "search/{search}", method = RequestMethod.GET)
+	public ResponseEntity<?> getPacienteByNombresApellidos(@PathVariable String search){
+		try {
+			List<Usuario> pacientes = usuarioService.findPacientesByNombresApellidos(search);
+			return ResponseEntity.ok(pacientes);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

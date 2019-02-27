@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
+import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 
 public interface UsuarioService {
@@ -34,7 +35,9 @@ public interface UsuarioService {
 	void deletePaciente(UUID idPaciente) throws ValidationException;
 	
 	Usuario findPacienteByIdentificacion(String identificacion);
-
+	
+	List<Usuario> findPacientesByNombresApellidos(String search);
+	
 	
 	List<Usuario> findAllMedicos();
 	
@@ -45,4 +48,5 @@ public interface UsuarioService {
 	List<Usuario> findAllAuditores();
 
 	Usuario findUserByUsername(String username);
+	
 }

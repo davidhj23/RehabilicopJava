@@ -93,7 +93,7 @@ public class EvolucionController {
 	}
     
     @RequestMapping(value = "/empleado", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('auditar')")
+	@PreAuthorize("hasRole('evolucion')")
 	public ResponseEntity<?> getEvolucionesPorMesYEmpleado(HttpServletRequest request) throws Exception {
 		try {
 			String token = request.getHeader(tokenHeader);

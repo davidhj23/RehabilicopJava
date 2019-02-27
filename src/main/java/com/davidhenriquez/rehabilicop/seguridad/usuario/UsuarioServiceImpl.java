@@ -264,4 +264,15 @@ public class UsuarioServiceImpl implements UsuarioService{
 		 
 		 return null;
 	}
+
+	@Override
+	public List<Usuario> findPacientesByNombresApellidos(String search) {
+		return usuarioRepository.findAll().stream()
+				.filter(x -> (x.getUsername() == null || 
+           		     		  x.getUsername().equals("")) &&
+           		     		 (x.getNombres().toLowerCase().contains(search.toLowerCase()) ||
+							  x.getApellidos().toLowerCase().contains(search.toLowerCase())))
+				.sorted(Comparator.comparing(Usuario::getNombres))
+				.collect(Collectors.toList()); 
+	}
 }

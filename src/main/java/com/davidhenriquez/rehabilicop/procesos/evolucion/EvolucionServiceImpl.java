@@ -19,6 +19,7 @@ import com.davidhenriquez.rehabilicop.configuracion.evolucion.TipoEvolucion;
 import com.davidhenriquez.rehabilicop.configuracion.evolucion.TipoEvolucionRepository;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -76,7 +77,8 @@ public class EvolucionServiceImpl implements EvolucionService{
 	@Override
 	public List<Evolucion> getEvolucionesEmpleado(String identificacion) {
 		return evolucionRepository.findAll().stream()
-	        	.filter(x -> x.getUsuario().getIdentificacion().equals(identificacion))	        	
+	        	.filter(x -> x.getUsuario().getIdentificacion().equals(identificacion))	
+	        	.sorted(Comparator.comparing(Evolucion::getFecha))	
                 .collect(Collectors.toList());
 	}
 }
