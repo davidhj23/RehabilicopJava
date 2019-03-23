@@ -230,6 +230,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
+	public List<Usuario> findAllMedicosyPsiquiatras() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> x.getRoles().stream().anyMatch(y ->
+                	y.getNombre().equals("Medicina general") ||
+                	y.getNombre().equals("Psiquiatria") || 
+                	y.getNombre().equals("Psiquiatria Infantil")))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
+	
+	@Override
 	public List<Usuario> findAllEnfermeros() {
 		return usuarioRepository.findAll().stream()
                 .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Jefe enfermeria")))
@@ -241,6 +252,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Usuario> findAllAuditores() {
 		return usuarioRepository.findAll().stream()
                 .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Auditor")))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Usuario> findAllAuxiliaresFarmacia() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Auxiliar Farmacia")))
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}

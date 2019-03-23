@@ -45,4 +45,6 @@ public class Evoluciones implements Serializable {
     private String idResponsable;
     @Column(name = "nombreResponsable")
     private String nombreResponsable;
+    @Column(name = "fechaDeIngreso")
+    private Date fechaDeIngreso;
 }

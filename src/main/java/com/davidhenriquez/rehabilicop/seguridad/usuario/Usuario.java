@@ -74,7 +74,8 @@ public class Usuario {
 	private String ocupacion;
 	private Date fechaDeNacimiento;
 	
-	private String ciudad;	
+	private String ciudad;
+	private String registroMedico;
 	
 	@ManyToOne	
 	@JoinColumn(name="idTipoDocumento", nullable=false)

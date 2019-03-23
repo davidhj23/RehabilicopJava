@@ -190,6 +190,18 @@ public class UsuarioController {
     	}
     }
     
+    @RequestMapping(value = "/medicos-y-psiquiatras", method = RequestMethod.GET)
+    public ResponseEntity<?> getMedicosyPsiquiatras() {
+    	try{
+    		List<Usuario> todos = usuarioService.findAllMedicosyPsiquiatras();
+    		return ResponseEntity.ok(todos);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
     @RequestMapping(value = "/enfermeros", method = RequestMethod.GET)
     public ResponseEntity<?> getEnfermeros() {
     	try{
@@ -207,6 +219,18 @@ public class UsuarioController {
     	try{
     		List<Usuario> auditores = usuarioService.findAllAuditores();
     		return ResponseEntity.ok(auditores);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
+    @RequestMapping(value = "/auxiliares-farmacia", method = RequestMethod.GET)
+    public ResponseEntity<?> getAuxiliaresFarmacia() {
+    	try{
+    		List<Usuario> auxiliares = usuarioService.findAllAuxiliaresFarmacia();
+    		return ResponseEntity.ok(auxiliares);
     	}catch(Exception ex){
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
