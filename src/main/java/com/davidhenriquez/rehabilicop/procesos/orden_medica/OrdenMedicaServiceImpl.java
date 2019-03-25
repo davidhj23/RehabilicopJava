@@ -49,12 +49,12 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	public OrdenMedica findById(UUID id){		
 		OrdenMedica ordenMedica = ordenMedicaRepository.findOne(id);
 		
-		List<MedicamentosOrdenMedica> medicamentos = medicamentosOrdenMedicaRepository
+		/*List<MedicamentosOrdenMedica> medicamentos = medicamentosOrdenMedicaRepository
 			.findAll().stream()
 			.filter(x -> x.getOrdenMedica().getIdOrdenMedica().equals(ordenMedica.getIdOrdenMedica()))
 			.collect(Collectors.toList());		
 		
-		ordenMedica.setMedicamentosOrdenMedica(medicamentos);
+		ordenMedica.setMedicamentosOrdenMedica(medicamentos);*/
 		
 		return ordenMedica;
 	}
