@@ -23,6 +23,7 @@ import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.procesos.evolucion.Evolucion;
 import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
+import com.davidhenriquez.rehabilicop.procesos.historia.Patologico;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
@@ -82,6 +83,30 @@ public class OrdenMedicaController {
 	public ResponseEntity<?> getOrdeneMedica(@PathVariable UUID id) throws Exception {
 		try {
 			return ResponseEntity.ok(ordenMedicaService.findById(id));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value = "/{id}/medicamentos", method = RequestMethod.GET)
+	public ResponseEntity<?> getMedicamentos(@PathVariable UUID id){
+		try {			
+			return ResponseEntity.ok(ordenMedicaService.findMedicamentosByIdOrdenMedica(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('editar orden medica')")
+	public ResponseEntity<?> update(@RequestBody OrdenMedica ordenMedica) throws Exception {
+		try {
+			return ResponseEntity.ok(ordenMedicaService.update(ordenMedica));
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));

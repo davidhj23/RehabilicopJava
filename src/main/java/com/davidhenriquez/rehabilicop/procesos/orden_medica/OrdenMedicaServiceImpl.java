@@ -23,8 +23,19 @@ import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
 import com.davidhenriquez.rehabilicop.procesos.evolucion.Evolucion;
+import com.davidhenriquez.rehabilicop.procesos.historia.Antecedente;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico2;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico3;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico4;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico5;
+import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico6;
+import com.davidhenriquez.rehabilicop.procesos.historia.Farmacologico;
+import com.davidhenriquez.rehabilicop.procesos.historia.GinecoObstetricio;
 import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
 import com.davidhenriquez.rehabilicop.procesos.historia.Patologico;
+import com.davidhenriquez.rehabilicop.procesos.historia.Toxico;
+import com.davidhenriquez.rehabilicop.procesos.historia.Traumatico;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
@@ -78,5 +89,22 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 						     x.getHistoria().getAdmision().getEstado().equals("ACTIVA"))	
 	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
                 .collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<MedicamentosOrdenMedica> findMedicamentosByIdOrdenMedica(UUID id) {
+		return medicamentosOrdenMedicaRepository.findAll().stream()
+                .filter(x -> x.getOrdenMedica().getIdOrdenMedica().equals(id))                
+                .collect(Collectors.toList());
+	}
+	
+	public OrdenMedica update(OrdenMedica ordenMedica) throws ValidationException {		
+						
+		for (MedicamentosOrdenMedica mom : ordenMedica.getMedicamentosOrdenMedica()){			
+			medicamentosOrdenMedicaRepository.save(mom);
+		}
+		
+		ordenMedica.setEstado("CERRADA");
+		return ordenMedicaRepository.save(ordenMedica);			
 	}
 }
