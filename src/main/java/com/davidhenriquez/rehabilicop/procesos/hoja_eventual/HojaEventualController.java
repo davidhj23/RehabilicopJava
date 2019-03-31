@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.procesos.epicrisis;
+package com.davidhenriquez.rehabilicop.procesos.hoja_eventual;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,6 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
-import com.davidhenriquez.rehabilicop.procesos.orden_medica.OrdenMedica;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
@@ -33,8 +32,8 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/epicrisis")
-public class EpicrisisController {
+@RequestMapping("/api/hoja-eventual")
+public class HojaEventualController {
         
 	@Value("${jwt.header}")
     private String tokenHeader;
@@ -43,58 +42,38 @@ public class EpicrisisController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private EpicrisisService epicrisisService;
-    
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> getEpicrisis() {
-    	try{
-    		return ResponseEntity.ok(epicrisisService.findAll());
-    	}catch(Exception ex){
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-    	}
-    }    
-    
+    private UsuarioService usuarioService;
+        
+    @Autowired
+    private HojaEventualService hojaEventualService; 
+        
+    @Autowired
+    private UserDetailsService userDetailsService;
+        
     @RequestMapping(value = "/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('crear epicrisis')")
-	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody Epicrisis epicrisis) throws Exception {
-		try {			
-			return ResponseEntity.ok(epicrisisService.create(epicrisis));		
+	@PreAuthorize("hasRole('evolucion')")
+	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody HojaEventual hojaEventual) throws Exception {
+		try {
+			String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);
+			Usuario usuario = usuarioService.findUserByUsername(username);
+			hojaEventual.setUsuario(usuario);
+			return ResponseEntity.ok(hojaEventualService.create(hojaEventual));		
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
-	}
+	}   
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)	
-	public ResponseEntity<?> getEpicrisis(@PathVariable UUID id) throws Exception {
+    
+    @RequestMapping(value = "/empleado", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('evolucion')")
+	public ResponseEntity<?> getEvolucionesPorMesYEmpleado(HttpServletRequest request) throws Exception {
 		try {
-			return ResponseEntity.ok(epicrisisService.findById(id));
-		} catch (Exception ex) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
-		}
-	}
-    
-    @RequestMapping(value = "/{id}/medicamentos", method = RequestMethod.GET)
-	public ResponseEntity<?> getMedicamentos(@PathVariable UUID id){
-		try {			
-			return ResponseEntity.ok(epicrisisService.findMedicamentosByIdEpicrisis(id));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-    				.body(new ValidationResult("error", 
-    					"ha ocurrido un error por favor vuelva a intentarlo"));
-		}
-	}
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('editar epicrisis')")
-	public ResponseEntity<?> update(@RequestBody Epicrisis epicrisis) throws Exception {
-		try {
-			return ResponseEntity.ok(epicrisisService.update(epicrisis));
-		} catch (ValidationException ex) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+			String token = request.getHeader(tokenHeader);
+	        String username = jwtTokenUtil.getUsernameFromToken(token);
+	        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+			return ResponseEntity.ok(hojaEventualService.getHojasEventualesEmpleado(user.getIdentificacion()));
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
