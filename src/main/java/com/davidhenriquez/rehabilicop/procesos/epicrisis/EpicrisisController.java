@@ -25,8 +25,11 @@ import com.davidhenriquez.rehabilicop.procesos.orden_medica.OrdenMedica;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
+import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -100,4 +103,15 @@ public class EpicrisisController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+    
+    @RequestMapping(value = "/reporte/{identificacion}", method = RequestMethod.GET)	
+    @PreAuthorize("hasRole('crear epicrisis')")
+    public ResponseEntity<byte[]> report(@PathVariable String identificacion) throws SQLException {      
+      byte[] bytes = epicrisisService.generateReport(identificacion);
+      return ResponseEntity
+        .ok()
+        .header("Content-Type", "application/pdf; charset=UTF-8")
+        .header("Content-Disposition", "inline; filename=\"" + identificacion + ".pdf\"")
+        .body(bytes);      
+    }
 }

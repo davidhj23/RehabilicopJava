@@ -1,7 +1,9 @@
 package com.davidhenriquez.rehabilicop.procesos.epicrisis;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
@@ -22,4 +24,6 @@ public interface EpicrisisService {
 	List<TratamientoFarmacologico> findMedicamentosByIdEpicrisis(UUID id);
 	
 	Epicrisis update(Epicrisis epicrisis) throws ValidationException;
+	
+	byte[] generateReport(String identificacion) throws SQLException;
 }

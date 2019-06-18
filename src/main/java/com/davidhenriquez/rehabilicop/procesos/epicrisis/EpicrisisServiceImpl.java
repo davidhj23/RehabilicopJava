@@ -1,15 +1,25 @@
 package com.davidhenriquez.rehabilicop.procesos.epicrisis;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +40,15 @@ import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioRepository;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
+
 @Service
 public class EpicrisisServiceImpl implements EpicrisisService{
 
@@ -38,6 +57,12 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 	
 	@Autowired	
 	private TratamientoFarmacologicoRepository tratamientoFarmacologicoRepository;
+	
+	@Autowired
+	private ResourceLoader resourceLoader;
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	public Epicrisis create(Epicrisis epicrisis) throws ValidationException {		
 		
@@ -76,4 +101,30 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 		
 		return epicrisisRepository.save(epicrisis);			
 	}
+	
+	
+	
+	@Override
+	public byte[] generateReport(String identificacion) throws SQLException {		
+	    
+		// Cerrar historia
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:HistoriaClinica.jasper").getFile());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", identificacion);
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    return bytes;
+    }
 }
