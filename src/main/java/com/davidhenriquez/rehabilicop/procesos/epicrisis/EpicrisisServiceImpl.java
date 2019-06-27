@@ -105,9 +105,7 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 	
 	
 	@Override
-	public byte[] generateReport(String identificacion) throws SQLException {		
-	    
-		// Cerrar historia
+	public byte[] generateReport(String identificacion) throws SQLException {
 		
 		byte[] bytes = null;
 	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
@@ -125,6 +123,9 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 	    catch (JRException | IOException e) {
 	    	e.printStackTrace();
 	    }
+	    
+		// Cerrar historia
+	    
 	    return bytes;
     }
 }
