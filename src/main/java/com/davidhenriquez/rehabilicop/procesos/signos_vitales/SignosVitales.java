@@ -55,6 +55,7 @@ public class SignosVitales {
 	
 	private Date fecha;
 	private String hora;
+	private String ampm;
 	
 	private String tension;
 	private String temperatura;
