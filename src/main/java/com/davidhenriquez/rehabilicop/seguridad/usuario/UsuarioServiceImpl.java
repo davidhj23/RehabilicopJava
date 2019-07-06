@@ -241,9 +241,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
-	public List<Usuario> findAllEnfermeros() {
+	public List<Usuario> findAllJefesEnfermerias() {
 		return usuarioRepository.findAll().stream()
                 .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Jefe enfermeria")))
+                .sorted(Comparator.comparing(Usuario::getNombres))
+                .collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Usuario> findAllEnfermeros() {
+		return usuarioRepository.findAll().stream()
+                .filter(x -> x.getRoles().stream().anyMatch(y -> y.getNombre().equals("Enfermeria")))
                 .sorted(Comparator.comparing(Usuario::getNombres))
                 .collect(Collectors.toList());
 	}

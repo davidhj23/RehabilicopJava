@@ -202,6 +202,18 @@ public class UsuarioController {
     	}
     }
     
+    @RequestMapping(value = "/jefes-enfermerias", method = RequestMethod.GET)
+    public ResponseEntity<?> getJefesEnfermerias() {
+    	try{
+    		List<Usuario> jefes = usuarioService.findAllJefesEnfermerias();
+    		return ResponseEntity.ok(jefes);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
     @RequestMapping(value = "/enfermeros", method = RequestMethod.GET)
     public ResponseEntity<?> getEnfermeros() {
     	try{
