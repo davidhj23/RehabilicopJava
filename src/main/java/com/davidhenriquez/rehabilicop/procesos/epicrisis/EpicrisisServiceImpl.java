@@ -111,7 +111,7 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
 	    	JasperReport jasperReport = 
 		    		(JasperReport) JRLoader.loadObject(
-		    				resourceLoader.getResource("classpath:HistoriaClinica.jasper").getFile());
+		    				resourceLoader.getResource("classpath:HistoriaClinica.jasper").getInputStream());
 		    
 		    Map<String, Object> params = new HashMap<>();
 		      params.put("identificacion", identificacion);

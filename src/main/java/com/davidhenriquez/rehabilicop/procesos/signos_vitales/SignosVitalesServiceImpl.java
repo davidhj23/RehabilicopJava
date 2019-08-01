@@ -42,7 +42,10 @@ public class SignosVitalesServiceImpl implements SignosVitalesService{
 		 	.filter(a -> a.getHistoria()
 					 	  .getAdmision()
 					 	  .getPaciente()
-					 	  .getIdentificacion().equals(identificacion))
+					 	  .getIdentificacion().equals(identificacion)
+					 	  && 
+					 	 a.getHistoria()
+					 	  .getAdmision().getEstado().equals("ACTIVA"))
 		 	.sorted(Comparator.comparing(SignosVitales::getFecha))
 	        .collect(Collectors.toList());
 	}

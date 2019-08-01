@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.procesos.notas_de_enfermeria;
+package com.davidhenriquez.rehabilicop.procesos.hospitalizacion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,34 +19,42 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioRepository;
 
 @Service
-public class NotasDeEnfermeriaServiceImpl implements NotasDeEnfermeriaService{
+public class HospitaliacionServiceImpl implements HospitalizacionService{
 
 	@Autowired
-	private NotasDeEnfermeriaRepository notasDeEnfermeriaRepository;
+	private HospitalizacionRepository hospitalizacionRepository;
 	
-	public NotasDeEnfermeria create(NotasDeEnfermeria notasDeEnfermeria) throws ValidationException {		
-		return notasDeEnfermeriaRepository.save(notasDeEnfermeria);		
+	public Hospitalizacion create(Hospitalizacion hospitalizacion) throws ValidationException {		
+		return hospitalizacionRepository.save(hospitalizacion);		
 	}
 	
 	@Override
-	public List<NotasDeEnfermeria> getNotasDeEnfermeriaByPaciente(String identificacion) {
-		 return notasDeEnfermeriaRepository
-		 	.findAll()
-		 	.stream()
-		 	.filter(a -> a.getHistoria()
-					 	  .getAdmision()
-					 	  .getPaciente()
-					 	  .getIdentificacion().equals(identificacion)
-					 	  &&
-					 	 a.getHistoria()
-					 	  .getAdmision().getEstado().equals("ACTIVA"))
-		 	.sorted(Comparator.comparing(NotasDeEnfermeria::getFecha))
-	        .collect(Collectors.toList());
+	public Hospitalizacion getHospitalizacionByPaciente(String identificacion) {
+		Optional<Hospitalizacion> hospitalizacion = 
+			hospitalizacionRepository
+			 	.findAll()
+			 	.stream()
+			 	.filter(a -> 
+			 		a.getHistoria()
+				 	  .getAdmision()
+				 	  .getPaciente()
+				 	  .getIdentificacion().equals(identificacion)
+				 	  	&&
+				 	a.getHistoria()
+				 	  .getAdmision().getEstado().equals("ACTIVA"))
+			 	.findFirst();
+		 
+		 if(hospitalizacion.isPresent()){
+			 return hospitalizacion.get();
+		 }
+		 
+		 return null;
 	}
 }

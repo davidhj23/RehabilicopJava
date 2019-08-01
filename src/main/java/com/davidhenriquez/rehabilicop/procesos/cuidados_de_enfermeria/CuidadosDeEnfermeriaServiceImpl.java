@@ -42,7 +42,10 @@ public class CuidadosDeEnfermeriaServiceImpl implements CuidadosDeEnfermeriaServ
 		 	.filter(a -> a.getHistoria()
 					 	  .getAdmision()
 					 	  .getPaciente()
-					 	  .getIdentificacion().equals(identificacion))
+					 	  .getIdentificacion().equals(identificacion)
+					 	  && 
+					 	 a.getHistoria()
+					 	  .getAdmision().getEstado().equals("ACTIVA"))
 		 	.sorted(Comparator.comparing(CuidadosDeEnfermeria::getFecha))
 	        .collect(Collectors.toList());
 	}
