@@ -29,7 +29,7 @@ public class Kardex {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idAdverso;	
+    private UUID idKardex;	
 		
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=true)
