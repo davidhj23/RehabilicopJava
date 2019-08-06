@@ -30,6 +30,24 @@ public class Kardex {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     private UUID idKardex;	
+	
+	private Date fecha;
+	private String tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPendiente", referencedColumnName = "idOpcion", nullable=true)
+	private Opcion pendiente;
+	
+	@ManyToOne
+	@JoinColumn(name = "idRecibido", referencedColumnName = "idOpcion", nullable=true)
+	private Opcion recibido;
+	
+	private Date fecha2;
+	private String cuidados_de_enfermeria;
+	
+	@ManyToOne	
+	@JoinColumn(name="idUsuario", nullable=true)
+	private Usuario usuario;
 		
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=true)
