@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.davidhenriquez.rehabilicop.listas.dosis.Dosis;
 import com.davidhenriquez.rehabilicop.listas.medicamento.Medicamento;
@@ -25,30 +26,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
-@Entity
-@Data
-public class MedicamentosOrdenMedica {
+public interface AdministracionRepository extends JpaRepository<Administracion, UUID> {
 
-	@Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID idMedicamentosOrdenMedica;	
-	
-	private Date fecha;	
-	
-	@ManyToOne	
-	@JoinColumn(name="idMedicamento", nullable=true)
-	private Medicamento medicamento;
-	
-	private Integer cantidadSolicitada;
-	private Integer cantidadEntregada;	
-	
-	@ManyToOne	
-	@JoinColumn(name="idOrdenMedica", nullable=true)
-	private OrdenMedica ordenMedica;
-	
-	@OneToMany(mappedBy="medicamentosOrdenMedica")	
-	@JsonBackReference(value="Administracion")	
-	private Collection<Administracion> administraciones;
 }

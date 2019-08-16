@@ -112,4 +112,15 @@ public class OrdenMedicaController {
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+    
+    @RequestMapping(value = "/medicamentos/{id}/administraciones", method = RequestMethod.GET)
+	public ResponseEntity<?> getAdministraciones(@PathVariable UUID id){
+		try {			
+			return ResponseEntity.ok(ordenMedicaService.findAdministracionesByIdMedicamento(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

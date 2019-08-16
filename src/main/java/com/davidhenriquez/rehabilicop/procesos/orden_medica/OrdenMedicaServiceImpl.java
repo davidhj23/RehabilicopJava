@@ -50,6 +50,9 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	@Autowired	
 	private MedicamentosOrdenMedicaRepository medicamentosOrdenMedicaRepository;
 	
+	@Autowired
+	private AdministracionRepository administracionRepository;
+	
 	public List<OrdenMedica> findAll(){
 		return ordenMedicaRepository.findAll().stream()
 	        	.filter(x -> x.getHistoria().getAdmision().getEstado().equals("ACTIVA"))	
@@ -77,6 +80,11 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 		for (MedicamentosOrdenMedica m : ordenMedica.getMedicamentosOrdenMedica()) {
 			m.setOrdenMedica(ordenMedica);
 			medicamentosOrdenMedicaRepository.save(m);
+			
+			for(Administracion a : m.getAdministraciones()){
+				a.setMedicamentosOrdenMedica(m);
+				administracionRepository.save(a);	
+			}
 		}
 		
 		return ordenGuardada;		
@@ -93,9 +101,11 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	
 	@Override
 	public List<MedicamentosOrdenMedica> findMedicamentosByIdOrdenMedica(UUID id) {
-		return medicamentosOrdenMedicaRepository.findAll().stream()
+		List<MedicamentosOrdenMedica> medicamentos = medicamentosOrdenMedicaRepository.findAll().stream()
                 .filter(x -> x.getOrdenMedica().getIdOrdenMedica().equals(id))                
                 .collect(Collectors.toList());
+		
+		return medicamentos;
 	}
 	
 	public OrdenMedica update(OrdenMedica ordenMedica) throws ValidationException {		
@@ -106,5 +116,15 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 		
 		ordenMedica.setEstado("CERRADA");
 		return ordenMedicaRepository.save(ordenMedica);			
+	}
+
+	@Override
+	public List<Administracion> findAdministracionesByIdMedicamento(UUID id) {
+		return
+				administracionRepository.findAll().stream()
+					.filter(x -> x.getMedicamentosOrdenMedica()
+									.getIdMedicamentosOrdenMedica()
+									.equals(id))
+					.collect(Collectors.toList());
 	}
 }
