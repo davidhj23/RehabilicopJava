@@ -33,13 +33,15 @@ public class MedicamentosOrdenMedica {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID idMedicamentosOrdenMedica;	
-	
-	private Date fecha;	
+    private UUID idMedicamentosOrdenMedica;
 	
 	@ManyToOne	
 	@JoinColumn(name="idMedicamento", nullable=true)
 	private Medicamento medicamento;
+	
+	@ManyToOne	
+	@JoinColumn(name="idDosis", referencedColumnName = "idDosis", nullable=true)
+	private Dosis frecuencia;
 	
 	private Integer cantidadSolicitada;
 	private Integer cantidadEntregada;	

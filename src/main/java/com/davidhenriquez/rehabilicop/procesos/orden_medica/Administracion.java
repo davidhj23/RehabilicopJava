@@ -30,9 +30,7 @@ public class Administracion {
     @Column(columnDefinition = "BINARY(16)")
     private UUID idAdministracion;
 	
-	@ManyToOne	
-	@JoinColumn(name="idDosis", referencedColumnName = "idDosis", nullable=true)
-	private Dosis dosis;
+	private String fecha;	
 	private String hora;
 	private String ampm;
 	

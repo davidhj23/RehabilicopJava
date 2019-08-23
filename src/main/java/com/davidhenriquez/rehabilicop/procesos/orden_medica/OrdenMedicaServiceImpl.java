@@ -62,14 +62,6 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	
 	public OrdenMedica findById(UUID id){		
 		OrdenMedica ordenMedica = ordenMedicaRepository.findOne(id);
-		
-		/*List<MedicamentosOrdenMedica> medicamentos = medicamentosOrdenMedicaRepository
-			.findAll().stream()
-			.filter(x -> x.getOrdenMedica().getIdOrdenMedica().equals(ordenMedica.getIdOrdenMedica()))
-			.collect(Collectors.toList());		
-		
-		ordenMedica.setMedicamentosOrdenMedica(medicamentos);*/
-		
 		return ordenMedica;
 	}
 	
@@ -112,6 +104,15 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 						
 		for (MedicamentosOrdenMedica mom : ordenMedica.getMedicamentosOrdenMedica()){			
 			medicamentosOrdenMedicaRepository.save(mom);
+			
+			for(Administracion a : mom.getAdministraciones()){
+				a.setMedicamentosOrdenMedica(mom);
+				if(a.getAdministra().getIdUsuario() == null)
+				{
+					a.setAdministra(null);
+				}
+				administracionRepository.save(a);	
+			}
 		}
 		
 		ordenMedica.setEstado("CERRADA");
