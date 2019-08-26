@@ -29,10 +29,8 @@ JOIN    medicamento med on med.id_medicamento = mom.id_medicamento
 JOIN    dosis d on d.id_dosis = mom.id_dosis
 
 JOIN	historia h on h.id_historia = om.id_historia
-JOIN	admision a on a.id_admision = h.id_admision and a.estado = 'ACTIVA'
-JOIN	usuario pac on pac.id_usuario = a.id_usuario
 
-WHERE	pac.identificacion = $P{identificacion}]]>
+WHERE	h.id_admision = unhex($P{identificacion})]]>
 	</queryString>
 	<field name="HEX(om.id_orden_medica)" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="HEX(om.id_orden_medica)"/>

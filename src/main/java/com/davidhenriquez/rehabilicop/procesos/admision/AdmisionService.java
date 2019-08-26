@@ -18,4 +18,6 @@ public interface AdmisionService {
 	void delete(UUID idAdmision) throws ValidationException;
 	
 	Admision findAdmisionActivaByIdentificacionPaciente(String identificacion);
+	
+	List<Admision> findTodasAdmisionByIdentificacionPaciente(String identificacion);
 }

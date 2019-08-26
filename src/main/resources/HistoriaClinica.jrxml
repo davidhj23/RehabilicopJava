@@ -84,7 +84,10 @@ JOIN	escolaridad e on e.id_escolaridad = u.id_escolaridad
 JOIN	tipo_entidad te on te.id_tipo_entidad = u.id_tipo_entidad
 JOIN	aseguradora a on a.id_aseguradora = u.id_aseguradora
 JOIN	regimen r on r.id_regimen = u.id_regimen
-WHERE  u.identificacion = $P{identificacion}]]>
+
+JOIN    admision ad on ad.id_admision = UNHEX($P{identificacion})
+
+WHERE   u.id_usuario = ad.id_usuario]]>
 	</queryString>
 	<field name="tipo_identificacion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_identificacion"/>

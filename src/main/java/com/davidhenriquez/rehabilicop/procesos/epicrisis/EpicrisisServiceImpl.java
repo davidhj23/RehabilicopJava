@@ -100,12 +100,10 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 		}
 		
 		return epicrisisRepository.save(epicrisis);			
-	}
-	
-	
+	}	
 	
 	@Override
-	public byte[] generateReport(String identificacion) throws SQLException {
+	public byte[] generateReport(String idAdmision) throws SQLException {
 		
 		byte[] bytes = null;
 	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
@@ -114,7 +112,7 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 		    				resourceLoader.getResource("classpath:HistoriaClinica.jasper").getInputStream());
 		    
 		    Map<String, Object> params = new HashMap<>();
-		      params.put("identificacion", identificacion);
+		      params.put("identificacion", idAdmision.replace("-", ""));
 		    
 		    JasperPrint jasperPrint = 
 		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      

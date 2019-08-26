@@ -25,5 +25,5 @@ public interface EpicrisisService {
 	
 	Epicrisis update(Epicrisis epicrisis) throws ValidationException;
 	
-	byte[] generateReport(String identificacion) throws SQLException;
+	byte[] generateReport(String idAdmision) throws SQLException;
 }

@@ -21,10 +21,8 @@ JOIN	usuario_rol ur on ur.id_usuario = res.id_usuario
 JOIN	rol r on r.id_rol = ur.id_rol
 
 JOIN	historia h on h.id_historia = e.id_historia
-JOIN	admision a on a.id_admision = h.id_admision and a.estado = 'ACTIVA'
-JOIN	usuario pac on pac.id_usuario = a.id_usuario
 
-WHERE	pac.identificacion = $P{identificacion}]]>
+WHERE	h.id_admision = unhex($P{identificacion})]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>

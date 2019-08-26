@@ -126,4 +126,16 @@ public class AdmisionController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	@RequestMapping(value = "/paciente/all/{identificacion}", method = RequestMethod.GET)
+	public ResponseEntity<?> getTodasAdmisionByIdentificacionPaciente(@PathVariable String identificacion){
+		try {
+			List<Admision> admisiones = admisionService.findTodasAdmisionByIdentificacionPaciente(identificacion);
+			return ResponseEntity.ok(admisiones);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
 }

@@ -104,14 +104,14 @@ public class EpicrisisController {
 		}
 	}
     
-    @RequestMapping(value = "/reporte/{identificacion}", method = RequestMethod.GET)	
+    @RequestMapping(value = "/reporte/{idAdmision}", method = RequestMethod.GET)	
     @PreAuthorize("hasRole('crear epicrisis')")
-    public ResponseEntity<byte[]> report(@PathVariable String identificacion) throws SQLException {      
-      byte[] bytes = epicrisisService.generateReport(identificacion);
+    public ResponseEntity<byte[]> report(@PathVariable String idAdmision) throws SQLException {      
+      byte[] bytes = epicrisisService.generateReport(idAdmision);
       return ResponseEntity
         .ok()
         .header("Content-Type", "application/pdf; charset=UTF-8")
-        .header("Content-Disposition", "inline; filename=\"" + identificacion + ".pdf\"")
+        .header("Content-Disposition", "inline; filename=\"" + idAdmision + ".pdf\"")
         .body(bytes);      
     }
 }

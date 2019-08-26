@@ -18,6 +18,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.procesos.epicrisis.Epicrisis;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
@@ -123,5 +124,13 @@ public class AdmisionServiceImpl implements AdmisionService{
     	 }
 		 
 		 return null;
+	}
+	
+	@Override
+	public List<Admision> findTodasAdmisionByIdentificacionPaciente(String identificacion) {
+		 return admisionRepository.findAll().stream()
+				 .filter(a -> a.getPaciente().getIdentificacion().equals(identificacion))
+				 .sorted(Comparator.comparing(Admision::getFechaDeIngreso))	
+		         .collect(Collectors.toList());
 	}
 }

@@ -30,13 +30,11 @@ JOIN 	tratamiento_farmacologico tf on tf.id_epicrisis = e.id_epicrisis
 JOIN    medicamento med on med.id_medicamento = tf.id_medicamento
 JOIN    dosis d on d.id_dosis = tf.id_dosis
 
-JOIN	historia h on h.id_historia = e.id_historia
-JOIN	admision a on a.id_admision = h.id_admision and a.estado = 'ACTIVA'
-JOIN	usuario pac on pac.id_usuario = a.id_usuario
-
 JOIN	usuario medico on medico.id_usuario = e.id_usuario
 
-WHERE	pac.identificacion = $P{identificacion}]]>
+JOIN	historia h on h.id_historia = e.id_historia
+
+WHERE	h.id_admision = unhex($P{identificacion})]]>
 	</queryString>
 	<field name="HEX(e.id_epicrisis)" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="HEX(e.id_epicrisis)"/>
