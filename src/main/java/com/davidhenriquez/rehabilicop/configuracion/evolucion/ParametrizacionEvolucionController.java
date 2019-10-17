@@ -99,7 +99,7 @@ public class ParametrizacionEvolucionController {
 	}
     
     @RequestMapping(value = "/anio/{anio}/mes/{mes}", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('auditoria')")
+	@PreAuthorize("hasRole('auditar')")
 	public ResponseEntity<?> getAllEvoluciones(			
 			@PathVariable int anio,
 			@PathVariable int mes) throws Exception {
