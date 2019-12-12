@@ -27,19 +27,13 @@ public class Farmacologico {
     private UUID idFaramacologio;	
 	
 	private String medicamento;
-    private String dosis;       
+    private String dosis;
+    private String tiempoDeUso;
+    private String eventoAdverso;
     
     @ManyToOne	
 	@JoinColumn(name = "idEficacia", referencedColumnName = "idOpcion", nullable=false)
 	private Opcion eficacia;
-    
-    @ManyToOne	
-	@JoinColumn(name = "idAdverso", referencedColumnName = "idOpcion", nullable=false)
-	private Opcion esAdverso;
-    
-    @ManyToOne	
-	@JoinColumn(name="idTiempoDeUso", nullable=false)
-	private TiempoDeUso tiempoDeUso;
 	
 	@ManyToOne	
 	@JoinColumn(name="idHistoria", nullable=false)

@@ -119,6 +119,8 @@ public class Historia {
 	private Collection<ExamenFisico6> examenFisicos6;
 		
 	private UUID idImpresionDiagnostica;
+	private UUID idImpresionDiagnostica2;
+	private UUID idImpresionDiagnostica3;
 	
 	@ManyToOne	
 	@JoinColumn(name = "idMedico", referencedColumnName = "idUsuario", nullable=false)
