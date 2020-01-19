@@ -22,8 +22,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false    
     username: root
-    #password: HisCli.344@*
-    password: root
+    password: HisCli.344@*
+    #password: root
     driver-class-name: com.mysql.jdbc.Driver
 
 jwt:
