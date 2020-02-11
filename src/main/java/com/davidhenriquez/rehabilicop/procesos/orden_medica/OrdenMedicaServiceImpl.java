@@ -128,4 +128,9 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 									.equals(id))
 					.collect(Collectors.toList());
 	}
+	
+	@Transactional
+	public void delete(UUID idAdmision) throws ValidationException {
+		ordenMedicaRepository.delete(idAdmision);		
+	}
 }

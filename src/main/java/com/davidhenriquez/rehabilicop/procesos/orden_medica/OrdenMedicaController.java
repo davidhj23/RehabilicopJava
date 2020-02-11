@@ -21,6 +21,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.procesos.evolucion.Evolucion;
 import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
 import com.davidhenriquez.rehabilicop.procesos.historia.Patologico;
@@ -121,6 +122,20 @@ public class OrdenMedicaController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
     					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+	//@PreAuthorize("hasRole('eliminar admision')")
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
+		try {
+			ordenMedicaService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Admision());
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
 }
