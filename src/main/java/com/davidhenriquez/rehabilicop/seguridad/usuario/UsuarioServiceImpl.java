@@ -48,7 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		        .findAny();
     	
     	if(duplicateCedula.isPresent()){
-    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un Usuario con esta c�dula"));
+    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un Usuario con esta cédula"));
     	}
 		
     	Optional<Usuario> duplicate = usuarios.stream()
@@ -198,7 +198,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		        .findAny();
     	
     	if(duplicateCedula.isPresent()){
-    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cédula"));
+    		vaidationResults.add(new ValidationResult("cedula", "Ya existe un paciente con esta cÃ©dula"));
     	}
 		
     	Optional<Usuario> duplicate = usuarios.stream()

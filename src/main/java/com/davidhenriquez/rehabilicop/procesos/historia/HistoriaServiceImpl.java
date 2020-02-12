@@ -76,7 +76,7 @@ public class HistoriaServiceImpl implements HistoriaService{
 		
 		Usuario paciente = usuarioRepository.findOne(historia.getAdmision().getPaciente().getIdUsuario());		
 		if(paciente == null)
-			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));
+			validationResults.add(new ValidationResult("paciente", "No se encontrÃ³ un paciente con esa identificaciÃ³n"));
 			
         return validationResults;
     }

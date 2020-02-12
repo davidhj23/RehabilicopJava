@@ -107,7 +107,8 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 			
 			for(Administracion a : mom.getAdministraciones()){
 				a.setMedicamentosOrdenMedica(mom);
-				if(a.getAdministra().getIdUsuario() == null)
+				if(a.getAdministra() != null 
+						&& a.getAdministra().getIdUsuario() == null)
 				{
 					a.setAdministra(null);
 				}

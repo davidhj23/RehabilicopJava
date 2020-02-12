@@ -39,7 +39,7 @@ public class AdmisionServiceImpl implements AdmisionService{
 		
 		Usuario paciente = usuarioRepository.findOne(admision.getPaciente().getIdUsuario());		
 		if(paciente == null)
-			validationResults.add(new ValidationResult("paciente", "No se encontró un paciente con esa identificación"));
+			validationResults.add(new ValidationResult("paciente", "No se encontrÃ³ un paciente con esa identificaciÃ³n"));
 			
         return validationResults;
     }
@@ -54,7 +54,7 @@ public class AdmisionServiceImpl implements AdmisionService{
 		        .findAny();
     	
     	if(numeroRemisionDuplicado.isPresent()){
-    		validationResults.add(new ValidationResult("remision", "Ya existe una admisión con este número"));
+    		validationResults.add(new ValidationResult("remision", "Ya existe una admisiÃ³n con este nÃºmero"));
     	}
     	
     	Optional<Admision> pacienteDuplicado = admisionRepository.findAll().stream()
