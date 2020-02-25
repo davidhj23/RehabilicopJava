@@ -130,7 +130,21 @@ public class OrdenMedicaController {
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
 			ordenMedicaService.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body(new Admision());
+			return ResponseEntity.status(HttpStatus.OK).body(new OrdenMedica());
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value="/medicamentos/{id}", method= RequestMethod.DELETE)
+	//@PreAuthorize("hasRole('eliminar admision')")
+	public ResponseEntity<?> deleteMedicamentos(@PathVariable UUID id) {
+		try {
+			ordenMedicaService.deleteMedicamentos(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new MedicamentosOrdenMedica());
 		} catch (ValidationException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {

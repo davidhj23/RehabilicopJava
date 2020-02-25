@@ -29,4 +29,6 @@ public interface OrdenMedicaService {
 	OrdenMedica update(OrdenMedica ordenMedica) throws ValidationException;
 	
 	void delete(UUID id) throws ValidationException;
+	
+	void deleteMedicamentos(UUID id) throws ValidationException;
 }

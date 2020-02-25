@@ -131,7 +131,25 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	}
 	
 	@Transactional
-	public void delete(UUID idAdmision) throws ValidationException {
-		ordenMedicaRepository.delete(idAdmision);		
+	public void delete(UUID id) throws ValidationException {
+		
+		for (MedicamentosOrdenMedica m : findMedicamentosByIdOrdenMedica(id)) {	
+			for (Administracion a : findAdministracionesByIdMedicamento(m.getIdMedicamentosOrdenMedica())) {			
+				administracionRepository.delete(a.getIdAdministracion());
+			}
+			medicamentosOrdenMedicaRepository.delete(m.getIdMedicamentosOrdenMedica());
+		}
+		
+		ordenMedicaRepository.delete(id);		
+	}
+	
+	@Transactional
+	public void deleteMedicamentos(UUID id) throws ValidationException {
+					
+		for (Administracion a : findAdministracionesByIdMedicamento(id)) {			
+			administracionRepository.delete(a);
+		}
+		
+		medicamentosOrdenMedicaRepository.delete(id);
 	}
 }

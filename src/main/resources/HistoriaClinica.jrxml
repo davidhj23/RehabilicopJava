@@ -80,7 +80,8 @@
         CONCAT('(', c2.codigo, ') ', c2.nombre) as impresion_diagnostica_2,
         CONCAT('(', c3.codigo, ') ', c3.nombre) as impresion_diagnostica_3,
         h.motivo_consulta as motivo_consulta,
-        med.firma as firma
+        med.firma as firma,
+        CONCAT(med.nombres, ' ', med.apellidos) as nombre_medico
 FROM	usuario u	
 JOIN	tipo_documento td on td.id_tipo_documento = u.id_tipo_documento
 JOIN	sexo s on s.id_sexo = u.id_sexo    		
@@ -179,6 +180,9 @@ WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
 	<field name="firma" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.label" value="firma"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="nombre_medico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_medico"/>
 	</field>
 	<title>
 		<band height="293" splitType="Stretch">
@@ -640,9 +644,9 @@ WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="57">
+		<band height="61">
 			<textField>
-				<reportElement x="453" y="22" width="100" height="20" uuid="f7626edf-2b91-4990-9a82-f810658c7ec9"/>
+				<reportElement x="457" y="40" width="100" height="20" uuid="f7626edf-2b91-4990-9a82-f810658c7ec9"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -660,6 +664,21 @@ WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
 				<reportElement x="50" y="0" width="130" height="42" uuid="33b2dc75-a821-48ad-84e5-3c38c5bde534"/>
 				<imageExpression><![CDATA[$F{firma}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="-1" y="42" width="51" height="17" uuid="155924df-e967-42df-a049-d2dbd49dc4a5">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="42" width="230" height="17" uuid="379a7468-be16-4691-8ff8-64a45d13b4fc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre_medico}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
