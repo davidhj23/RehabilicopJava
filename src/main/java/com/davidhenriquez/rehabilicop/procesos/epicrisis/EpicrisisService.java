@@ -24,6 +24,4 @@ public interface EpicrisisService {
 	List<TratamientoFarmacologico> findMedicamentosByIdEpicrisis(UUID id);
 	
 	Epicrisis update(Epicrisis epicrisis) throws ValidationException;
-	
-	byte[] generateReport(String idAdmision) throws SQLException;
 }

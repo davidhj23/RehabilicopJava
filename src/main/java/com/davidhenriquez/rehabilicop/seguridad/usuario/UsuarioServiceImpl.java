@@ -1,14 +1,22 @@
 package com.davidhenriquez.rehabilicop.seguridad.usuario;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +30,13 @@ import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
@@ -30,6 +45,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired
 	private RolRepository rolRepository;
+	
+	@Autowired
+	private ResourceLoader resourceLoader;
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	private ArrayList<ValidationResult> Validar(Usuario usuario)
     {
@@ -302,4 +323,79 @@ public class UsuarioServiceImpl implements UsuarioService{
 				.sorted(Comparator.comparing(Usuario::getNombres))
 				.collect(Collectors.toList()); 
 	}
+	
+	@Override
+	public byte[] generateReporteEvoluciones(String idAdmision) throws SQLException {
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:EvolucionesMaster.jasper").getInputStream());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", idAdmision.replace("-", ""));
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+		// Cerrar historia
+	    
+	    return bytes;
+    }
+	
+	@Override
+	public byte[] generateReporteOrdenesMedicas(String idAdmision) throws SQLException {
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:OrdenesMedicasMaster.jasper").getInputStream());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", idAdmision.replace("-", ""));
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+		// Cerrar historia
+	    
+	    return bytes;
+    }
+	
+	@Override
+	public byte[] generateReportEpicrisis(String idAdmision) throws SQLException {
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:EpicrisisMaster.jasper").getInputStream());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", idAdmision.replace("-", ""));
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+		// Cerrar historia
+	    
+	    return bytes;
+    }
 }

@@ -1,5 +1,6 @@
 package com.davidhenriquez.rehabilicop.seguridad.usuario;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,5 +55,13 @@ public interface UsuarioService {
 	List<Usuario> findAllAuxiliaresFarmacia();
 
 	Usuario findUserByUsername(String username);
+	
+
+	
+	byte[] generateReporteEvoluciones(String idAdmision) throws SQLException;
+	
+	byte[] generateReporteOrdenesMedicas(String idAdmision) throws SQLException;
+	
+	byte[] generateReportEpicrisis(String idAdmision) throws SQLException;
 	
 }

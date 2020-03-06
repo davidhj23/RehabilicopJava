@@ -30,7 +30,9 @@ JOIN    dosis d on d.id_dosis = mom.id_dosis
 
 JOIN	historia h on h.id_historia = om.id_historia
 
-WHERE	h.id_admision = unhex($P{identificacion})]]>
+WHERE	h.id_admision = unhex($P{identificacion})
+
+ORDER BY fecha asc]]>
 	</queryString>
 	<field name="HEX(om.id_orden_medica)" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="HEX(om.id_orden_medica)"/>

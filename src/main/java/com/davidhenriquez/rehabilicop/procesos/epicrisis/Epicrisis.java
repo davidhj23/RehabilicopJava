@@ -34,8 +34,15 @@ public class Epicrisis {
     private UUID idEpicrisis;	
 	
 	private Date fechaDeIngreso;
+	private String horaIngreso;
+	private String ampmIngreso;
+	
 	private Date fechaDeContinuacion;
+	
 	private Date fechaDeEgreso;	
+	private String horaEgreso;
+	private String ampmEgreso;
+	
 	private String diasDeEstancia;
 	
 	private String justificacion;

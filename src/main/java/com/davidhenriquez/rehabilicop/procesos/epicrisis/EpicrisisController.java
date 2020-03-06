@@ -102,16 +102,5 @@ public class EpicrisisController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
-	}
-    
-    @RequestMapping(value = "/reporte/{idAdmision}", method = RequestMethod.GET)	
-    @PreAuthorize("hasRole('crear epicrisis')")
-    public ResponseEntity<byte[]> report(@PathVariable String idAdmision) throws SQLException {      
-      byte[] bytes = epicrisisService.generateReport(idAdmision);
-      return ResponseEntity
-        .ok()
-        .header("Content-Type", "application/pdf; charset=UTF-8")
-        .header("Content-Disposition", "inline; filename=\"" + idAdmision + ".pdf\"")
-        .body(bytes);      
-    }
+	} 
 }

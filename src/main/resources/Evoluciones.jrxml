@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
 	<parameter name="identificacion" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT 	e.fecha,
-		te.nombre as tipo,
-        e.descripcion,
-        CONCAT(res.nombres, ' ', res.apellidos) as responsable,
-        r.nombre as rol_responsable,
-        ifnull(res.registro_medico, res.identificacion) as registro_medico,
-        res.firma as firma
+		<![CDATA[SELECT *
+FROM (SELECT 	e.fecha,
+				te.nombre as tipo,
+		        e.descripcion,
+		        CONCAT(res.nombres, ' ', res.apellidos) as responsable,
+		        r.nombre as rol_responsable,
+		        ifnull(res.registro_medico, res.identificacion) as registro_medico,
+		        res.firma as firma
         
-FROM	evolucion e
+				FROM	evolucion e
+				
+				JOIN	tipo_evolucion te on te.id_tipo_evolucion = e.id_tipo_evolucion
+				JOIN	usuario res on res.id_usuario = e.id_usuario
+				JOIN	usuario_rol ur on ur.id_usuario = res.id_usuario
+				JOIN	rol r on r.id_rol = ur.id_rol
+				
+				JOIN	historia h on h.id_historia = e.id_historia
+				
+				WHERE	h.id_admision = unhex($P{identificacion})
+				
+				UNION
+				
+				SELECT 	he.fecha,
+						te.nombre as tipo,
+				        he.descripcion,
+				        CONCAT(res.nombres, ' ', res.apellidos) as responsable,
+				        r.nombre as rol_responsable,
+				        ifnull(res.registro_medico, res.identificacion) as registro_medico,
+				        res.firma as firma
+				        
+				FROM	hoja_eventual he
+				
+				JOIN	tipo_evolucion te on te.id_tipo_evolucion = he.id_tipo_evolucion
+				JOIN	usuario res on res.id_usuario = he.id_usuario
+				JOIN	usuario_rol ur on ur.id_usuario = res.id_usuario
+				JOIN	rol r on r.id_rol = ur.id_rol
+				
+				JOIN	historia h on h.id_historia = he.id_historia
+				
+				WHERE	h.id_admision = unhex($P{identificacion})) AS evo
 
-JOIN	tipo_evolucion te on te.id_tipo_evolucion = e.id_tipo_evolucion
-JOIN	usuario res on res.id_usuario = e.id_usuario
-JOIN	usuario_rol ur on ur.id_usuario = res.id_usuario
-JOIN	rol r on r.id_rol = ur.id_rol
-
-JOIN	historia h on h.id_historia = e.id_historia
-
-WHERE	h.id_admision = unhex($P{identificacion})]]>
+ORDER BY fecha asc]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
@@ -96,7 +120,7 @@ WHERE	h.id_admision = unhex($P{identificacion})]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="106" y="20" width="344" height="60" uuid="8056daf0-c72f-4d42-932b-91cfb4937b3e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="079b48f0-84f5-4ae3-8933-2488b0fac07b"/>
 				</reportElement>

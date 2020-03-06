@@ -22,6 +22,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -123,4 +124,34 @@ public class PacienteController {
     					"ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
+	
+	 @RequestMapping(value = "/reporte-evoluciones/{idAdmision}", method = RequestMethod.GET)	
+    public ResponseEntity<byte[]> reportEvoluciones(@PathVariable String idAdmision) throws SQLException {      
+      byte[] bytes = usuarioService.generateReporteEvoluciones(idAdmision);
+      return ResponseEntity
+        .ok()
+        .header("Content-Type", "application/pdf; charset=UTF-8")
+        .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-evoluciones" + ".pdf\"")
+        .body(bytes);      
+    }
+	    
+    @RequestMapping(value = "/reporte-ordenes-medicas/{idAdmision}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> reportOrdenesMedicas(@PathVariable String idAdmision) throws SQLException {      
+      byte[] bytes = usuarioService.generateReporteOrdenesMedicas(idAdmision);
+      return ResponseEntity
+        .ok()
+        .header("Content-Type", "application/pdf; charset=UTF-8")
+        .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-ordenes-medicas" + ".pdf\"")
+        .body(bytes);      
+    }
+    
+    @RequestMapping(value = "/reporte-epicrisis/{idAdmision}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> reportEpicrisis(@PathVariable String idAdmision) throws SQLException {      
+      byte[] bytes = usuarioService.generateReportEpicrisis(idAdmision);
+      return ResponseEntity
+        .ok()
+        .header("Content-Type", "application/pdf; charset=UTF-8")
+        .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-epicrisis" + ".pdf\"")
+        .body(bytes);      
+    }
 }
