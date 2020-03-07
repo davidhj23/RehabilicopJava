@@ -64,4 +64,6 @@ public interface UsuarioService {
 	
 	byte[] generateReportEpicrisis(String idAdmision) throws SQLException;
 	
+	byte[] generateReportNotas(String idAdmision) throws SQLException;
+	
 }

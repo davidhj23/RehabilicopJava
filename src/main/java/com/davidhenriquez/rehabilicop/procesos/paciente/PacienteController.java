@@ -154,4 +154,14 @@ public class PacienteController {
         .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-epicrisis" + ".pdf\"")
         .body(bytes);      
     }
+    
+    @RequestMapping(value = "/reporte-notas/{idAdmision}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> reportNotas(@PathVariable String idAdmision) throws SQLException {      
+      byte[] bytes = usuarioService.generateReportNotas(idAdmision);
+      return ResponseEntity
+        .ok()
+        .header("Content-Type", "application/pdf; charset=UTF-8")
+        .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-notas" + ".pdf\"")
+        .body(bytes);      
+    }
 }

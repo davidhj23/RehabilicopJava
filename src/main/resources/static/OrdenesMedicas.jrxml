@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenesMedicas" pageWidth="556" pageHeight="500" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<parameter name="identificacion" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 	HEX(om.id_orden_medica),
+		om.fecha_de_creacion as fecha,		        
+        
+        CONCAT(s.nombres, ' ', s.apellidos) as solicitante,
+        CONCAT(qe.nombres, ' ', qe.apellidos) as entrega,
+        CONCAT(qr.nombres, ' ', qr.apellidos) as recibe,
+        
+        med.nombre as medicamento,
+        d.nombre as dosis,
+        mom.cantidad_solicitada,
+        mom.cantidad_entregada
+        
+FROM	orden_medica om
+
+JOIN	usuario s on s.id_usuario = om.id_solicitante
+JOIN	usuario qe on qe.id_usuario = om.id_quien_entrega
+JOIN	usuario qr on qr.id_usuario = om.id_quien_recibe
+
+JOIN    medicamentos_orden_medica mom on mom.id_orden_medica = om.id_orden_medica
+JOIN    medicamento med on med.id_medicamento = mom.id_medicamento
+JOIN    dosis d on d.id_dosis = mom.id_dosis
+
+JOIN	historia h on h.id_historia = om.id_historia
+
+WHERE	h.id_admision = unhex($P{identificacion})
+
+ORDER BY fecha asc]]>
+	</queryString>
+	<field name="HEX(om.id_orden_medica)" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HEX(om.id_orden_medica)"/>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orden_medica"/>
+	</field>
+	<field name="solicitante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="solicitante"/>
+	</field>
+	<field name="entrega" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="entrega"/>
+	</field>
+	<field name="recibe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="recibe"/>
+	</field>
+	<field name="medicamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="medicamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
+	</field>
+	<field name="dosis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dosis"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="dosis"/>
+	</field>
+	<field name="cantidad_solicitada" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="cantidad_solicitada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamentos_orden_medica"/>
+	</field>
+	<field name="cantidad_entregada" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="cantidad_entregada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamentos_orden_medica"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
+	</group>
+	<group name="Orden">
+		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<textField>
+					<reportElement x="160" y="0" width="90" height="20" uuid="78a91a5c-3934-4593-8fff-4929cf2309e1"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="300" y="0" width="100" height="20" uuid="14f0188b-dd15-491a-84bc-3a3b506b10bb"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{entrega}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="0" width="106" height="20" uuid="e7596f03-f6ae-425f-9582-c0fa66863fec"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{recibe}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="400" y="0" width="50" height="20" uuid="61a5f044-7908-4711-9c00-a676e4b5d3fc"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recibe:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="0" width="50" height="20" uuid="b650fbef-4676-4c02-bc9d-d8342d9fc9da"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Solicita:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="50" height="20" uuid="d4349761-52da-4c2e-a43b-1b99568346c2"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="50" y="0" width="60" height="20" uuid="b7c6c716-7e1f-4ac1-b630-4d1e7006bfc5"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="250" y="0" width="50" height="20" uuid="0dd1b173-4cea-4c91-b155-754a1465e26f"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Entrega:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="349" height="20" uuid="9a1bb67f-0111-4f08-96b0-cec53f68c8d7"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Medicamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="349" y="20" width="69" height="20" uuid="b443a9a7-9f81-4e7d-b9a6-acb926f86d8b"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dosis]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="20" width="68" height="20" uuid="b03613ee-2b09-4e4e-b9ed-49a03c842905"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Solicitado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="486" y="20" width="70" height="20" uuid="7b7581c6-f647-466d-bea9-64a388804e26"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Entregado]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<rectangle>
+				<reportElement x="0" y="0" width="556" height="20" backcolor="#86B8D1" uuid="a63ece5b-ef64-4699-ad14-6266d0149705"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="556" height="20" uuid="777374c6-021e-44be-8e55-3c57e17bc223"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORDENES MEDICAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="-1" width="349" height="20" uuid="ea66831f-0bb3-4553-8197-6e40008727cc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{medicamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="-1" width="69" height="20" uuid="f7bed8af-b832-42b2-a1be-0da61c9f2e27"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dosis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="-1" width="68" height="20" uuid="9b9204a7-193c-4357-9e8d-949525fc1c3b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidad_solicitada}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="486" y="-1" width="70" height="20" uuid="d77bf537-6b1c-4424-bbc6-953fcd1724e6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidad_entregada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -398,4 +398,29 @@ public class UsuarioServiceImpl implements UsuarioService{
 	    
 	    return bytes;
     }
+	
+	@Override
+	public byte[] generateReportNotas(String idAdmision) throws SQLException {
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:NotasEnfermeriaMaster.jasper").getInputStream());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", idAdmision.replace("-", ""));
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+		// Cerrar historia
+	    
+	    return bytes;
+    }
 }
