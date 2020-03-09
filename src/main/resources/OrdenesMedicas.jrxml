@@ -72,42 +72,9 @@ ORDER BY fecha asc]]>
 	<group name="Orden">
 		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
 		<groupHeader>
-			<band height="41">
+			<band height="80">
 				<textField>
-					<reportElement x="160" y="0" width="90" height="20" uuid="78a91a5c-3934-4593-8fff-4929cf2309e1"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="300" y="0" width="100" height="20" uuid="14f0188b-dd15-491a-84bc-3a3b506b10bb"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{entrega}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="450" y="0" width="106" height="20" uuid="e7596f03-f6ae-425f-9582-c0fa66863fec"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{recibe}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="400" y="0" width="50" height="20" uuid="61a5f044-7908-4711-9c00-a676e4b5d3fc"/>
+					<reportElement x="330" y="19" width="226" height="20" uuid="78a91a5c-3934-4593-8fff-4929cf2309e1"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -115,12 +82,51 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="50" y="39" width="230" height="20" uuid="14f0188b-dd15-491a-84bc-3a3b506b10bb"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{entrega}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="330" y="39" width="226" height="20" uuid="e7596f03-f6ae-425f-9582-c0fa66863fec"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{recibe}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="280" y="39" width="50" height="20" uuid="61a5f044-7908-4711-9c00-a676e4b5d3fc"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Recibe:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="110" y="0" width="50" height="20" uuid="b650fbef-4676-4c02-bc9d-d8342d9fc9da"/>
+					<reportElement x="280" y="19" width="50" height="20" uuid="b650fbef-4676-4c02-bc9d-d8342d9fc9da"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -128,12 +134,12 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Solicita:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="0" width="50" height="20" uuid="d4349761-52da-4c2e-a43b-1b99568346c2"/>
+					<reportElement x="0" y="19" width="50" height="20" uuid="d4349761-52da-4c2e-a43b-1b99568346c2"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -141,23 +147,12 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Fecha:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="50" y="0" width="60" height="20" uuid="b7c6c716-7e1f-4ac1-b630-4d1e7006bfc5"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="250" y="0" width="50" height="20" uuid="0dd1b173-4cea-4c91-b155-754a1465e26f"/>
+					<reportElement x="50" y="19" width="230" height="20" uuid="b7c6c716-7e1f-4ac1-b630-4d1e7006bfc5"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -165,12 +160,25 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="39" width="50" height="20" uuid="0dd1b173-4cea-4c91-b155-754a1465e26f"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Entrega:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="20" width="349" height="20" uuid="9a1bb67f-0111-4f08-96b0-cec53f68c8d7"/>
+					<reportElement x="0" y="59" width="349" height="20" uuid="9a1bb67f-0111-4f08-96b0-cec53f68c8d7"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -178,12 +186,12 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Medicamento]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="349" y="20" width="69" height="20" uuid="b443a9a7-9f81-4e7d-b9a6-acb926f86d8b"/>
+					<reportElement x="349" y="59" width="69" height="20" uuid="b443a9a7-9f81-4e7d-b9a6-acb926f86d8b"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -191,12 +199,12 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Dosis]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="418" y="20" width="68" height="20" uuid="b03613ee-2b09-4e4e-b9ed-49a03c842905"/>
+					<reportElement x="418" y="59" width="68" height="20" uuid="b03613ee-2b09-4e4e-b9ed-49a03c842905"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -204,12 +212,12 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Solicitado]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="486" y="20" width="70" height="20" uuid="7b7581c6-f647-466d-bea9-64a388804e26"/>
+					<reportElement x="486" y="59" width="70" height="20" uuid="7b7581c6-f647-466d-bea9-64a388804e26"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -217,9 +225,20 @@ ORDER BY fecha asc]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Entregado]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="-1" width="556" height="20" backcolor="#86B8D1" uuid="a63ece5b-ef64-4699-ad14-6266d0149705"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="0" y="0" width="556" height="19" uuid="3569b42c-6190-4906-a375-7c03707f70bd"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ORDEN MÉDICA
+]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -227,20 +246,6 @@ ORDER BY fecha asc]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="20">
-			<rectangle>
-				<reportElement x="0" y="0" width="556" height="20" backcolor="#86B8D1" uuid="a63ece5b-ef64-4699-ad14-6266d0149705"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="0" y="0" width="556" height="20" uuid="777374c6-021e-44be-8e55-3c57e17bc223"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ORDENES MEDICAS]]></text>
-			</staticText>
-		</band>
-	</title>
 	<detail>
 		<band height="19" splitType="Stretch">
 			<textField>
@@ -251,7 +256,9 @@ ORDER BY fecha asc]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{medicamento}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -262,7 +269,9 @@ ORDER BY fecha asc]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{dosis}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -273,7 +282,9 @@ ORDER BY fecha asc]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad_solicitada}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -284,7 +295,9 @@ ORDER BY fecha asc]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad_entregada}]]></textFieldExpression>
 			</textField>
 		</band>
