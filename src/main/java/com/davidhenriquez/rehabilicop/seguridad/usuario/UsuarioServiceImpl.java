@@ -325,6 +325,31 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
+	public byte[] generateReporteHistoria(String idAdmision) throws SQLException {
+		
+		byte[] bytes = null;
+	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
+	    	JasperReport jasperReport = 
+		    		(JasperReport) JRLoader.loadObject(
+		    				resourceLoader.getResource("classpath:HistoriaMaster.jasper").getInputStream());
+		    
+		    Map<String, Object> params = new HashMap<>();
+		      params.put("identificacion", idAdmision.replace("-", ""));
+		    
+		    JasperPrint jasperPrint = 
+		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      
+	      	bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+	    }
+	    catch (JRException | IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+		// Cerrar historia
+	    
+	    return bytes;
+    }
+	
+	@Override
 	public byte[] generateReporteEvoluciones(String idAdmision) throws SQLException {
 		
 		byte[] bytes = null;

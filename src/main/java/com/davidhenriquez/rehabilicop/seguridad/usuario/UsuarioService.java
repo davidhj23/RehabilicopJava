@@ -57,6 +57,7 @@ public interface UsuarioService {
 	Usuario findUserByUsername(String username);
 	
 
+	byte[] generateReporteHistoria(String idAdmision) throws SQLException;
 	
 	byte[] generateReporteEvoluciones(String idAdmision) throws SQLException;
 	
