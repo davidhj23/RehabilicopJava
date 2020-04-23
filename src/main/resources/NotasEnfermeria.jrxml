@@ -201,7 +201,7 @@ ORDER BY fecha asc]]>
 				<textFieldExpression><![CDATA[$F{ampm}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="1" width="1" height="19" uuid="37363d4e-0283-46bd-9bfb-297cdf6705b2"/>
+				<reportElement x="0" y="-10" width="1" height="30" uuid="37363d4e-0283-46bd-9bfb-297cdf6705b2"/>
 			</line>
 		</band>
 	</detail>

@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<parameter name="identificacion" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  
+
+ef.descripcion,
+ef.fecha,
+
+o.nombre id_acustica,
+o2.nombre id_bridipsiquia,
+o3.nombre id_concreto,
+o4.nombre id_curso_normal,
+o5.nombre id_depresivo,
+o6.nombre id_espacio,
+o7.nombre id_estado_conciencia,
+o8.nombre id_euprosexico,
+o9.nombre id_eutimico,
+o10.nombre id_expensivo,
+o11.nombre id_fugas_de_idea,
+o12.nombre id_hiperprosexico,
+o13.nombre id_hipoprosexico,
+o14.nombre id_ideas_delirantes,
+o15.nombre id_ideas_obsesivas,
+o16.nombre id_ideas_refenciales,
+o17.nombre id_origen_normal,
+o18.nombre id_pensamiento_mago,
+o19.nombre id_persona,
+o20.nombre id_pobreza_ideativa,
+o21.nombre id_taquipsiquia,
+o22.nombre id_tiempo
+        
+FROM	usuario u	
+
+LEFT JOIN   admision ad on ad.id_usuario = u.id_usuario
+LEFT JOIN   historia h on h.id_admision = ad.id_admision
+LEFT JOIN   examen_fisico5 ef on ef.id_historia = h.id_historia
+
+LEFT JOIN   opcion o on o.id_opcion = ef.id_acustica
+LEFT JOIN   opcion o2 on o2.id_opcion = ef.id_bridipsiquia
+LEFT JOIN   opcion o3 on o3.id_opcion = ef.id_concreto
+LEFT JOIN   opcion o4 on o4.id_opcion = ef.id_curso_normal
+LEFT JOIN   opcion o5 on o5.id_opcion = ef.id_depresivo
+LEFT JOIN   opcion o6 on o6.id_opcion = ef.id_espacio
+LEFT JOIN   estado_conciencia o7 on o7.id_estado_conciencia = ef.id_estado_conciencia
+LEFT JOIN   opcion o8 on o8.id_opcion = ef.id_euprosexico
+LEFT JOIN   opcion o9 on o9.id_opcion = ef.id_eutimico
+LEFT JOIN   opcion o10 on o10.id_opcion = ef.id_expensivo
+LEFT JOIN   opcion o11 on o11.id_opcion = ef.id_fugas_de_idea
+LEFT JOIN   opcion o12 on o12.id_opcion = ef.id_hiperprosexico
+LEFT JOIN   opcion o13 on o13.id_opcion = ef.id_hipoprosexico
+LEFT JOIN   opcion o14 on o14.id_opcion = ef.id_ideas_delirantes
+LEFT JOIN   opcion o15 on o15.id_opcion = ef.id_ideas_obsesivas
+LEFT JOIN   opcion o16 on o16.id_opcion = ef.id_ideas_refenciales
+LEFT JOIN   opcion o17 on o17.id_opcion = ef.id_origen_normal
+LEFT JOIN   opcion o18 on o18.id_opcion = ef.id_pensamiento_mago
+LEFT JOIN   opcion o19 on o19.id_opcion = ef.id_persona
+LEFT JOIN   opcion o20 on o20.id_opcion = ef.id_pobreza_ideativa
+LEFT JOIN   opcion o21 on o21.id_opcion = ef.id_taquipsiquia
+LEFT JOIN   opcion o22 on o22.id_opcion = ef.id_tiempo
+
+WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
+	</queryString>
+	<field name="descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico5"/>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico5"/>
+	</field>
+	<field name="id_acustica" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_acustica"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_bridipsiquia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_bridipsiquia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_concreto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_concreto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_curso_normal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_curso_normal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_depresivo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_depresivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_espacio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_espacio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_estado_conciencia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_estado_conciencia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estado_conciencia"/>
+	</field>
+	<field name="id_euprosexico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_euprosexico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_eutimico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_eutimico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_expensivo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_expensivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_fugas_de_idea" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_fugas_de_idea"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_hiperprosexico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_hiperprosexico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_hipoprosexico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_hipoprosexico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_ideas_delirantes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_ideas_delirantes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_ideas_obsesivas" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_ideas_obsesivas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_ideas_refenciales" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_ideas_refenciales"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_origen_normal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_origen_normal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_pensamiento_mago" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_pensamiento_mago"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_persona" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_persona"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_pobreza_ideativa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_pobreza_ideativa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_taquipsiquia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_taquipsiquia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="id_tiempo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_tiempo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<detail>
+		<band height="300" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="556" height="20" backcolor="#AFBABA" uuid="04de824a-8ab9-4bc2-86b3-4021fb7102fc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="40" width="556" height="20" uuid="c0e44ef9-6322-4b36-89bc-d3cfe6d5811c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orientación:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="60" width="44" height="20" uuid="d35ead22-61fd-4f78-9776-e478717bcc59"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_persona}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="60" width="48" height="20" uuid="32ad721f-29c5-4d92-89b2-67ad26d1f1e4"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_espacio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="60" width="136" height="20" uuid="60d7a8ed-f2b8-43c5-a835-d925e79d420d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Espacio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="140" height="20" uuid="a4aea6ea-9242-4067-80e9-5517f5dc9757"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Persona:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="140" width="44" height="20" uuid="62c8e63a-9ba4-46e4-9dee-7ed74f427f41"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_eutimico}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="140" width="48" height="20" uuid="103d6865-5015-40ab-9180-dca4063d2f43"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_depresivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="140" width="136" height="20" uuid="8c384ba6-edcf-4193-af53-dbe1a6c473c6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Depresivo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="140" height="20" uuid="c1c885e1-3c71-4946-b87c-8ba62aa773ec"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eutimico:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="220" width="44" height="20" uuid="114bc4d4-d505-4ef0-abaa-45785adb1918"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_origen_normal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="220" width="48" height="20" uuid="8b71cc88-44e9-4ab9-8b46-d66d73d0f535"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_curso_normal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="220" width="136" height="20" uuid="d1357bda-0a97-4656-bbad-7a2c4d7c87cb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Normal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="140" height="20" uuid="7bc47d67-42ae-4aeb-8ce4-06263ac29872"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Normal:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="240" width="44" height="20" uuid="d532a011-c0d8-417f-a291-18c5febb1b82"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_acustica}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="240" width="48" height="20" uuid="078223d3-2dc5-422c-bb74-5480b3bd41d0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_bridipsiquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="240" width="136" height="20" uuid="d7d1a39a-55c6-4d9b-acb8-06c3b8531197"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bridipsiquia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="240" width="140" height="20" uuid="68aad11f-dfff-48ef-b904-a79d09d88cdf"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acustica:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="260" width="44" height="20" uuid="2f926c8b-8f41-491a-ab33-554cbe887b5f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_concreto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="260" width="140" height="20" uuid="c5517333-e0e7-4d5d-a464-9791b2136525"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concreto:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="260" width="48" height="20" uuid="d5c4ca5c-1819-4954-8e74-56c87fc3b998"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_taquipsiquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="260" width="136" height="20" uuid="c76b0bef-08b0-416c-93d1-10d40504ddec"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taquipsiquia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="280" width="136" height="20" uuid="cd6a8565-86e3-450c-b286-606b3e4567ba"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fugas de idea:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="280" width="48" height="20" uuid="9cd50017-ed37-41bf-b2d5-3458d4fd9033"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_fugas_de_idea}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="0" width="525" height="20" uuid="01a80907-7ed7-49a2-bb77-8cc05ac62154"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXAMEN FÍSICO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="240" width="52" height="20" uuid="c5d2c3d2-c17f-472f-be87-2738cacb1e30"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_ideas_refenciales}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="240" width="136" height="20" uuid="c556a8f1-ea6c-4d39-b06b-642d90be4d97"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ideas Refenciales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="260" width="136" height="20" uuid="8cb3a022-43b6-4ee9-a066-85698db62975"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ideas Obsesivas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="140" width="136" height="20" uuid="d671def6-69e7-4653-8454-0aa04c544725"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expensivo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="220" width="52" height="20" uuid="41dfea29-02d3-4290-84c7-7f4555cc79dc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_ideas_delirantes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="140" width="52" height="20" uuid="567370cd-c17a-4ae6-a189-76a331c160d2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_expensivo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="260" width="52" height="20" uuid="43214eaf-382d-4371-8c08-7b0b47467a5b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_ideas_obsesivas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="280" width="52" height="20" uuid="e90f38bb-a537-4455-b46b-27c47d88afb1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_pensamiento_mago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="220" width="136" height="20" uuid="5f3724fc-7eeb-4671-86a1-8f7b68742b6a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ideas Delirantes:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="60" width="52" height="20" uuid="8f23bd16-3921-48f3-b691-b2a34385d345"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_tiempo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="60" width="136" height="20" uuid="d5f70630-7c31-4547-bae1-dbfbe3708797"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="280" width="136" height="20" uuid="6ea3fc4f-67aa-4e95-b3e3-f526e824961f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pensamiento Mago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="20" width="92" height="20" uuid="dae6c8aa-4e6d-4191-934d-f64af2779125"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="276" y="20" width="280" height="20" uuid="7fd34928-0152-4472-9aed-b4642211a425"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="20" width="92" height="20" uuid="1af66fa2-2e1c-43b8-a115-f970c9c2d310"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_estado_conciencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="92" height="20" uuid="3892d8e1-f61c-465b-b193-2c2e0b2b7728"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de conciencia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="280" width="44" height="20" uuid="ede6421e-01ea-44d2-825f-ba8e7f3327d6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_pobreza_ideativa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="280" width="140" height="20" uuid="27c9a8b7-f824-433c-a987-a2e7692c8a6a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pobreza Ideativa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="556" height="20" uuid="263c4792-7d72-4ad9-9dac-1bc22d1fa6ec"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atención:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="556" height="20" uuid="815f1044-85d1-49ac-b754-0b43f7df176b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Afecto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="556" height="20" uuid="d192faa1-02b0-4acc-83d5-1d2b8a3d8bcd"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pensamiento:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="100" width="48" height="20" uuid="31d35f11-9e54-46f4-aba1-1a2afead2629"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_hipoprosexico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="100" width="136" height="20" uuid="5a8e051c-0708-467b-9d0e-35d109f4e66c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hiperprosexico:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="100" width="44" height="20" uuid="71d384bb-105c-40c2-9235-ad0649f443aa"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_euprosexico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="140" height="20" uuid="96ba02a6-72cd-4414-80be-88b130c0ae21"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Euprosexico:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="100" width="52" height="20" uuid="f77564ca-9100-445e-a565-543353b90224"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_hiperprosexico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="100" width="136" height="20" uuid="8b005793-de1d-4010-8d7e-e3bca2a0c7aa"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hipoprosexico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="184" height="20" uuid="fbcc3f78-ef04-430e-8ae7-6081dd33026b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origen:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="200" width="188" height="20" uuid="083778ed-e583-4d21-82e6-eff8423362a5"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contenido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="200" width="184" height="20" uuid="5f134ec3-ee1f-44f6-85ab-38ba60aabebf"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Curso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="140" height="20" uuid="aded72df-464d-4cd2-a3b5-eadfa0cc08b9"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripciòn:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="160" width="416" height="20" uuid="5f1f572d-7e0c-473d-be63-90e9985cb202"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

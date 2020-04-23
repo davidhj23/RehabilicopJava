@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<parameter name="identificacion" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  
+
+h.analisis_manejo
+        
+FROM	usuario u	
+
+LEFT JOIN   admision ad on ad.id_usuario = u.id_usuario
+LEFT JOIN   historia h on h.id_admision = ad.id_admision
+
+WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
+	</queryString>
+	<field name="analisis_manejo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="analisis_manejo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="historia"/>
+	</field>
+	<title>
+		<band height="21">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="556" height="20" backcolor="#AFBABA" uuid="0193bbbc-cc74-48ec-91f8-25e68442dbf6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="21" y="0" width="525" height="20" uuid="90c9b70e-2f86-497b-beb0-af3ff636246f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANALISIS Y MANEJO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="-1" width="556" height="20" uuid="5f1f572d-7e0c-473d-be63-90e9985cb202"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{analisis_manejo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

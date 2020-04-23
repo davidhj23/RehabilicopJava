@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<parameter name="identificacion" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  
+a.nombre apariencia_general,
+ef.descripcion_apariencia,
+
+ef.signo_vital_ta,
+ef.signo_vital_fc,
+ef.signo_vital_fr,
+ef.signo_vitalt,
+
+o.nombre anisocordia,
+o2.nombre epixtasis,
+o3.nombre crepitantes,
+o4.nombre midriasis,
+o5.nombre miosis,
+o6.nombre vesicular,
+o7.nombre murmullo_vesicular_pulmones,
+o8.nombre otoliquia,
+o9.nombre otorragia,
+o10.nombre pinral,
+o11.nombre rinoloquia,
+o12.nombre roncus,
+o13.nombre sibilancias,
+o14.nombre silencio_auscultorio
+        
+FROM	usuario u	
+
+LEFT JOIN   admision ad on ad.id_usuario = u.id_usuario
+LEFT JOIN   historia h on h.id_admision = ad.id_admision
+LEFT JOIN   examen_fisico ef on ef.id_historia = h.id_historia
+LEFT JOIN   apariencia a on a.id_apariencia = ef.id_apariencia
+
+LEFT JOIN   opcion o on o.id_opcion = ef.id_anisocordia
+LEFT JOIN   opcion o2 on o2.id_opcion = ef.id_epixtasis
+LEFT JOIN   opcion o3 on o3.id_opcion = ef.id_estertores_crepitantes
+LEFT JOIN   opcion o4 on o4.id_opcion = ef.id_midriasis
+LEFT JOIN   opcion o5 on o5.id_opcion = ef.id_miosis
+LEFT JOIN   opcion o6 on o6.id_opcion = ef.id_murmullo_vesicular
+LEFT JOIN   opcion o7 on o7.id_opcion = ef.id_murmullo_vesicular_pulmones
+LEFT JOIN   opcion o8 on o8.id_opcion = ef.id_otoliquia
+LEFT JOIN   opcion o9 on o9.id_opcion = ef.id_otorragia
+LEFT JOIN   opcion o10 on o10.id_opcion = ef.idpinral
+LEFT JOIN   opcion o11 on o11.id_opcion = ef.id_rinoloquia
+LEFT JOIN   opcion o12 on o12.id_opcion = ef.id_roncus
+LEFT JOIN   opcion o13 on o13.id_opcion = ef.id_sibilancias
+LEFT JOIN   opcion o14 on o14.id_opcion = ef.id_silencio_auscultorio
+
+WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
+	</queryString>
+	<field name="apariencia_general" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apariencia_general"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="apariencia"/>
+	</field>
+	<field name="descripcion_apariencia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion_apariencia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico"/>
+	</field>
+	<field name="signo_vital_ta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="signo_vital_ta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico"/>
+	</field>
+	<field name="signo_vital_fc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="signo_vital_fc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico"/>
+	</field>
+	<field name="signo_vital_fr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="signo_vital_fr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico"/>
+	</field>
+	<field name="signo_vitalt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="signo_vitalt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="examen_fisico"/>
+	</field>
+	<field name="anisocordia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anisocordia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="epixtasis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="epixtasis"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="crepitantes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="crepitantes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="midriasis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="midriasis"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="miosis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="miosis"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="vesicular" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vesicular"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="murmullo_vesicular_pulmones" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="murmullo_vesicular_pulmones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="otoliquia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="otoliquia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="otorragia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="otorragia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="pinral" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pinral"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="rinoloquia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="rinoloquia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="roncus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="roncus"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="sibilancias" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sibilancias"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<field name="silencio_auscultorio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="silencio_auscultorio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="opcion"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="556" height="20" backcolor="#AFBABA" uuid="d3ad6193-ad9e-46d4-b189-e469559ff271"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="0" width="525" height="20" uuid="554002ca-1990-4577-9dd7-ed6a1faa541d"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXAMEN FÍSICO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="92" height="20" uuid="ce3fe28a-ebfd-4e54-b896-89f430d118a1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apariencia general
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="276" y="0" width="280" height="20" uuid="7c52c0c2-e753-450b-a36a-d3e37e20c5e8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion_apariencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="0" width="92" height="20" uuid="ff6059b0-8c23-45b7-be08-4042bf464bd0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="0" width="92" height="20" uuid="d87b19e7-5753-4c68-9391-e088b0610e3e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apariencia_general}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="92" height="20" uuid="0069f6a7-9293-453d-a76e-1be5c9232206"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signos Vitales]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="20" width="92" height="20" uuid="4544cb4b-b23a-461b-8c93-6fcbe358d3eb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TA: " + $F{signo_vital_ta}.toString() + " MMHG"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="184" height="20" uuid="c0e44ef9-6322-4b36-89bc-d3cfe6d5811c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ojos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="40" width="188" height="20" uuid="4e1ce076-5446-4da3-9b77-ff2f916b62bd"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pulmones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="40" width="184" height="20" uuid="b27e56b2-3a55-4e52-a4e4-043935a724cf"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cara]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="60" width="44" height="20" uuid="d35ead22-61fd-4f78-9776-e478717bcc59"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{midriasis}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="60" width="48" height="20" uuid="32ad721f-29c5-4d92-89b2-67ad26d1f1e4"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otorragia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="60" width="136" height="20" uuid="60d7a8ed-f2b8-43c5-a835-d925e79d420d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otorragia:	
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="60" width="46" height="20" uuid="c2bd39d2-b7da-4b52-ad7d-5e8b59725a6f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{crepitantes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="60" width="142" height="20" uuid="7def5077-b875-4cd8-be6c-86b095f12b60"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estertores Crepitantes:			
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="140" height="20" uuid="a4aea6ea-9242-4067-80e9-5517f5dc9757"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Midriasis:
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="80" width="44" height="20" uuid="62c8e63a-9ba4-46e4-9dee-7ed74f427f41"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{miosis}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="80" width="48" height="20" uuid="103d6865-5015-40ab-9180-dca4063d2f43"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otoliquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="80" width="136" height="20" uuid="8c384ba6-edcf-4193-af53-dbe1a6c473c6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otoliquia:
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="80" width="46" height="20" uuid="7d474c3d-8487-4c83-8b74-7bf4207dcf92"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{roncus}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="80" width="142" height="20" uuid="a03b6707-bad2-41d6-8354-9fa39d5378e3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Roncus:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="140" height="20" uuid="c1c885e1-3c71-4946-b87c-8ba62aa773ec"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Miosis:
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="100" width="44" height="20" uuid="114bc4d4-d505-4ef0-abaa-45785adb1918"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anisocordia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="100" width="48" height="20" uuid="8b71cc88-44e9-4ab9-8b46-d66d73d0f535"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rinoloquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="100" width="136" height="20" uuid="d1357bda-0a97-4656-bbad-7a2c4d7c87cb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rinoloquia:
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="100" width="46" height="20" uuid="5f3e9a29-0d53-4e27-a67e-5a74985da51b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sibilancias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="100" width="142" height="20" uuid="667c0c8d-1940-4c16-b9d6-f5f44548bc79"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sibilancias:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="140" height="20" uuid="7bc47d67-42ae-4aeb-8ce4-06263ac29872"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anisocoria:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="120" width="44" height="20" uuid="d532a011-c0d8-417f-a291-18c5febb1b82"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pinral}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="120" width="48" height="20" uuid="078223d3-2dc5-422c-bb74-5480b3bd41d0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{epixtasis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="120" width="136" height="20" uuid="d7d1a39a-55c6-4d9b-acb8-06c3b8531197"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Epixtasis:	
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="120" width="46" height="20" uuid="b082c236-69ad-4ffd-9d51-4e5611b001ab"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{silencio_auscultorio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="120" width="142" height="20" uuid="8b6802e8-14c7-4e4e-a863-105292639c79"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Silencio Auscultorio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="140" height="20" uuid="68aad11f-dfff-48ef-b904-a79d09d88cdf"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pinral:
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="140" width="48" height="20" uuid="2f926c8b-8f41-491a-ab33-554cbe887b5f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vesicular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="140" width="136" height="20" uuid="c5517333-e0e7-4d5d-a464-9791b2136525"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Murmullo Vesicular:			
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="140" width="46" height="20" uuid="d5c4ca5c-1819-4954-8e74-56c87fc3b998"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{murmullo_vesicular_pulmones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="140" width="142" height="20" uuid="c76b0bef-08b0-416c-93d1-10d40504ddec"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Murmullo Vesicular:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="184" height="20" uuid="5e6710a0-e88e-47d9-98be-fa72eb1ff318"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="184" y="20" width="92" height="20" uuid="72546338-0636-44bd-84fe-5e2a9cd5336f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FC: " + $F{signo_vital_fc}.toString() + " LAT/MIN"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="276" y="20" width="92" height="20" uuid="ef6be668-adfc-428f-aa3e-f84106cc57f4"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FR: " + $F{signo_vital_fc}.toString() + " RES/MIN"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="368" y="20" width="92" height="20" uuid="1fe077ce-69df-4f51-9a43-5a58958783cb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["T°: " + $F{signo_vital_fc}.toString() + "°"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="20" width="96" height="20" uuid="3035530e-db74-4463-b1fa-bcfc62d73c9f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
