@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop.core.config;
+package com.davidhenriquez.rehabilicop_test.core.config;
 
 import org.assertj.core.util.DateUtil;
 import org.junit.Before;

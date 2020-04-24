@@ -1,4 +1,4 @@
-package com.davidhenriquez.rehabilicop;
+package com.davidhenriquez.rehabilicop_test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
