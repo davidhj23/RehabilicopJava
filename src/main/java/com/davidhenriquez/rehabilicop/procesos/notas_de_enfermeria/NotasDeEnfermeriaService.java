@@ -15,4 +15,6 @@ public interface NotasDeEnfermeriaService {
 	NotasDeEnfermeria create(NotasDeEnfermeria notasDeEnfermeria) throws ValidationException;
 	
 	List<NotasDeEnfermeria> getNotasDeEnfermeriaByPaciente(String identificacion);
+	
+	void delete(UUID id) throws ValidationException;
 }

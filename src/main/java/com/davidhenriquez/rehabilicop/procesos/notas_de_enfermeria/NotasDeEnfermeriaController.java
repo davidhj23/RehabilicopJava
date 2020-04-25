@@ -19,6 +19,7 @@ import com.davidhenriquez.rehabilicop.core.config.JwtTokenUtil;
 import com.davidhenriquez.rehabilicop.core.model.JwtUser;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
+import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
@@ -74,6 +75,19 @@ public class NotasDeEnfermeriaController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
     				.body(new ValidationResult("error", 
     					"ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
+	@RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
+		try {
+			notasDeEnfermeriaService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new NotasDeEnfermeria());
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
 		}
 	}
 }

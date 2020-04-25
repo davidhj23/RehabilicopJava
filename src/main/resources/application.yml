@@ -1,37 +1,3 @@
-server:
-  contextPath: 
-  port: 4000
-
 spring:
-  jackson:
-    serialization:
-      INDENT_OUTPUT: true 
-  
-  jpa:
-    database: MYSQL
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:
-      hibernate:   
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        hbm2ddl:
-          auto: none
-          
-  datasource:
-    url: jdbc:mysql://localhost:3306/rehabilicop?autoReconnect=true&useSSL=false    
-    username: root
-    #password: HisCli.344@*
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-
-jwt:
-  header: Authorization
-  secret: mySecret
-  expiration: 3600
-  route:
-    authentication:
-      path: /api/auth
-      refresh: /api/refresh
-      isTokenValid: /api/token/  
+  profiles:
+    active: prod

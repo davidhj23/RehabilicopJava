@@ -49,4 +49,9 @@ public class NotasDeEnfermeriaServiceImpl implements NotasDeEnfermeriaService{
 		 	.sorted(Comparator.comparing(NotasDeEnfermeria::getFecha))
 	        .collect(Collectors.toList());
 	}
+	
+	@Transactional
+	public void delete(UUID id) throws ValidationException {
+		notasDeEnfermeriaRepository.delete(id);		
+	}  
 }
