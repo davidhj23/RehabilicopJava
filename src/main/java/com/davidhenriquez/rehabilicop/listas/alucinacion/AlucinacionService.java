@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
-import com.davidhenriquez.rehabilicop.listas.opcion.Opcion;
-import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 
 public interface AlucinacionService {
 	

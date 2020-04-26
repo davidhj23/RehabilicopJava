@@ -1,18 +1,15 @@
 package com.davidhenriquez.rehabilicop.listas.alimentacion;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
-import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
-import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 
 @Service
 public class AlimentacionServiceImpl implements AlimentacionService {

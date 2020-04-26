@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
-import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
-import com.davidhenriquez.rehabilicop.procesos.evolucion.Evoluciones;
 
 public interface ParametrizacionEvolucionService {
 	
