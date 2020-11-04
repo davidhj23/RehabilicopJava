@@ -33,6 +33,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.procesos.admision.AdmisionRepository;
 import com.davidhenriquez.rehabilicop.procesos.orden_medica.MedicamentosOrdenMedica;
 import com.davidhenriquez.rehabilicop.procesos.orden_medica.OrdenMedica;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
@@ -58,6 +59,9 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 	@Autowired	
 	private TratamientoFarmacologicoRepository tratamientoFarmacologicoRepository;
 	
+	@Autowired	
+	private AdmisionRepository admisionRepository;
+	
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
@@ -72,6 +76,9 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 			t.setEpicrisis(e);
 			tratamientoFarmacologicoRepository.save(t);
 		}
+		
+		// Cerrar historia
+		cerrarHistoriaClinica(e);
 		
 		return e;		
 	}
@@ -99,6 +106,19 @@ public class EpicrisisServiceImpl implements EpicrisisService{
 			tratamientoFarmacologicoRepository.save(t);
 		}
 		
+		// Cerrar historia
+		cerrarHistoriaClinica(epicrisis);
+		
 		return epicrisisRepository.save(epicrisis);			
 	}	
+	
+	private void cerrarHistoriaClinica(Epicrisis e)
+	{
+		if(e.getFechaDeEgreso() != null && 
+				!e.getHistoria().getAdmision().getEstado().equals("CERRADA"))
+		{
+			e.getHistoria().getAdmision().setEstado("CERRADA");
+			admisionRepository.save(e.getHistoria().getAdmision());
+		}
+	}
 }

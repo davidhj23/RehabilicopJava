@@ -55,7 +55,8 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	
 	public List<OrdenMedica> findAll(){
 		return ordenMedicaRepository.findAll().stream()
-	        	.filter(x -> x.getHistoria().getAdmision().getEstado().equals("ACTIVA"))	
+	        	.filter(x -> x.getHistoria().getAdmision().getEstado().equals("ACTIVA") &&
+	        			     !x.getEstado().equals("CERRADA"))	
 	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
 	        	.collect(Collectors.toList());
 	}

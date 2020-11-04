@@ -2,10 +2,11 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="identificacion" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT 	ne.fecha,
+		<![CDATA[SELECT  STR_TO_DATE(CONCAT(date(ne.fecha), ' ', ne.hora, ' ', ne.ampm), '%Y-%c-%e %h:%i %p') as completeDate, 
+     	ne.fecha,
 		ne.hora,
 		ne.ampm,
 		ne.descripcion,
@@ -24,7 +25,7 @@ JOIN	historia h on h.id_historia = ne.id_historia
 
 WHERE	h.id_admision = unhex($P{identificacion})
 
-ORDER BY fecha asc]]>
+ORDER BY completeDate asc]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
@@ -77,14 +78,14 @@ ORDER BY fecha asc]]>
 	<detail>
 		<band height="80" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="0" width="40" height="20" uuid="e521752c-404e-430d-8b1d-bb830074e284">
+				<reportElement x="0" y="0" width="50" height="20" uuid="e521752c-404e-430d-8b1d-bb830074e284">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42021413-1cdc-46cd-a556-fee043d31de9"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
@@ -175,7 +176,7 @@ ORDER BY fecha asc]]>
 				<imageExpression><![CDATA[$F{firma}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="40" y="0" width="40" height="20" uuid="159bfe38-1c05-4ccd-bd5f-e22c2f67149d"/>
+				<reportElement x="50" y="0" width="30" height="20" uuid="159bfe38-1c05-4ccd-bd5f-e22c2f67149d"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -200,9 +201,6 @@ ORDER BY fecha asc]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ampm}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="-10" width="1" height="30" uuid="37363d4e-0283-46bd-9bfb-297cdf6705b2"/>
-			</line>
 		</band>
 	</detail>
 </jasperReport>

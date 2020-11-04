@@ -53,7 +53,9 @@ public class EvolucionServiceImpl implements EvolucionService{
 		        .findAny();
     	
     	if(adminGlobal.isPresent()){
-    		return tipoEvolucionRepository.findAll();
+    		return tipoEvolucionRepository.findAll().stream()
+    				.sorted(Comparator.comparing(TipoEvolucion::getNombre))	
+                    .collect(Collectors.toList());
     	}else{
     		List<RolTipoEvolucion> rolTipoEvolucionList = rolTipoEvolucionRepository.findAll().stream()
 	        	.filter(a -> roles.stream().anyMatch(x -> x.getIdRol().equals(a.getRol().getIdRol())))	        	
@@ -65,7 +67,9 @@ public class EvolucionServiceImpl implements EvolucionService{
     			tipoEvolucionList.add(rte.getTipoEolucion());
     		}
     		
-    		return tipoEvolucionList;
+    		return tipoEvolucionList.stream()
+    				.sorted(Comparator.comparing(TipoEvolucion::getNombre))	
+                    .collect(Collectors.toList());
     	}
 	}
 
