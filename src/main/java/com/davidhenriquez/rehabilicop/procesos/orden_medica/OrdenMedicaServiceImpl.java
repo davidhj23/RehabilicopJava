@@ -61,6 +61,22 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	        	.collect(Collectors.toList());
 	}
 	
+	public List<OrdenMedica> getPendientes(){
+		return ordenMedicaRepository.findAll().stream()
+	        	.filter(x -> x.getHistoria().getAdmision().getEstado().equals("ACTIVA") &&
+	        			     x.getEstado().equals("PENDIENTE"))	
+	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
+	        	.collect(Collectors.toList());
+	}
+	
+	public List<OrdenMedica> getEnProceso(){
+		return ordenMedicaRepository.findAll().stream()
+	        	.filter(x -> x.getHistoria().getAdmision().getEstado().equals("ACTIVA") &&
+	        			     x.getEstado().equals("EN PROCESO"))	
+	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
+	        	.collect(Collectors.toList());
+	}
+	
 	public OrdenMedica findById(UUID id){		
 		OrdenMedica ordenMedica = ordenMedicaRepository.findOne(id);
 		return ordenMedica;
@@ -117,7 +133,7 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 			}
 		}
 		
-		ordenMedica.setEstado("CERRADA");
+		ordenMedica.setEstado("EN PROCESO");
 		return ordenMedicaRepository.save(ordenMedica);			
 	}
 

@@ -16,6 +16,10 @@ public interface OrdenMedicaService {
 	
 	List<OrdenMedica> findAll();
 	
+	List<OrdenMedica> getPendientes();
+	
+	List<OrdenMedica> getEnProceso();
+	
 	OrdenMedica findById(UUID id);
 	
 	OrdenMedica create(OrdenMedica ordenMedica) throws ValidationException;

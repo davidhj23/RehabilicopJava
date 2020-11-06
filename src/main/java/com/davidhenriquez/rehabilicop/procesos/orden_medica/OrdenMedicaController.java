@@ -63,6 +63,30 @@ public class OrdenMedicaController {
     	}
     }
     
+    @RequestMapping(value = "/pendientes", method = RequestMethod.GET)
+    public ResponseEntity<?> getPendientes() {
+    	try{
+    		List<OrdenMedica> ordenesMedicas = ordenMedicaService.getPendientes();
+    		return ResponseEntity.ok(ordenesMedicas);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
+    @RequestMapping(value = "/en-proceso", method = RequestMethod.GET)
+    public ResponseEntity<?> getEnProceso() {
+    	try{
+    		List<OrdenMedica> ordenesMedicas = ordenMedicaService.getEnProceso();
+    		return ResponseEntity.ok(ordenesMedicas);
+    	}catch(Exception ex){
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+    				.body(new ValidationResult("error", 
+    					"ha ocurrido un error por favor vuelva a intentarlo"));
+    	}
+    }
+    
     @RequestMapping(value = "/", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('crear orden medica')")
 	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody OrdenMedica ordenMedica) throws Exception {

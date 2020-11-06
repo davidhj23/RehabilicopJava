@@ -21,6 +21,7 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cama.Cama;
+import com.davidhenriquez.rehabilicop.procesos.historia.Historia;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.UsuarioService;
 
@@ -100,6 +101,20 @@ public class EvolucionController {
 	        String username = jwtTokenUtil.getUsernameFromToken(token);
 	        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
 			return ResponseEntity.ok(evolucionService.getEvolucionesEmpleado(user.getIdentificacion()));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+    
+    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+	@PreAuthorize("hasRole('eliminar evolucion')")
+	public ResponseEntity<?> delete(@PathVariable UUID id) {
+		try {
+			evolucionService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new Evolucion());
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));

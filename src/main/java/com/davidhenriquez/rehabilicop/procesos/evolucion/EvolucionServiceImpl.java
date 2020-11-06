@@ -85,4 +85,9 @@ public class EvolucionServiceImpl implements EvolucionService{
 	        	.sorted(Comparator.comparing(Evolucion::getFecha))	
                 .collect(Collectors.toList());
 	}
+	
+	@Transactional
+	public void delete(UUID id) throws ValidationException {
+		evolucionRepository.delete(id);		
+	}
 }
