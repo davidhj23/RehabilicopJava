@@ -99,8 +99,8 @@ public class EvolucionController {
 		try {
 			String token = request.getHeader(tokenHeader);
 	        String username = jwtTokenUtil.getUsernameFromToken(token);
-	        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
-			return ResponseEntity.ok(evolucionService.getEvolucionesEmpleado(user.getIdentificacion()));
+	        Usuario usuario = usuarioService.findUserByUsername(username);	        ;
+			return ResponseEntity.ok(evolucionService.getEvolucionesEmpleado(usuario));
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));

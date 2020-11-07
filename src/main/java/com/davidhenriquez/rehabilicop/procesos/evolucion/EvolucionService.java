@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
+import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
 import com.davidhenriquez.rehabilicop.configuracion.evolucion.TipoEvolucion;
 
 public interface EvolucionService {
@@ -17,7 +18,7 @@ public interface EvolucionService {
 	
 	List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month);
 	
-	List<Evolucion> getEvolucionesEmpleado(String identification);
+	List<Evolucion> getEvolucionesEmpleado(Usuario usuario);
 	
 	void delete(UUID id) throws ValidationException;
 }
