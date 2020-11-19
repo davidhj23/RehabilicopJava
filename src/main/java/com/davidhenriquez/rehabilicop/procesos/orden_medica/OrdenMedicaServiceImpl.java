@@ -118,7 +118,9 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 	}
 	
 	public OrdenMedica update(OrdenMedica ordenMedica) throws ValidationException {		
-						
+			
+		boolean cerrar = true;
+		
 		for (MedicamentosOrdenMedica mom : ordenMedica.getMedicamentosOrdenMedica()){			
 			medicamentosOrdenMedicaRepository.save(mom);
 			
@@ -128,12 +130,19 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 						&& a.getAdministra().getIdUsuario() == null)
 				{
 					a.setAdministra(null);
+					cerrar = false;
 				}
 				administracionRepository.save(a);	
 			}
 		}
 		
-		ordenMedica.setEstado("EN PROCESO");
+		if(cerrar){
+			ordenMedica.setEstado("CERRADA");	
+		}else{
+			ordenMedica.setEstado("EN PROCESO");
+		}
+		
+		
 		return ordenMedicaRepository.save(ordenMedica);			
 	}
 
