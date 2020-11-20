@@ -136,12 +136,13 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 			}
 		}
 		
-		if(cerrar){
+		if(ordenMedica.getPuedeCerrar() != null && 
+		   ordenMedica.getPuedeCerrar() && 
+		   cerrar){
 			ordenMedica.setEstado("CERRADA");	
 		}else{
 			ordenMedica.setEstado("EN PROCESO");
 		}
-		
 		
 		return ordenMedicaRepository.save(ordenMedica);			
 	}

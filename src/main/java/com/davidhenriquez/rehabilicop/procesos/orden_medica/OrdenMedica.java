@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,6 +40,9 @@ public class OrdenMedica {
 	
 	private Date fechaDeCreacion;
 	private String Estado;
+	
+	@Transient
+	private Boolean puedeCerrar; 
 	
 	@ManyToOne	
 	@JoinColumn(name="idSolicitante", nullable=true)
