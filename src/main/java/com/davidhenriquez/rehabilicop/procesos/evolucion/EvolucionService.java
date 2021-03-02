@@ -18,7 +18,7 @@ public interface EvolucionService {
 	
 	List<Evoluciones> getAllEvoluciones(String idAseguradora, int year, int month);
 	
-	List<Evolucion> getEvolucionesEmpleado(Usuario usuario);
+	List<Evolucion> getEvolucionesEmpleadoYPaciente(Usuario usuario, String idPaciente);
 	
 	void delete(UUID id) throws ValidationException;
 }

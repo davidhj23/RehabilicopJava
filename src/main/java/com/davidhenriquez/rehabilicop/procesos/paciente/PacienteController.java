@@ -125,6 +125,19 @@ public class PacienteController {
 		}
 	}
 	
+	@RequestMapping(value = "/{id}/reabrir-ultima-historia", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('reabrir historia')")
+	public ResponseEntity<?> reabrirUltimaHistoria(@RequestBody Usuario paciente) throws Exception {
+		try {
+			return ResponseEntity.ok(usuarioService.reabrirUltimaHistoria(paciente));
+		} catch (ValidationException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrors());
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ValidationResult("error", "ha ocurrido un error por favor vuelva a intentarlo"));
+		}
+	}
+	
 	 @RequestMapping(value = "/reporte-evoluciones/{idAdmision}", method = RequestMethod.GET)	
     public ResponseEntity<byte[]> reportEvoluciones(@PathVariable String idAdmision) throws SQLException {      
       byte[] bytes = usuarioService.generateReporteEvoluciones(idAdmision);

@@ -26,6 +26,8 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.procesos.admision.Admision;
+import com.davidhenriquez.rehabilicop.procesos.admision.AdmisionRepository;
 import com.davidhenriquez.rehabilicop.seguridad.rol.Rol;
 import com.davidhenriquez.rehabilicop.seguridad.rol.RolRepository;
 import com.davidhenriquez.rehabilicop.seguridad.usuario.Usuario;
@@ -51,6 +53,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private AdmisionRepository admisionRepository;
 	
 	private ArrayList<ValidationResult> Validar(Usuario usuario)
     {
@@ -131,6 +136,23 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Transactional
 	public void delete(UUID idUsuario) throws ValidationException {
 		usuarioRepository.delete(idUsuario);		
+	}
+	
+	public Usuario reabrirUltimaHistoria(Usuario usuario) throws ValidationException {
+		Optional<Admision> admisionOptional = 
+				admisionRepository.findAll().stream()
+				 .filter(a -> a.getPaciente().getIdentificacion().equals(usuario.getIdentificacion()) &&
+						      a.getEstado().equals("CERRADA"))
+				 .sorted(Comparator.comparing(Admision::getFechaDeIngreso).reversed())	
+				 .findFirst();	
+		
+		if(admisionOptional.isPresent()){
+    		Admision a = admisionOptional.get();
+    		a.setEstado("ACTIVA");
+    		admisionRepository.save(a);
+    	 }
+		 
+		 return usuario;
 	}
 
 	@Override

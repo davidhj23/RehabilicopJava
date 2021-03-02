@@ -130,7 +130,7 @@ public class AdmisionServiceImpl implements AdmisionService{
 	public List<Admision> findTodasAdmisionByIdentificacionPaciente(String identificacion) {
 		 return admisionRepository.findAll().stream()
 				 .filter(a -> a.getPaciente().getIdentificacion().equals(identificacion))
-				 .sorted(Comparator.comparing(Admision::getFechaDeIngreso))	
+				 .sorted(Comparator.comparing(Admision::getFechaDeIngreso))
 		         .collect(Collectors.toList());
 	}
 }

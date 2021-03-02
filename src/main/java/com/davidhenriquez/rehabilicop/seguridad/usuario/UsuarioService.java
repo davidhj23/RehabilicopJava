@@ -24,6 +24,8 @@ public interface UsuarioService {
 	
 	void restablecerPassword(UUID idUsuario, RestablecerPasswordModel restablecerPasswordModel) throws ValidationException;
 	
+	Usuario reabrirUltimaHistoria(Usuario usuario) throws ValidationException;
+	
 	
 	List<Usuario> findAllPacientes();
 

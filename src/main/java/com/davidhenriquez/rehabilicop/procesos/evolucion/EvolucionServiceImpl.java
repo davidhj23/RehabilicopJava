@@ -80,7 +80,7 @@ public class EvolucionServiceImpl implements EvolucionService{
 	}
 
 	@Override
-	public List<Evolucion> getEvolucionesEmpleado(Usuario usuario) {
+	public List<Evolucion> getEvolucionesEmpleadoYPaciente(Usuario usuario, String idPaciente) {
 		
 		Optional<Rol> adminGlobal = usuario.getRoles().stream()
 		        .filter(a -> a.getNombre().equals("admin global"))
@@ -88,12 +88,16 @@ public class EvolucionServiceImpl implements EvolucionService{
     	
     	if(adminGlobal.isPresent()){
     		return evolucionRepository.findAll().stream()
-    	        	.sorted(Comparator.comparing(Evolucion::getFecha))	
+    				.filter(x -> x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))
+    				.limit(80)
+    	        	.sorted(Comparator.comparing(Evolucion::getFecha).reversed())	
                     .collect(Collectors.toList());
     	}else{
     		return evolucionRepository.findAll().stream()
-    	        	.filter(x -> x.getUsuario().getIdentificacion().equals(usuario.getIdentificacion()))	
-    	        	.sorted(Comparator.comparing(Evolucion::getFecha))	
+    	        	.filter(x -> x.getUsuario().getIdentificacion().equals(usuario.getIdentificacion()) &&
+    	        			     x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))	
+    	        	.limit(80)
+    	        	.sorted(Comparator.comparing(Evolucion::getFecha).reversed())	
                     .collect(Collectors.toList());
     	}
 	}
