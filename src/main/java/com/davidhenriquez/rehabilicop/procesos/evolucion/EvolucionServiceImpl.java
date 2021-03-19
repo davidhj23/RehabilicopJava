@@ -88,16 +88,16 @@ public class EvolucionServiceImpl implements EvolucionService{
     	
     	if(adminGlobal.isPresent()){
     		return evolucionRepository.findAll().stream()
-    				.filter(x -> x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))
-    				.limit(80)
-    	        	.sorted(Comparator.comparing(Evolucion::getFecha).reversed())	
+    				.filter(x -> x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))    				
+    	        	.sorted(Comparator.comparing(Evolucion::getFecha).reversed())
+    	        	.limit(80)
                     .collect(Collectors.toList());
     	}else{
     		return evolucionRepository.findAll().stream()
     	        	.filter(x -> x.getUsuario().getIdentificacion().equals(usuario.getIdentificacion()) &&
-    	        			     x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))	
-    	        	.limit(80)
+    	        			     x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idPaciente))
     	        	.sorted(Comparator.comparing(Evolucion::getFecha).reversed())	
+    	        	.limit(80)
                     .collect(Collectors.toList());
     	}
 	}

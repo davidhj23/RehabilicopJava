@@ -45,8 +45,9 @@ public class NotasDeEnfermeriaServiceImpl implements NotasDeEnfermeriaService{
 					 	  .getIdentificacion().equals(identificacion)
 					 	  &&
 					 	 a.getHistoria()
-					 	  .getAdmision().getEstado().equals("ACTIVA"))
-		 	.sorted(Comparator.comparing(NotasDeEnfermeria::getFecha))
+					 	  .getAdmision().getEstado().equals("ACTIVA"))		 	
+		 	.sorted(Comparator.comparing(NotasDeEnfermeria::getFecha).reversed())
+		 	.limit(40)
 	        .collect(Collectors.toList());
 	}
 	

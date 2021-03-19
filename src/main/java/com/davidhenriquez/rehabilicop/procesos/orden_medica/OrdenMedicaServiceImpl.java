@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,7 +22,9 @@ import com.davidhenriquez.rehabilicop.core.validation.ValidationException;
 import com.davidhenriquez.rehabilicop.core.validation.ValidationResult;
 import com.davidhenriquez.rehabilicop.listas.alimentacion.Alimentacion;
 import com.davidhenriquez.rehabilicop.listas.cie10.Cie10;
+import com.davidhenriquez.rehabilicop.listas.dosis.Dosis;
 import com.davidhenriquez.rehabilicop.listas.expresion_facial1.ExpresionFacial1;
+import com.davidhenriquez.rehabilicop.listas.medicamento.Medicamento;
 import com.davidhenriquez.rehabilicop.procesos.evolucion.Evolucion;
 import com.davidhenriquez.rehabilicop.procesos.historia.Antecedente;
 import com.davidhenriquez.rehabilicop.procesos.historia.ExamenFisico;
@@ -98,25 +101,7 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 		
 		return ordenGuardada;		
 	}
-	
-	@Override
-	public List<OrdenMedica> getOrdenesMedicasByPaciente(String idEmpleado) {
-		return ordenMedicaRepository.findAll().stream()
-	        	.filter(x -> x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idEmpleado) &&    							
-						     x.getHistoria().getAdmision().getEstado().equals("ACTIVA"))	
-	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
-                .collect(Collectors.toList());
-	}
-	
-	@Override
-	public List<MedicamentosOrdenMedica> findMedicamentosByIdOrdenMedica(UUID id) {
-		List<MedicamentosOrdenMedica> medicamentos = medicamentosOrdenMedicaRepository.findAll().stream()
-                .filter(x -> x.getOrdenMedica().getIdOrdenMedica().equals(id))                
-                .collect(Collectors.toList());
-		
-		return medicamentos;
-	}
-	
+			
 	public OrdenMedica update(OrdenMedica ordenMedica) throws ValidationException {		
 			
 		boolean cerrar = true;
@@ -147,16 +132,6 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 		return ordenMedicaRepository.save(ordenMedica);			
 	}
 
-	@Override
-	public List<Administracion> findAdministracionesByIdMedicamento(UUID id) {
-		return
-				administracionRepository.findAll().stream()
-					.filter(x -> x.getMedicamentosOrdenMedica()
-									.getIdMedicamentosOrdenMedica()
-									.equals(id))
-					.collect(Collectors.toList());
-	}
-	
 	@Transactional
 	public void delete(UUID id) throws ValidationException {
 		
@@ -178,5 +153,83 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 		}
 		
 		medicamentosOrdenMedicaRepository.delete(id);
+	}
+	
+	@Override
+	public List<OrdenMedica> getOrdenesMedicasByPaciente(String idEmpleado) {
+		return ordenMedicaRepository.findAll().stream()
+	        	.filter(x -> x.getHistoria().getAdmision().getPaciente().getIdentificacion().equals(idEmpleado) &&    							
+						     x.getHistoria().getAdmision().getEstado().equals("ACTIVA"))	
+	        	.sorted(Comparator.comparing(OrdenMedica::getFechaDeCreacion))	
+                .collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<MedicamentosOrdenMedica> findMedicamentosByIdOrdenMedica(UUID id) 
+	{	
+		List<MedicamentosOrdenMedicaSP> medicamentosOrdenMedicaSPs = medicamentosOrdenMedicaRepository.getMedicamentosOrdenMedica(id.toString());
+				
+		ArrayList<MedicamentosOrdenMedica> medicamentosOrdenMedicas = new ArrayList<MedicamentosOrdenMedica>();		
+		for(MedicamentosOrdenMedicaSP momSP : medicamentosOrdenMedicaSPs)
+		{	
+			MedicamentosOrdenMedica mom = new MedicamentosOrdenMedica();
+			
+			mom.setIdMedicamentosOrdenMedica(momSP.getIdMedicamentosOrdenMedica());
+			
+			OrdenMedica om = new OrdenMedica();
+			om.setIdOrdenMedica(id);
+			mom.setOrdenMedica(om);			
+			
+			Medicamento m = new Medicamento();
+			m.setIdMedicamento(momSP.getIdMedicamento());
+			m.setNombre(momSP.getMedicamento());		
+			mom.setMedicamento(m);
+			
+			Dosis d = new Dosis();
+			d.setIdDosis(momSP.getIdDosisMom());
+			d.setNombre(momSP.getDosisMom());		
+			mom.setFrecuencia(d);
+			
+			mom.setCantidadSolicitada(momSP.getCantidadSolicitada());				
+			mom.setCantidadEntregada(momSP.getCantidadEntregada());
+			
+			medicamentosOrdenMedicas.add(mom);
+		}
+		
+		return medicamentosOrdenMedicas;
+	}
+	
+	@Override
+	public List<Administracion> findAdministracionesByIdMedicamento(UUID id) 
+	{
+		List<AdministracionSP> administracionSPs = medicamentosOrdenMedicaRepository.getAdministraciones(id.toString());
+		
+		ArrayList<Administracion> administraciones = new ArrayList<Administracion>();		
+		for(AdministracionSP admSP : administracionSPs)
+		{	
+			Administracion adm = new Administracion();
+			
+			MedicamentosOrdenMedica mom = new MedicamentosOrdenMedica();
+			mom.setIdMedicamentosOrdenMedica(id);			
+			adm.setMedicamentosOrdenMedica(mom);
+			
+			adm.setIdAdministracion(admSP.getIdAdministracion());
+			
+			adm.setFecha(admSP.getFechaAdm());
+			adm.setHora(admSP.getHora());
+			adm.setAmpm(admSP.getAmpm());
+			
+			Usuario usuario = new Usuario();
+			usuario.setIdUsuario(admSP.getIdAdministra());
+			usuario.setNombres(admSP.getNombreAdministra());
+			usuario.setApellidos(admSP.getApellidoAdministra());
+			adm.setAdministra(usuario);
+			
+			adm.setMedicamentosOrdenMedica(mom);
+			
+			administraciones.add(adm);
+		}
+		
+		return administraciones;
 	}
 }
