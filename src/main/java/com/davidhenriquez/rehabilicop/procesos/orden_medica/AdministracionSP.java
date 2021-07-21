@@ -42,4 +42,6 @@ public class AdministracionSP implements Serializable {
     private String hora;
     @Column(name = "ampm")
     private String ampm;
+    @Column(name = "valida")
+    private String valida;
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -372,7 +373,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 	
 	@Override
-	public byte[] generateReporteEvoluciones(String idAdmision) throws SQLException {
+	public byte[] generateReporteEvoluciones(String idAdmision, Date fechaInicio, Date fechaFin) throws SQLException {
 		
 		byte[] bytes = null;
 	    try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {		    	
@@ -382,6 +383,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		    
 		    Map<String, Object> params = new HashMap<>();
 		      params.put("identificacion", idAdmision.replace("-", ""));
+		      params.put("fechaInicio", fechaInicio);
+		      params.put("fechaFin", fechaFin);
 		    
 		    JasperPrint jasperPrint = 
 		    		JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());			      

@@ -218,6 +218,7 @@ public class OrdenMedicaServiceImpl implements OrdenMedicaService{
 			adm.setFecha(admSP.getFechaAdm());
 			adm.setHora(admSP.getHora());
 			adm.setAmpm(admSP.getAmpm());
+			adm.setValida(admSP.getValida());
 			
 			Usuario usuario = new Usuario();
 			usuario.setIdUsuario(admSP.getIdAdministra());

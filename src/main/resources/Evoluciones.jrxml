@@ -2,8 +2,10 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evoluciones" pageWidth="556" pageHeight="500" whenNoDataType="BlankPage" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6d52288-5dde-42ee-a0be-b3f0248b6766">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Rehabilicop"/>
 	<parameter name="identificacion" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT *
 FROM (SELECT 	e.fecha,
@@ -46,7 +48,9 @@ FROM (SELECT 	e.fecha,
 				
 				WHERE	h.id_admision = unhex($P{identificacion})) AS evo
 
-ORDER BY fecha asc]]>
+WHERE	($P{fechaInicio} IS NULL OR (DATE(evo.fecha) between $P{fechaInicio} and $P{fechaFin})) 
+
+ORDER BY evo.fecha asc]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>

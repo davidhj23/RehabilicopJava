@@ -1,6 +1,7 @@
 package com.davidhenriquez.rehabilicop.seguridad.usuario;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,7 +62,7 @@ public interface UsuarioService {
 
 	byte[] generateReporteHistoria(String idAdmision) throws SQLException;
 	
-	byte[] generateReporteEvoluciones(String idAdmision) throws SQLException;
+	byte[] generateReporteEvoluciones(String idAdmision, Date fechaInicio, Date fechaFin) throws SQLException;
 	
 	byte[] generateReporteOrdenesMedicas(String idAdmision) throws SQLException;
 	

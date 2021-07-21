@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HistoriaClinica" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RehabilicopDataBase"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Rehabilicop"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -59,6 +59,8 @@
 		</queryString>
 	</subDataset>
 	<parameter name="identificacion" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT  td.nombre as tipo_identificacion, 
 		u.identificacion,
@@ -444,9 +446,15 @@ WHERE   ad.id_admision = UNHEX($P{identificacion})]]>
 		<band height="245">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="245" uuid="b1910fa9-7e18-45fa-b6d0-36bfc59d2651"/>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="555" height="245" uuid="b1910fa9-7e18-45fa-b6d0-36bfc59d2651"/>
 				<subreportParameter name="identificacion">
 					<subreportParameterExpression><![CDATA[$P{identificacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaInicio">
+					<subreportParameterExpression><![CDATA[$P{fechaInicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaFin">
+					<subreportParameterExpression><![CDATA[$P{fechaFin}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["Evoluciones.jasper"]]></subreportExpression>
