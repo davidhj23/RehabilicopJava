@@ -141,11 +141,20 @@ public class PacienteController {
 		}
 	}
 	
+    public ResponseEntity<byte[]> reportEvoluciones(@PathVariable String idAdmision) throws SQLException {      
+        byte[] bytes = usuarioService.generateReporteEvoluciones(idAdmision);
+        return ResponseEntity
+          .ok()
+          .header("Content-Type", "application/pdf; charset=UTF-8")
+          .header("Content-Disposition", "inline; filename=\"" + idAdmision + "-evoluciones" + ".pdf\"")
+          .body(bytes);      
+      }
+	
 	 @RequestMapping(value = "/reporte-evoluciones/{idAdmision}", method = RequestMethod.GET)	
-    public ResponseEntity<byte[]> reportEvoluciones(@PathVariable String idAdmision,
+    public ResponseEntity<byte[]> reportEvoluciones2(@PathVariable String idAdmision,
     		@RequestParam(name = "fechaInicio", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
     		@RequestParam(name = "fechaFin", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) throws SQLException {      
-      byte[] bytes = usuarioService.generateReporteEvoluciones(idAdmision, fechaInicio, fechaFin);
+      byte[] bytes = usuarioService.generateReporteEvoluciones2(idAdmision, fechaInicio, fechaFin);
       return ResponseEntity
         .ok()
         .header("Content-Type", "application/pdf; charset=UTF-8")

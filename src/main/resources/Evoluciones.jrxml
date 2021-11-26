@@ -48,8 +48,6 @@ FROM (SELECT 	e.fecha,
 				
 				WHERE	h.id_admision = unhex($P{identificacion})) AS evo
 
-WHERE	($P{fechaInicio} IS NULL OR (DATE(evo.fecha) between $P{fechaInicio} and $P{fechaFin})) 
-
 ORDER BY evo.fecha asc]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">

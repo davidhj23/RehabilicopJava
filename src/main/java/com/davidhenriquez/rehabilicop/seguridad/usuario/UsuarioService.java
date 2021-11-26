@@ -62,7 +62,9 @@ public interface UsuarioService {
 
 	byte[] generateReporteHistoria(String idAdmision) throws SQLException;
 	
-	byte[] generateReporteEvoluciones(String idAdmision, Date fechaInicio, Date fechaFin) throws SQLException;
+	byte[] generateReporteEvoluciones(String idAdmision) throws SQLException;
+	
+	byte[] generateReporteEvoluciones2(String idAdmision, Date fechaInicio, Date fechaFin) throws SQLException;
 	
 	byte[] generateReporteOrdenesMedicas(String idAdmision) throws SQLException;
 	
